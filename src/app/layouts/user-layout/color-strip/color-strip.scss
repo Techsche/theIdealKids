@@ -1,0 +1,32 @@
+/* Container */
+.color-strip {
+  display: flex;
+  width: 100%;
+  height: clamp(5px, 1vw, 10px); // 🔥 responsive height
+}
+
+/* Common strip style */
+.strip {
+  height: 100%;
+}
+
+/* Colors + proportions (adjusted to match your image feel) */
+.orange {
+  background: #f59e0b;
+  width: 30%;
+}
+
+.light-blue {
+  background: #06b6d4;
+  width: 20%;
+}
+
+.blue {
+  background: #1e3a8a;
+  width: 25%;
+}
+
+.green {
+  background: #84cc16;
+  width: 25%;
+}

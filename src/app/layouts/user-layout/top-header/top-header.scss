@@ -1,0 +1,81 @@
+.top-header {
+  height: 50px;
+  background: #0d47a1; // dark blue
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+/* Layout */
+.spacer {
+  flex: 1 1 auto;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Icon buttons */
+button[mat-icon-button] {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Facebook */
+.fb {
+  color: #1877f2;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+/* Twitter X */
+.tw {
+  color: #000;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+/* Donate button */
+.donate-btn {
+  background: #ffcc00;
+  color: #000;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 0 16px;
+  margin-left: 8px;
+}
+
+/* Hover */
+button:hover {
+  transform: scale(1.1);
+  transition: 0.2s ease;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .tax-id {
+    font-size: 12px;
+  }
+
+  .donate-btn {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tax-id {
+    display: none;
+  }
+}

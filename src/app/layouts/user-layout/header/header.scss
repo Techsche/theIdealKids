@@ -1,0 +1,126 @@
+/* Main Header */
+.main-header {
+  height: 80px; // 🔥 fits 65px logo
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+/* Logo */
+.logo img {
+  height: 65px;   // 🔥 main size
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Center Menu */
+.nav-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+/* Right Section */
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+.right-section button[color="primary"] {
+  border-radius: 20px;
+  padding: 0 14px;
+}
+
+/* Profile Image */
+.profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Hamburger */
+.menu-toggle {
+  display: none;
+  margin-left: auto;
+}
+
+/* Mobile actions hidden on desktop */
+.mobile-actions {
+  display: none;
+}
+
+/* ------------------ */
+/* 📱 Tablet */
+/* ------------------ */
+@media (max-width: 992px) {
+
+  .main-header {
+    height: 70px;
+  }
+
+  .logo img {
+    height: 55px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    display: none;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .right-section {
+    display: none;
+  }
+
+  .mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+}
+
+/* ------------------ */
+/* 📱 Mobile */
+/* ------------------ */
+@media (max-width: 600px) {
+
+  .main-header {
+    height: 65px;
+    padding: 0 12px;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  .nav-menu {
+    top: 65px;
+  }
+}
