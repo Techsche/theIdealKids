@@ -19,47 +19,51 @@
   gap: 8px;
 }
 
-/* Icon buttons */
-button[mat-icon-button] {
-  width: 34px;
-  height: 34px;
+/* Social icon buttons (match footer style) */
+.fb, .tw {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Facebook */
-.fb {
-  color: #1877f2;
-  font-size: 14px;
-  background: #fff;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  padding: 5px;
-}
-
-/* Twitter X */
-.tw {
-  color: #000;
-  font-size: 14px;
   background: #fff;
-  border-radius: 50%;
-  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
 }
 
-/* Donate button */
+.fb { color: #1877f2; }
+.tw { color: #000; }
+
+.right a:hover .fb,
+.right a:hover .tw {
+  transform: scale(1.1);
+}
+
+/* Donate button: same color as footer donate button */
 .donate-btn {
-  background: #ffcc00;
-  color: #000;
-  font-weight: 600;
+  background: #f7941d;  // 🔥 match footer
+  color: #fff;
+  // font-weight: 600;
   border-radius: 20px;
   padding: 0 16px;
   margin-left: 8px;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
-/* Hover */
-button:hover {
-  transform: scale(1.1);
-  transition: 0.2s ease;
+.donate-btn:hover {
+  background: #e6830c; // slightly darker on hover
+  transform: scale(1.05);
+}
+
+/* Remove extra padding for icon buttons */
+button[mat-icon-button] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  background: none;
+  border: none;
 }
 
 /* Responsive */
