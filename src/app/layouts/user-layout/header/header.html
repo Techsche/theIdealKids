@@ -1,8 +1,9 @@
 <mat-toolbar class="main-header">
-
   <!-- Logo -->
   <div class="logo">
-    <img src="assets/images/logo.png" alt="The Ideal Kids Logo">
+    <a [routerLink]="'/home'">
+      <img src="assets/images/logo.png" alt="The Ideal Kids Logo" />
+    </a>
   </div>
 
   <!-- Hamburger -->
@@ -12,7 +13,6 @@
 
   <!-- Center Menu -->
   <nav class="nav-menu">
-    <a mat-button>TIK Summer Online Event 2020</a>
     <a mat-button>About Us</a>
     <a mat-button>Events</a>
     <a mat-button>Ideal Tips</a>
@@ -20,33 +20,26 @@
 
     <!-- Mobile Actions -->
     <div class="mobile-actions">
-
       @if (!isLoggedIn) {
         <button mat-button>Login</button>
         <button mat-button>Signup</button>
-        <button mat-raised-button color="primary">
-          Volunteer
-        </button>
+        <button mat-raised-button color="primary">High School Volunteer Signup</button>
       }
-
     </div>
   </nav>
 
   <!-- Right Section (Desktop) -->
   <div class="right-section">
-
     @if (!isLoggedIn) {
       <button mat-button>Login</button>
       <button mat-button>Signup</button>
 
-      <button mat-raised-button color="primary">
-        High School Volunteer
-      </button>
+      <button mat-raised-button color="primary">High School Volunteer Signup</button>
     }
 
     @if (isLoggedIn) {
       <button mat-icon-button [matMenuTriggerFor]="profileMenu">
-        <img src="assets/images/user.png" class="profile-img">
+        <img src="assets/images/user.png" class="profile-img" />
       </button>
 
       <mat-menu #profileMenu="matMenu">
@@ -56,7 +49,5 @@
         <button mat-menu-item>Logout</button>
       </mat-menu>
     }
-
   </div>
-
 </mat-toolbar>
