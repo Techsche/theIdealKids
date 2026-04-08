@@ -4,7 +4,9 @@
 
     <!-- Logo -->
     <div class="footer-col logo-col">
-      <img src="/assets/images/logo.png" alt="Logo">
+      <a [routerLink]="'/home'">
+        <img src="/assets/images/logo.png" alt="The Ideal Kids Logo">
+      </a>
     </div>
 
     <!-- Contact -->
@@ -30,20 +32,48 @@
       </div>
     </div>
 
+    <!-- Quick Links -->
+    <div class="footer-col links-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a [routerLink]="'/about'">TIK Summer Online Event 2020 (Execution Team)</a></li>
+        <li><a [routerLink]="'/about'">About Us</a></li>
+        <li><a [routerLink]="'/programs'">Events</a></li>
+        <li><a [routerLink]="'/admissions'">Ideal Tips</a></li>
+        <li><a [routerLink]="'/admissions'">Forms</a></li>
+        <li><a [routerLink]="'/contact'">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Important Links -->
+    <div class="footer-col important-col">
+      <h4>Important Links</h4>
+      <ul>
+        <li><a [routerLink]="'/login'" class="simple-link">Login</a></li>
+        <li><a [routerLink]="'/signup'" class="simple-link">Signup</a></li>
+        <li><a [routerLink]="'/volunteer'" class="simple-link">Volunteer Signup</a></li>
+      </ul>
+
+      <!-- Donate Button -->
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="donate-form">
+        <input type="hidden" name="cmd" value="_s-xclick" />
+        <input type="hidden" name="hosted_button_id" value="AUKRPQK5HPJ3G" />
+        <button mat-raised-button type="submit" class="footer-btn donate-btn">Donate</button>
+      </form>
+    </div>
+
     <!-- Social -->
     <div class="footer-col social-col">
       <h4>Follow Us</h4>
 
       <div class="social-icons">
-
-        <a href="https://www.facebook.com/YOUR_PAGE" target="_blank">
+        <a href="https://www.facebook.com/theidealkids" target="_blank" rel="noopener">
           <i class="fab fa-facebook-f fb"></i>
         </a>
 
-        <a href="https://twitter.com/YOUR_PROFILE" target="_blank">
+        <a href="https://twitter.com/the_ideal_kids" target="_blank" rel="noopener">
           <i class="fab fa-x-twitter tw"></i>
         </a>
-
       </div>
 
     </div>
