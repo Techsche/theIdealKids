@@ -1,0 +1,22 @@
+@if (banners().length) {
+  <div class="carousel-container">
+    <!-- Left arrow -->
+    <button mat-icon-button class="arrow left-arrow" (click)="prev()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <!-- Carousel images -->
+    <div class="carousel-wrapper">
+      <div class="carousel-inner" [style.transform]="getTransform()">
+        @for (banner of banners(); track banner) {
+          <img [src]="apiUrl + banner.imagePath" alt="Banner Image" (click)="redirect(banner)" />
+        }
+      </div>
+    </div>
+
+    <!-- Right arrow -->
+    <button mat-icon-button class="arrow right-arrow" (click)="next()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+}
