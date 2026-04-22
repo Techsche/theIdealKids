@@ -1,0 +1,46 @@
+
+<div class="table-holder">
+  <div class="title-holder">
+    <h1 class="list-title">Upcoming Events</h1>
+  </div>
+
+  <!-- No Data -->
+  @if (dataSource.length === 0) {
+    <div class="no-data">No event list found</div>
+  }
+
+  <!-- Table -->
+  @if (dataSource.length > 0) {
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" class="mat-mdc-table custom-table">
+        <!-- Event Name -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Event Name</th>
+          <td mat-cell *matCellDef="let element" data-label="Event Name">
+            {{ element.name }}
+          </td>
+        </ng-container>
+
+        <!-- Date -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element" data-label="Date">
+            {{ element.date | date: 'dd MMM yyyy' }}
+          </td>
+        </ng-container>
+
+        <!-- Link -->
+        <ng-container matColumnDef="link">
+          <th mat-header-cell *matHeaderCellDef>Register</th>
+          <td mat-cell *matCellDef="let element" data-label="Register">
+            <a [href]="element.link" target="_blank" class="register-btn"> Register </a>
+          </td>
+        </ng-container>
+
+        <!-- Sticky Header -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  }
+</div>

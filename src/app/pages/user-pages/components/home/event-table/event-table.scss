@@ -1,0 +1,173 @@
+/* ===== OUTER CONTAINER ===== */
+.table-holder {
+  max-width: 1150px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+/* ===== TITLE ===== */
+.list-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* ===== TABLE WRAPPER ===== */
+.table-wrapper {
+  max-height: 500px;
+  overflow: hidden; /* IMPORTANT: disables outer scroll */
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+/* ===== TABLE BASE ===== */
+.mat-mdc-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* ===== HEADER (FIXED) ===== */
+.mat-mdc-header-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ===== HEADER STYLE ===== */
+.mat-mdc-header-cell {
+  background-color: #0d47a1 !important;
+  color: #fff !important;
+  font-weight: 600;
+  padding: 16px;
+  border-bottom: none !important;
+}
+
+/* Rounded corners */
+.mat-mdc-header-cell:first-child {
+  border-top-left-radius: 12px;
+}
+.mat-mdc-header-cell:last-child {
+  border-top-right-radius: 12px;
+}
+
+/* ===== TBODY SCROLL (KEY FEATURE) ===== */
+.mat-mdc-table tbody {
+  display: block;
+  max-height: 420px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* ===== ROW ALIGNMENT ===== */
+.mat-mdc-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  height: 60px;
+}
+
+/* ===== CELLS ===== */
+.mat-mdc-cell {
+  padding: 16px;
+  border-bottom: none !important;
+}
+
+/* ===== STRIPED ROWS ===== */
+.mat-mdc-row:nth-child(even) {
+  background-color: #ffffff;
+}
+
+/* Hover effect */
+.mat-mdc-row:hover {
+  background-color: #8c8e8f;
+}
+
+/* ===== BUTTON ===== */
+.register-btn {
+  display: inline-block;
+  padding: 6px 18px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ===== SCROLLBAR (INSIDE TBODY) ===== */
+.mat-mdc-table tbody::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mat-mdc-table tbody::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mat-mdc-table tbody::-webkit-scrollbar-thumb {
+  background: #0d47a1;
+  border-radius: 10px;
+}
+
+/* ===== NO DATA ===== */
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+
+/* ===== RESPONSIVE (MOBILE CARD VIEW) ===== */
+@media (max-width: 768px) {
+
+  .table-holder {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  /* Hide header */
+  .mat-mdc-header-row {
+    display: none;
+  }
+
+  /* Make rows card style */
+  .mat-mdc-row {
+    display: block;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 10px;
+  }
+
+  /* Stack cells */
+  .mat-mdc-cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  /* Labels */
+  .mat-mdc-cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #0d47a1;
+  }
+
+  /* Button alignment */
+  .register-btn {
+    margin-left: auto;
+  }
+
+  /* Disable tbody scroll on mobile */
+  .mat-mdc-table tbody {
+    display: block;
+    max-height: none;
+    overflow: visible;
+  }
+}

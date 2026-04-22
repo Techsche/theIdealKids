@@ -1,0 +1,87 @@
+// / Who we are section
+
+/* ===== SECTION ===== */
+.vmo-section {
+  padding: 60px 20px;
+  //   background: #f5f7fb;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Title */
+.section-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+/* ===== GRID ===== */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* ===== CARD ===== */
+.vmo-card {
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.vmo-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== ICON ===== */
+.vmo-icon {
+  font-size: 40px !important;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+
+/* ===== COLORS (kids-style vibrant) ===== */
+.vision {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5); /* blue */
+}
+
+.mission {
+  background: linear-gradient(135deg, #66bb6a, #43a047); /* green */
+}
+
+.organization {
+  background: linear-gradient(135deg, #ffa726, #fb8c00); /* orange */
+}
+
+/* ===== TEXT ===== */
+.vmo-card h3 {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.vmo-card p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .vmo-card {
+    padding: 25px 15px;
+  }
+}
