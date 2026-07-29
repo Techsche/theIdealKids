@@ -21,8 +21,8 @@
     <!-- Mobile Actions -->
     <div class="mobile-actions">
       @if (!isLoggedIn) {
-        <button mat-button>Login</button>
-        <button mat-button>Signup</button>
+        <button mat-button routerLink="/login">Login</button>
+        <button mat-button routerLink="/register">Signup</button>
         <button mat-raised-button color="primary">High School Volunteer Signup</button>
       }
     </div>
@@ -31,8 +31,8 @@
   <!-- Right Section (Desktop) -->
   <div class="right-section">
     @if (!isLoggedIn) {
-      <button mat-button>Login</button>
-      <button mat-button>Signup</button>
+      <button mat-button routerLink="/login">Login</button>
+      <button mat-button routerLink="/register">Signup</button>
 
       <button mat-raised-button color="primary">High School Volunteer Signup</button>
     }

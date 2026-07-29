@@ -1,0 +1,105 @@
+<div class="login-page">
+  <div class="login-container">
+    
+
+    <!-- Card -->
+
+    <div class="login-card">
+      <h2>Sign In</h2>
+
+      <p class="subtitle">Enter your credentials to access the portal.</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+        <!-- Email -->
+
+        <div class="form-group">
+          <label>Email Address</label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-envelope"></i>
+
+            <input type="email" formControlName="email" placeholder="Enter your email" />
+          </div>
+
+          @if ((submitted || f.email.touched) && f.email.errors) {
+            <small class="error">
+              @if (f.email.errors['required']) {
+                Email is required.
+              }
+
+              @if (f.email.errors['email']) {
+                Please enter a valid email.
+              }
+            </small>
+          }
+        </div>
+
+        <!-- Password -->
+
+        <div class="form-group">
+          <label>Password</label>
+
+          <div class="input-wrapper">
+            <i class="bi bi-lock-fill"></i>
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter your password"
+            />
+
+            <button type="button" class="eye-btn" (click)="togglePassword()">
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"> </i>
+            </button>
+          </div>
+
+          @if ((submitted || f.password.touched) && f.password.errors) {
+            <small class="error"> Password is required. </small>
+          }
+        </div>
+
+        <!-- Forgot Password -->
+
+        <div class="forgot-password">
+          <a routerLink="/forgot-password"> Forgot Password? </a>
+        </div>
+
+        <!-- Buttons -->
+
+        <div class="button-row">
+          <button class="btn btn-primary" type="submit" [disabled]="loading">
+            @if (!loading) {
+              <span>Login</span>
+            }
+
+            @if (loading) {
+              <span class="spinner-border spinner-border-sm me-2"> </span>
+
+              Logging in...
+            }
+          </button>
+
+          <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <!-- Register -->
+
+      <div class="bottom-links">
+        <div class="link-row">
+          <span>New Member?</span>
+          <a routerLink="/register" class="btn btn-success btn-sm"> Sign Up </a>
+        </div>
+
+        <div class="link-row">
+          <span>High School Volunteer Sign Up?</span>
+          <a routerLink="/volunteer-login" class="btn btn-info btn-sm"> Volunteer Login </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
