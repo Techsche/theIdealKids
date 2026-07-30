@@ -1,0 +1,617 @@
+<div class="signup-page">
+  <div class="signup-container">
+    <div class="signup-card">
+      <h2>Volunteer Registration</h2>
+
+      <p class="subtitle">
+        Join our volunteer community by completing the registration form below.
+      </p>
+
+      <form [formGroup]="volunteerForm" (ngSubmit)="signup()" novalidate>
+        <!-- ===========================================
+                     STUDENT INFORMATION
+                ============================================ -->
+
+        <div class="section-title">
+          <i class="bi bi-person-circle"></i>
+
+          <span>Student Information</span>
+        </div>
+
+        <div class="form-grid">
+          <!-- Student Name -->
+
+          <div class="form-group">
+            <label>
+              Student Name
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> (Last Name, First Name) </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter student name"
+                formControlName="studentName"
+              />
+            </div>
+
+            @if ((submitted || f['studentName'].touched) && f['studentName'].errors) {
+              <small class="error"> Student name is required. </small>
+            }
+          </div>
+
+          <!-- Student Email -->
+
+          <div class="form-group">
+            <label>
+              Student Email
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> (Example: john@email.com) </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter student email"
+                formControlName="studentEmail"
+              />
+            </div>
+
+            @if ((submitted || f['studentEmail'].touched) && f['studentEmail'].errors) {
+              <small class="error">
+                @if (f['studentEmail'].errors?.['required']) {
+                  Student email is required.
+                }
+
+                @if (f['studentEmail'].errors?.['email']) {
+                  Enter a valid email address.
+                }
+              </small>
+            }
+          </div>
+
+          <!-- School Name -->
+
+          <div class="form-group">
+            <label>
+              School Name
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> Current School </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-building"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter school name"
+                formControlName="schoolName"
+              />
+            </div>
+
+            @if ((submitted || f['schoolName'].touched) && f['schoolName'].errors) {
+              <small class="error"> School name is required. </small>
+            }
+          </div>
+
+          <!-- School City -->
+
+          <div class="form-group">
+            <label>
+              School City
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> City where the school is located </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-geo-alt"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter school city"
+                formControlName="schoolCity"
+              />
+            </div>
+
+            @if ((submitted || f['schoolCity'].touched) && f['schoolCity'].errors) {
+              <small class="error"> School city is required. </small>
+            }
+          </div>
+
+          <!-- Grade -->
+
+          <div class="form-group">
+            <label>
+              Grade
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> Current Grade </small>
+            </label>
+
+            <select class="form-select" formControlName="grade" [class.has-value]="f['grade'].value">
+              <option value="" disabled selected >Select Grade</option>
+
+              @for (grade of grades; track grade) {
+                <option [value]="grade">
+                  {{ grade }}
+                </option>
+              }
+            </select>
+
+            @if ((submitted || f['grade'].touched) && f['grade'].errors) {
+              <small class="error"> Grade is required. </small>
+            }
+          </div>
+
+          <!-- Mobile -->
+
+          <div class="form-group">
+            <label>
+              Mobile Number
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> 10-digit Mobile Number </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-telephone"></i>
+
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="Enter mobile number"
+                formControlName="mobileNumber"
+              />
+            </div>
+
+            @if ((submitted || f['mobileNumber'].touched) && f['mobileNumber'].errors) {
+              <small class="error"> Enter a valid mobile number. </small>
+            }
+          </div>
+        </div>
+        <!-- ===========================================
+                     PARENT INFORMATION
+                ============================================ -->
+
+        <div class="section-title">
+          <i class="bi bi-people-fill"></i>
+
+          <span>Parent Information</span>
+        </div>
+
+        <div class="form-grid">
+          <!-- Mother's Name -->
+
+          <div class="form-group">
+            <label>
+              Mother's Name
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> Full Name </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person-heart"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter mother's name"
+                formControlName="momName"
+              />
+            </div>
+
+            @if ((submitted || f['momName'].touched) && f['momName'].errors) {
+              <small class="error"> Mother's name is required. </small>
+            }
+          </div>
+
+          <!-- Father's Name -->
+
+          <div class="form-group">
+            <label>
+              Father's Name
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> Full Name </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person-heart"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter father's name"
+                formControlName="dadName"
+              />
+            </div>
+
+            @if ((submitted || f['dadName'].touched) && f['dadName'].errors) {
+              <small class="error"> Father's name is required. </small>
+            }
+          </div>
+
+          <!-- Mother's Mobile -->
+
+          <div class="form-group">
+            <label>
+              Mother's Mobile
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> 10-digit Mobile Number </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-telephone"></i>
+
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="Enter mother's mobile"
+                formControlName="momMobile"
+              />
+            </div>
+
+            @if ((submitted || f['momMobile'].touched) && f['momMobile'].errors) {
+              <small class="error"> Enter a valid mobile number. </small>
+            }
+          </div>
+
+          <!-- Father's Mobile -->
+
+          <div class="form-group">
+            <label>
+              Father's Mobile
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> 10-digit Mobile Number </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-telephone"></i>
+
+              <input
+                type="tel"
+                class="form-control"
+                placeholder="Enter father's mobile"
+                formControlName="dadMobile"
+              />
+            </div>
+
+            @if ((submitted || f['dadMobile'].touched) && f['dadMobile'].errors) {
+              <small class="error"> Enter a valid mobile number. </small>
+            }
+          </div>
+
+          <!-- Mother's Email -->
+
+          <div class="form-group">
+            <label>
+              Mother's Email
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> Example: mother@email.com </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter mother's email"
+                formControlName="momEmail"
+              />
+            </div>
+
+            @if ((submitted || f['momEmail'].touched) && f['momEmail'].errors) {
+              <small class="error"> Enter a valid email address. </small>
+            }
+          </div>
+
+          <!-- Father's Email -->
+
+          <div class="form-group">
+            <label>
+              Father's Email
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> Example: father@email.com </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter father's email"
+                formControlName="dadEmail"
+              />
+            </div>
+
+            @if ((submitted || f['dadEmail'].touched) && f['dadEmail'].errors) {
+              <small class="error"> Enter a valid email address. </small>
+            }
+          </div>
+        </div>
+
+        <!-- ===========================================
+                     COACH INFORMATION
+                ============================================ -->
+
+        <div class="section-title">
+          <i class="bi bi-award-fill"></i>
+
+          <span>Coach Information</span>
+        </div>
+
+        <div class="form-grid">
+          <!-- Coach Name -->
+
+          <div class="form-group">
+            <label>
+              Coach Name
+
+              <small class="helper-text"> Optional </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person-badge"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter coach name"
+                formControlName="coachName"
+              />
+            </div>
+          </div>
+
+          <!-- Coach Email -->
+
+          <div class="form-group">
+            <label>
+              Coach Email
+
+              <small class="helper-text"> Optional </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Enter coach email"
+                formControlName="coachEmail"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- ===========================================
+                     VOLUNTEER INFORMATION
+                ============================================ -->
+
+        <div class="section-title">
+          <i class="bi bi-heart-fill"></i>
+
+          <span>Volunteer Information</span>
+        </div>
+
+        <div class="form-grid">
+          <!-- Volunteer Categories -->
+
+          <div class="form-group full-width">
+            <label>
+              Volunteer Categories
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> Select one or more categories </small>
+            </label>
+
+            <ng-select
+              [items]="volunteerCategories"
+              bindLabel="name"
+              bindValue="id"
+              [multiple]="true"
+              [closeOnSelect]="false"
+              appendTo="body"
+              placeholder="Select categories"
+              formControlName="volunteerCategories"
+            >
+              <!-- <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                @for (item of $any(items) | slice: 0 : 4; track item) {
+                  <div class="ng-value">
+                    <span class="ng-value-label">
+                      {{ $any(item).name }}
+                    </span>
+
+                    <span class="ng-value-icon right" (click)="clear(item)"> × </span>
+                  </div>
+                }
+
+                @if (items.length > 4) {
+                  <div class="ng-value more">+{{ items.length - 4 }} more</div>
+                }
+              </ng-template> -->
+            </ng-select>
+            @if (
+              (submitted || f['volunteerCategories'].touched) && f['volunteerCategories'].errors
+            ) {
+              <small class="error"> Please select at least one category. </small>
+            }
+          </div>
+
+          <!-- Expertise -->
+
+          <div class="form-group full-width">
+            <label>
+              Area of Expertise
+
+              <small class="helper-text">
+                Tell us about your skills, interests or previous volunteer experience.
+              </small>
+            </label>
+
+            <textarea
+              rows="6"
+              class="form-control"
+              placeholder="Write about your skills..."
+              formControlName="expertise"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- ===========================================
+                     ACCOUNT INFORMATION
+                ============================================ -->
+
+        <div class="section-title">
+          <i class="bi bi-shield-lock-fill"></i>
+
+          <span>Account Information</span>
+        </div>
+
+        <div class="form-grid">
+          <!-- Password -->
+
+          <div class="form-group">
+            <label>
+              Password
+
+              <span class="required">*</span>
+
+              <small class="helper-text"> One uppercase, one lowercase and one number </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-lock"></i>
+
+              <input
+                class="form-control"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="Enter Password"
+              />
+
+              <button type="button" class="eye-btn" (click)="togglePassword()">
+                <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"> </i>
+              </button>
+            </div>
+
+            @if ((submitted || f['password'].touched) && f['password'].errors) {
+              <small class="error"> Password must contain uppercase, lowercase and number. </small>
+            }
+          </div>
+
+          <!-- Confirm Password -->
+
+          <div class="form-group">
+            <label>
+              Confirm Password
+
+              <span class="required">*</span>
+              <small class="helper-text">&nbsp;</small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-lock-fill"></i>
+
+              <input
+                class="form-control"
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                formControlName="confirmPassword"
+                placeholder="Confirm Password"
+              />
+
+              <button type="button" class="eye-btn" (click)="toggleConfirmPassword()">
+                <i class="bi" [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"> </i>
+              </button>
+            </div>
+
+            @if (
+              (submitted || volunteerForm.errors?.['passwordMismatch']) &&
+              f['confirmPassword'].touched
+            ) {
+              <small class="error"> Passwords do not match. </small>
+            }
+          </div>
+        </div>
+        <!-- ===========================================
+                     ACTION BUTTONS
+                ============================================ -->
+
+        <div class="button-row">
+          <button type="submit" class="btn btn-primary" [disabled]="loading">
+            @if (!loading) {
+              <i class="bi bi-check-circle me-2"></i>
+
+              Register
+            }
+
+            @if (loading) {
+              <span class="spinner-border spinner-border-sm me-2"> </span>
+
+              Registering...
+            }
+          </button>
+
+          <button type="button" class="btn btn-danger" (click)="cancel()">
+            <i class="bi bi-x-circle me-2"></i>
+
+            Cancel
+          </button>
+        </div>
+
+        <!-- ===========================================
+                     DIVIDER
+                ============================================ -->
+
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <!-- ===========================================
+                     LOGIN LINK
+                ============================================ -->
+
+        <div class="bottom-links">
+          <div class="link-row">
+            <span> Already have an account? </span>
+
+            <a routerLink="/login" class="btn btn-outline-primary"> Login </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

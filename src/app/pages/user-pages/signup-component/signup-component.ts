@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from '../../../shared/validators/password.validator';
 import { matchPassword } from '../../../shared/validators/match-password.validator';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -13,26 +13,42 @@ import { NgClass } from '@angular/common';
 })
 export class SignupComponent {
   private fb = inject(FormBuilder);
+  private router = inject(Router);
+
+  signupForm!: FormGroup;
 
   submitted = false;
   loading = false;
+
   showPassword = false;
   showConfirmPassword = false;
 
-  signupForm = this.fb.group(
-    {
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      secondaryName: [''],
-      secondaryEmail: ['', Validators.email],
-      mobile: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
-      password: ['', [Validators.required, passwordValidator()]],
-      confirmPassword: ['', Validators.required],
-    },
-    {
-      validators: matchPassword('password', 'confirmPassword'),
-    },
-  );
+  ngOnInit(): void {
+    this.buildForm();
+  }
+
+  buildForm(): void {
+    this.signupForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+
+        email: ['', [Validators.required, Validators.email]],
+
+        secondaryName: ['', Validators.required],
+
+        secondaryEmail: ['', Validators.email],
+
+        mobileNumber: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{7,14}$/)]],
+
+        password: ['', [Validators.required, passwordValidator()]],
+
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validators: matchPassword('password', 'confirmPassword'),
+      },
+    );
+  }
 
   get f() {
     return this.signupForm.controls;
@@ -51,12 +67,17 @@ export class SignupComponent {
 
     console.log(this.signupForm.getRawValue());
 
-    // Replace with API call
+    /**
+     * TODO
+     * Replace with your API
+     */
 
     setTimeout(() => {
       this.loading = false;
 
-      alert('Registration Successful');
+      alert('Account Created Successfully');
+
+      // this.router.navigate(['/login']);
     }, 1500);
   }
 

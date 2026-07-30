@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -12,15 +12,25 @@ import { RouterModule } from '@angular/router';
 })
 export class LoginComponent {
   private fb = inject(FormBuilder);
+  private router = inject(Router);
+
+  loginForm!: FormGroup;
 
   submitted = false;
-  showPassword = false;
   loading = false;
 
-  loginForm = this.fb.nonNullable.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-  });
+  showPassword = false;
+
+  ngOnInit(): void {
+    this.buildForm();
+  }
+
+  buildForm(): void {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
+  }
 
   get f() {
     return this.loginForm.controls;
@@ -29,8 +39,9 @@ export class LoginComponent {
   login(): void {
     this.submitted = true;
 
+    this.loginForm.markAllAsTouched();
+
     if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
       return;
     }
 
@@ -38,17 +49,16 @@ export class LoginComponent {
 
     console.log(this.loginForm.getRawValue());
 
-    // Replace this with your API call
+    // Replace with your API call
     setTimeout(() => {
       this.loading = false;
+
+      alert('Login Successful');
     }, 1500);
   }
 
   cancel(): void {
-    this.loginForm.reset({
-      email: '',
-      password: '',
-    });
+    this.loginForm.reset();
 
     this.submitted = false;
   }

@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { interval, Subscription } from 'rxjs';
 import { HomeBannerService } from '../../../../../services/user/home-banner.service';
-import { IBanner } from '../../../../../models/user/home-banner.model';
 import { environment } from '../../../../../../environment/environment';
+import { IBanner } from '../../../../../core/models/user/home-banner.model';
 
 @Component({
   selector: 'app-bannercomponent',

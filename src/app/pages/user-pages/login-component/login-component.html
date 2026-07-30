@@ -1,61 +1,91 @@
 <div class="login-page">
   <div class="login-container">
-    
-
-    <!-- Card -->
-
     <div class="login-card">
-      <h2>Sign In</h2>
+      <h2>Welcome Back</h2>
 
-      <p class="subtitle">Enter your credentials to access the portal.</p>
+      <p class="subtitle">Sign in to continue to your IdealKids account.</p>
 
-      <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
-        <!-- Email -->
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <!-- ===========================================
+                     ACCOUNT INFORMATION
+                ============================================ -->
 
-        <div class="form-group">
-          <label>Email Address</label>
+        <div class="section-title">
+          <i class="bi bi-shield-lock-fill"></i>
 
-          <div class="input-wrapper">
-            <i class="bi bi-envelope"></i>
-
-            <input type="email" formControlName="email" placeholder="Enter your email" />
-          </div>
-
-          @if ((submitted || f.email.touched) && f.email.errors) {
-            <small class="error">
-              @if (f.email.errors['required']) {
-                Email is required.
-              }
-
-              @if (f.email.errors['email']) {
-                Please enter a valid email.
-              }
-            </small>
-          }
+          <span>Account Information</span>
         </div>
 
-        <!-- Password -->
+        <div class="form-grid">
+          <!-- Email -->
 
-        <div class="form-group">
-          <label>Password</label>
+          <div class="form-group full-width">
+            <label class="form-label">
+              <div class="label-row">
+                <span>Email Address</span>
 
-          <div class="input-wrapper">
-            <i class="bi bi-lock-fill"></i>
+                <span class="required">*</span>
+              </div>
 
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              formControlName="password"
-              placeholder="Enter your password"
-            />
+              <small class="helper-text"> Enter your registered email address </small>
+            </label>
 
-            <button type="button" class="eye-btn" (click)="togglePassword()">
-              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"> </i>
-            </button>
+            <div class="input-wrapper">
+              <i class="bi bi-envelope"></i>
+
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            @if ((submitted || f['email'].touched) && f['email'].errors) {
+              <small class="error">
+                @if (f['email'].errors?.['required']) {
+                  Email address is required.
+                }
+
+                @if (f['email'].errors?.['email']) {
+                  Please enter a valid email address.
+                }
+              </small>
+            }
           </div>
 
-          @if ((submitted || f.password.touched) && f.password.errors) {
-            <small class="error"> Password is required. </small>
-          }
+          <!-- Password -->
+
+          <div class="form-group full-width">
+            <label>
+              <div class="label-row">
+                <span>Password</span>
+
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> Enter your account password </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-lock-fill"></i>
+
+              <input
+                class="form-control"
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="Enter your password"
+              />
+
+              <button type="button" class="eye-btn" (click)="togglePassword()">
+                <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"> </i>
+              </button>
+            </div>
+
+            @if ((submitted || f['password'].touched) && f['password'].errors) {
+              <small class="error"> Password is required. </small>
+            }
+          </div>
         </div>
 
         <!-- Forgot Password -->
@@ -67,39 +97,72 @@
         <!-- Buttons -->
 
         <div class="button-row">
-          <button class="btn btn-primary" type="submit" [disabled]="loading">
+          <button type="submit" class="btn btn-primary" [disabled]="loading">
             @if (!loading) {
-              <span>Login</span>
+              <i class="bi bi-box-arrow-in-right me-2"></i>
+
+              Login
             }
 
             @if (loading) {
               <span class="spinner-border spinner-border-sm me-2"> </span>
 
-              Logging in...
+              Signing In...
             }
           </button>
 
-          <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="cancel()">
+            <i class="bi bi-x-circle me-2"></i>
+
+            Cancel
+          </button>
+        </div>
+
+        <!-- Divider -->
+
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <!-- ===========================================
+                     REGISTER OPTIONS
+                ============================================ -->
+
+        <div class="bottom-links">
+          <div class="option-card">
+            <div class="option-content">
+              <h6>
+                <i class="bi bi-person-add"></i>
+
+                New Here?
+              </h6>
+
+              <p>
+                Create your account to access events, programs, and all features of the IdealKids
+                portal.
+              </p>
+            </div>
+
+            <a routerLink="/register" class="btn btn-success"> Sign Up </a>
+          </div>
+
+          <div class="option-card">
+            <div class="option-content">
+              <h6>
+                <i class="bi bi-people-fill me-2"></i>
+
+                High School Volunteer?
+              </h6>
+
+              <p>Register as a volunteer and become part of the IdealKids volunteer community.</p>
+            </div>
+
+            <a routerLink="/volunteer-signup" class="btn btn-info text-white">
+              Volunteer Sign Up
+            </a>
+          </div>
         </div>
       </form>
-
-      <div class="divider">
-        <span>OR</span>
-      </div>
-
-      <!-- Register -->
-
-      <div class="bottom-links">
-        <div class="link-row">
-          <span>New Member?</span>
-          <a routerLink="/register" class="btn btn-success btn-sm"> Sign Up </a>
-        </div>
-
-        <div class="link-row">
-          <span>High School Volunteer Sign Up?</span>
-          <a routerLink="/volunteer-login" class="btn btn-info btn-sm"> Volunteer Login </a>
-        </div>
-      </div>
     </div>
   </div>
 </div>

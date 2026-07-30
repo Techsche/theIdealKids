@@ -3,6 +3,8 @@ import { UserLayoutComponent } from './layouts/user-layout/user-layout.component
 import { Homecomponent } from './pages/user-pages/homecomponent/homecomponent';
 import { LoginComponent } from './pages/user-pages/login-component/login-component';
 import { SignupComponent } from './pages/user-pages/signup-component/signup-component';
+import { VolunteerSignupComponent } from './pages/user-pages/volunteer-signup-component/volunteer-signup-component';
+import { ForgotPasswordComponent } from './pages/user-pages/forgot-password-component/forgot-password-component';
 
 export const routes: Routes = [
   {
@@ -13,6 +15,8 @@ export const routes: Routes = [
       //   { path: 'about', component: AboutComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: SignupComponent },
+      { path: 'volunteer-signup', component: VolunteerSignupComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
     ],
   },
 ];

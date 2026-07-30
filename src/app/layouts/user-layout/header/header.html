@@ -23,7 +23,9 @@
       @if (!isLoggedIn) {
         <button mat-button routerLink="/login">Login</button>
         <button mat-button routerLink="/register">Signup</button>
-        <button mat-raised-button color="primary">High School Volunteer Signup</button>
+        <button mat-raised-button color="primary" routerLink="/volunteer-signup">
+          High School Volunteer Signup
+        </button>
       }
     </div>
   </nav>
@@ -33,8 +35,9 @@
     @if (!isLoggedIn) {
       <button mat-button routerLink="/login">Login</button>
       <button mat-button routerLink="/register">Signup</button>
-
-      <button mat-raised-button color="primary">High School Volunteer Signup</button>
+      <button mat-raised-button color="primary" routerLink="/volunteer-signup">
+        High School Volunteer Signup
+      </button>
     }
 
     @if (isLoggedIn) {
