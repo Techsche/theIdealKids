@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { ToastrAlertService } from '../../../services/common/toastr.services';
+import { AuthService } from '../../../services/user/auth.service';
 
 @Component({
   selector: 'app-forgot-password-component',
@@ -11,6 +13,9 @@ import { Router, RouterModule } from '@angular/router';
 export class ForgotPasswordComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
+  private authService = inject(AuthService);
+  private toastrService = inject(ToastrAlertService);
 
   forgotForm!: FormGroup;
 
@@ -41,21 +46,26 @@ export class ForgotPasswordComponent {
     }
 
     this.loading = true;
+    this.authService.forgotPassword(this.forgotForm.value).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.cdr.detectChanges();
 
-    console.log(this.forgotForm.getRawValue());
+        if (res.success) {
+          this.toastrService.success(res.message);
+          this.router.navigate(['/login']);
+        } else {
+          this.toastrService.error(res.message || 'Something went wrong!');
+        }
+      },
 
-    /**
-     * TODO
-     * Replace with your API call
-     */
+      error: (err) => {
+        this.loading = false;
+        this.cdr.detectChanges();
 
-    setTimeout(() => {
-      this.loading = false;
-
-      alert('Password reset link sent successfully.');
-
-      // this.router.navigate(['/login']);
-    }, 1500);
+        this.toastrService.error('Something went wrong!');
+      },
+    });
   }
 
   cancel(): void {

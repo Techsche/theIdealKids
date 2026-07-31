@@ -1,0 +1,205 @@
+<div class="events-page">
+  <!-- Hero -->
+
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Events</h1>
+
+        <p>Explore our upcoming events and browse memories from previous years.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+
+  <section class="events-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <i class="bi bi-calendar-event me-2"></i>
+
+          Upcoming Events
+        </h2>
+      </div>
+
+      <div class="table-card">
+        <div class="table-responsive event-table">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Event</th>
+
+                <th>Date</th>
+
+                <th>Location</th>
+
+                <th>Status</th>
+
+                <th width="150">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @if (upcomingEvents.length) {
+                @for (event of upcomingEvents; track event) {
+                  <tr>
+                    <td>
+                      <strong>{{ event.title }}</strong>
+                    </td>
+
+                    <td>
+                      {{ event.date }}
+                    </td>
+
+                    <td>
+                      {{ event.location }}
+                    </td>
+
+                    <td>
+                      <span
+                        class="badge rounded-pill"
+                        [ngClass]="{
+                          'bg-success': event.status == 'Open',
+
+                          'bg-warning text-dark': event.status == 'Coming Soon',
+
+                          'bg-danger': event.status == 'Closed',
+                        }"
+                      >
+                        {{ event.status }}
+                      </span>
+                    </td>
+
+                    <td>
+                      <button class="btn btn-primary btn-sm">View</button>
+                    </td>
+                  </tr>
+                }
+              } @else {
+                <tr>
+                  <td colspan="5" class="text-center py-5">
+                    <i class="bi bi-calendar-x display-5 text-secondary"></i>
+
+                    <div class="mt-3">No upcoming events available.</div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===========================================
+       Past Events
+  ============================================-->
+
+  <section class="events-section light-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2>
+          <i class="bi bi-clock-history me-2"></i>
+
+          Past Events
+        </h2>
+      </div>
+
+      <div class="accordion custom-accordion" id="pastEventsAccordion">
+        @for (year of pastEvents; track year.year; let i = $index) {
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                [class.collapsed]="!isExpanded(year.year)"
+                type="button"
+                (click)="toggleAccordion(year.year)"
+              >
+                <span class="year-badge">
+                  {{ year.year }}
+                </span>
+
+                <span class="ms-3"> {{ year.events.length }} Events </span>
+              </button>
+            </h2>
+
+            <div
+              [id]="'collapse' + year.year"
+              class="accordion-collapse"
+              [class.show]="isExpanded(year.year)"
+              [style.display]="isExpanded(year.year) ? 'block' : 'none'"
+              data-bs-parent="#pastEventsAccordion"
+            >
+              <div class="accordion-body">
+                <div class="row g-4">
+                  @for (event of year.events; track event) {
+                    <div class="col-lg-6">
+                      <div class="event-card">
+                        <div class="event-icon">
+                          <i
+                            class="bi"
+                            [ngClass]="{
+                              'bi-person-running': event.type == 'run',
+
+                              'bi-palette-fill': event.type == 'talent',
+
+                              'bi-mic-fill': event.type == 'speech',
+
+                              'bi-calendar-event': event.type == 'general',
+                            }"
+                          >
+                          </i>
+                        </div>
+
+                        <div class="event-body">
+                          <h4>
+                            {{ event.title }}
+                          </h4>
+
+                          <div class="event-date">
+                            {{ event.date }}
+                          </div>
+
+                          @if (event.description) {
+                            <p>
+                              {{ event.description }}
+                            </p>
+                          }
+
+                          @if (event.weeks?.length) {
+                            <div class="weekly-runs">
+                              <h6>Weekly Run Pictures</h6>
+
+                              <ul>
+                                @for (week of event.weeks; track week) {
+                                  <li>{{ week.title }} - {{ week.location }}</li>
+                                }
+                              </ul>
+                            </div>
+                          }
+                        </div>
+
+                        @if (event.pictureUrl) {
+                          <a
+                            [href]="event.pictureUrl"
+                            target="_blank"
+                            rel="noopener"
+                            class="btn btn-outline-primary"
+                          >
+                            <i class="bi bi-images me-2"></i>
+
+                            Pictures
+                          </a>
+                        }
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,4 +1,4 @@
-import { NgClass, SlicePipe } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from '../../../shared/validators/password.validator';
@@ -11,7 +11,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 @Component({
   selector: 'app-volunteer-signup-component',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass, RouterLink, NgSelectComponent, SlicePipe],
+  imports: [ReactiveFormsModule, NgClass, RouterLink, NgSelectComponent],
   templateUrl: './volunteer-signup-component.html',
   styleUrl: './volunteer-signup-component.scss',
 })

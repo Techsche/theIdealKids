@@ -1,0 +1,339 @@
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.tips-page {
+  background: #f8fafc;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.container {
+  width: min(1200px, calc(100% - 40px));
+  margin: auto;
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero-section {
+  background: linear-gradient(135deg, #0d6efd, #4a90ff);
+  color: #fff;
+  padding: 90px 0;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 850px;
+  margin: auto;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  opacity: 0.95;
+  margin: 0;
+}
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.tips-section,
+.softskill-section {
+  padding: 80px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-header h2 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #263238;
+  margin: 0;
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.tip-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 35px 30px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tip-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(13, 110, 253, 0.15);
+}
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.tip-card .icon,
+.softskill-card .icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: rgba(13, 110, 253, 0.12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tip-card .icon i,
+.softskill-card .icon i {
+  font-size: 34px;
+  color: #0d6efd;
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.tip-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #263238;
+  margin-bottom: 15px;
+}
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+.tip-card p {
+  color: #6c757d;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  flex: 1;
+}
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.tip-card .btn {
+  align-self: center;
+  min-width: 220px;
+  border-radius: 10px;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.tip-card .btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   SOFT SKILL
+========================================================== */
+
+.softskill-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transition: 0.3s;
+}
+
+.softskill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(13, 110, 253, 0.15);
+}
+
+.softskill-card h2 {
+  font-size: 36px;
+  color: #263238;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.softskill-card p {
+  max-width: 800px;
+  margin: auto;
+  font-size: 18px;
+  color: #55616d;
+  line-height: 1.9;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 1200px) {
+  .hero-content h1 {
+    font-size: 42px;
+  }
+
+  .section-header h2 {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-section {
+    padding: 70px 0;
+  }
+
+  .tips-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .tips-section,
+  .softskill-section {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 30px);
+  }
+
+  .hero-section {
+    padding: 60px 0;
+  }
+
+  .hero-content h1 {
+    font-size: 34px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .section-header h2 {
+    font-size: 30px;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .tip-card {
+    padding: 30px 24px;
+  }
+
+  .tip-card h3 {
+    font-size: 20px;
+  }
+
+  .softskill-card {
+    padding: 40px 25px;
+  }
+
+  .softskill-card h2 {
+    font-size: 30px;
+  }
+
+  .softskill-card p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+  }
+
+  .section-header h2 {
+    font-size: 26px;
+  }
+
+  .tip-card,
+  .softskill-card {
+    border-radius: 14px;
+  }
+
+  .tip-card .icon,
+  .softskill-card .icon {
+    width: 65px;
+    height: 65px;
+  }
+
+  .tip-card .icon i,
+  .softskill-card .icon i {
+    font-size: 28px;
+  }
+
+  .tip-card .btn {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .softskill-card h2 {
+    font-size: 26px;
+  }
+}
+
+/* ==========================================================
+   SELECTION
+========================================================== */
+
+::selection {
+  background: rgba(13, 110, 253, 0.18);
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7d2dc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #adb8c4;
+}

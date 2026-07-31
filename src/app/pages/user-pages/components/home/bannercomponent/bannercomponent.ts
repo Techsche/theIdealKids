@@ -1,61 +1,59 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { interval, Subscription } from 'rxjs';
+import { Component, OnInit, signal } from '@angular/core';
+
 import { HomeBannerService } from '../../../../../services/user/home-banner.service';
 import { environment } from '../../../../../../environment/environment';
 import { IBanner } from '../../../../../core/models/user/home-banner.model';
+import { CarouselComponent, CarouselItem } from '../carousel-component/carousel-component';
 
 @Component({
   selector: 'app-bannercomponent',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [CarouselComponent],
   templateUrl: './bannercomponent.html',
   styleUrl: './bannercomponent.scss',
 })
-export class Bannercomponent implements OnInit, OnDestroy {
-  banners = signal<IBanner[]>([]);
-  currentIndex = signal(0);
-  autoplaySub!: Subscription;
+export class Bannercomponent implements OnInit {
   apiUrl = environment.base;
+
+  carouselItems = signal<CarouselItem[]>([]);
+
   constructor(private bannerService: HomeBannerService) {}
 
   ngOnInit(): void {
     this.bannerService.getBanners().subscribe({
       next: (data) => {
-        const enabled = data.filter(b => b.is_enable);
-        this.banners.set(enabled);
+        const enabled = data.filter((x) => x.is_enable);
 
-        if (enabled.length > 1) {
-          this.autoplaySub = interval(5000).subscribe(() => this.next());
-        }
+        this.carouselItems.set(
+          enabled.map((b) => ({
+            image: this.getImage(b.imagePath),
+
+            title: b.text,
+
+            redirectUrl: b.redirectUrl,
+
+            data: b,
+          })),
+        );
       },
-      error: (err) => console.error(err)
+
+      error: console.error,
     });
   }
 
-  ngOnDestroy(): void {
-    this.autoplaySub?.unsubscribe();
+  getImage(path: string): string {
+    if (!path) return '';
+
+    if (path.startsWith('http')) {
+      return path;
+    }
+
+    return this.apiUrl + path;
   }
 
-  next(): void {
-    const len = this.banners().length;
-    if (!len) return;
-    this.currentIndex.set((this.currentIndex() + 1) % len);
-  }
-
-  prev(): void {
-    const len = this.banners().length;
-    if (!len) return;
-    this.currentIndex.set((this.currentIndex() - 1 + len) % len);
-  }
-
-  getTransform(): string {
-    return `translateX(-${this.currentIndex() * 100}%)`;
-  }
-
-  redirect(banner: IBanner): void {
-    if (banner.redirectUrl && banner.redirectUrl !== '#') {
-      window.open(banner.redirectUrl, '_blank');
+  redirect(item: CarouselItem) {
+    if (item.redirectUrl && item.redirectUrl !== '#') {
+      window.open(item.redirectUrl, '_blank');
     }
   }
 }

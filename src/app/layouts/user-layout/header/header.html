@@ -13,10 +13,10 @@
 
   <!-- Center Menu -->
   <nav class="nav-menu">
-    <a mat-button>About Us</a>
-    <a mat-button>Events</a>
-    <a mat-button>Ideal Tips</a>
-    <a mat-button>Forms</a>
+    <a mat-button [routerLink]="'/about'" routerLinkActive="active">About Us</a>
+    <a mat-button [routerLink]="'/events'" routerLinkActive="active">Events</a>
+    <a mat-button [routerLink]="'/ideal-tips'" routerLinkActive="active">Ideal Tips</a>
+    <a mat-button [routerLink]="'/forms'" routerLinkActive="active">Forms</a>
 
     <!-- Mobile Actions -->
     <div class="mobile-actions">
@@ -46,10 +46,13 @@
       </button>
 
       <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item>Admin</button>
         <button mat-menu-item>Profile</button>
-        <button mat-menu-item>Events</button>
-        <button mat-menu-item>Competitions</button>
-        <button mat-menu-item>Logout</button>
+        <button mat-menu-item routerLink="/my-events">Events</button>
+        <button mat-menu-item>Current Event Info</button>
+        <button mat-menu-item>Add/Edit Child</button>
+        <button mat-menu-item>Change Password</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
     }
   </div>

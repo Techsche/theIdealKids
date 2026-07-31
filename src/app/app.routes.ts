@@ -5,6 +5,13 @@ import { LoginComponent } from './pages/user-pages/login-component/login-compone
 import { SignupComponent } from './pages/user-pages/signup-component/signup-component';
 import { VolunteerSignupComponent } from './pages/user-pages/volunteer-signup-component/volunteer-signup-component';
 import { ForgotPasswordComponent } from './pages/user-pages/forgot-password-component/forgot-password-component';
+import { AboutComponent } from './pages/user-pages/about-component/about-component';
+import { IdealTipsComponent } from './pages/user-pages/ideal-tips-component/ideal-tips-component';
+import { FromsComponent } from './pages/user-pages/froms-component/froms-component';
+import { EventsComponent } from './pages/user-pages/events-component/events-component';
+import { guestGuard } from './core/guards/guest.guard';
+import { authGuard } from './core/guards/auth.guard';
+import { MyEventsComponent } from './pages/user-pages/accounts/my-events-component/my-events-component';
 
 export const routes: Routes = [
   {
@@ -12,11 +19,17 @@ export const routes: Routes = [
     component: UserLayoutComponent,
     children: [
       { path: '', component: Homecomponent },
-      //   { path: 'about', component: AboutComponent },
-      { path: 'login', component: LoginComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'events', component: EventsComponent },
+      { path: 'ideal-tips', component: IdealTipsComponent },
+      { path: 'forms', component: FromsComponent },
+
+      { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
       { path: 'register', component: SignupComponent },
       { path: 'volunteer-signup', component: VolunteerSignupComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
+
+      { path: 'my-events', component: MyEventsComponent, canActivate: [authGuard] },
     ],
   },
 ];

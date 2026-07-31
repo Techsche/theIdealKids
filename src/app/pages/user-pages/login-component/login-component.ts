@@ -1,7 +1,9 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/user/auth.service';
+import { ToastrAlertService } from '../../../services/common/toastr.services';
 
 @Component({
   selector: 'app-login-component',
@@ -13,6 +15,9 @@ import { Router, RouterModule } from '@angular/router';
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private authService = inject(AuthService);
+  private toastrService = inject(ToastrAlertService);
+  private cdr = inject(ChangeDetectorRef);
 
   loginForm!: FormGroup;
 
@@ -36,30 +41,38 @@ export class LoginComponent {
     return this.loginForm.controls;
   }
 
-  login(): void {
+  login() {
     this.submitted = true;
-
-    this.loginForm.markAllAsTouched();
-
     if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+
       return;
     }
-
     this.loading = true;
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.cdr.detectChanges();
 
-    console.log(this.loginForm.getRawValue());
+        if (res.success) {
+          this.toastrService.success(res.message || 'Login successful!');
+          this.router.navigate(['/home']);
+        } else {
+          this.toastrService.error(res.message || 'Login failed.');
+        }
+      },
 
-    // Replace with your API call
-    setTimeout(() => {
-      this.loading = false;
+      error: (err) => {
+        this.loading = false;
+        this.cdr.detectChanges();
 
-      alert('Login Successful');
-    }, 1500);
+        this.toastrService.error('An error occurred while logging in.');
+      },
+    });
   }
 
   cancel(): void {
     this.loginForm.reset();
-
     this.submitted = false;
   }
 

@@ -1,0 +1,246 @@
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.forms-page {
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.container {
+  width: min(1100px, calc(100% - 40px));
+  margin: auto;
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero-section {
+  background: linear-gradient(135deg, #0d6efd, #4b8fff);
+  color: #fff;
+  padding: 90px 0;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 760px;
+  margin: auto;
+}
+
+.hero-content h1 {
+  font-size: 46px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* ==========================================================
+   SECTION
+========================================================== */
+
+.forms-section {
+  padding: 80px 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.section-header h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #263238;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.form-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+
+  transition: 0.3s;
+}
+
+.form-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(13, 110, 253, 0.15);
+}
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.form-icon {
+  width: 75px;
+  height: 75px;
+  flex-shrink: 0;
+
+  border-radius: 50%;
+  background: rgba(13, 110, 253, 0.12);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-icon i {
+  font-size: 34px;
+  color: #0d6efd;
+}
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.form-content {
+  flex: 1;
+}
+
+.form-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #263238;
+  margin-bottom: 10px;
+}
+
+.form-content p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+.form-card .btn {
+  min-width: 180px;
+  height: 50px;
+  border-radius: 10px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.form-card .btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 70px 0;
+  }
+
+  .hero-content h1 {
+    font-size: 34px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .forms-section {
+    padding: 60px 0;
+  }
+
+  .form-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px;
+  }
+
+  .form-content {
+    text-align: center;
+  }
+
+  .form-card .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: calc(100% - 30px);
+  }
+
+  .hero-section {
+    padding: 55px 0;
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+  }
+
+  .section-header h2 {
+    font-size: 28px;
+  }
+
+  .form-card {
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .form-icon {
+    width: 65px;
+    height: 65px;
+  }
+
+  .form-icon i {
+    font-size: 28px;
+  }
+
+  .form-content h3 {
+    font-size: 22px;
+  }
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9d2dc;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #aeb7c1;
+}
