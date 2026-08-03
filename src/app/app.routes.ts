@@ -30,6 +30,9 @@ export const routes: Routes = [
       { path: 'forgot-password', component: ForgotPasswordComponent },
 
       { path: 'my-events', component: MyEventsComponent, canActivate: [authGuard] },
+
+      // Must be the last child route
+      { path: '**', redirectTo: '' },
     ],
   },
 ];

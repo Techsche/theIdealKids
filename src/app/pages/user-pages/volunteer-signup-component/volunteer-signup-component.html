@@ -146,8 +146,12 @@
               <small class="helper-text"> Current Grade </small>
             </label>
 
-            <select class="form-select" formControlName="grade" [class.has-value]="f['grade'].value">
-              <option value="" disabled selected >Select Grade</option>
+            <select
+              class="form-select"
+              formControlName="grade"
+              [class.has-value]="f['grade'].value"
+            >
+              <option value="" disabled selected>Select Grade</option>
 
               @for (grade of grades; track grade) {
                 <option [value]="grade">

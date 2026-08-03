@@ -1,18 +1,16 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
   Input,
-  OnChanges,
   OnDestroy,
   Output,
-  SimpleChanges,
   ViewChild,
   signal,
-  afterNextRender,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -28,11 +26,28 @@ export interface CarouselItem {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './carousel-component.html',
-  styleUrl: './carousel-component.scss',
+  styleUrls: ['./carousel-component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CarouselComponent implements AfterViewInit, OnChanges, OnDestroy {
-  @Input() items: CarouselItem[] = [];
+export class CarouselComponent implements AfterViewInit, OnDestroy {
+  private _items: CarouselItem[] = [];
+
+  @Input()
+  set items(value: CarouselItem[]) {
+    this._items = value ?? [];
+    this.currentIndex.set(0);
+
+    queueMicrotask(() => {
+      this.updateTransform();
+      this.restartAutoplay();
+      this.cdr.markForCheck();
+    });
+  }
+
+  get items(): CarouselItem[] {
+    return this._items;
+  }
+
   @Input() autoPlay = true;
   @Input() delay = 4000;
   @Input() showDots = true;
@@ -53,37 +68,25 @@ export class CarouselComponent implements AfterViewInit, OnChanges, OnDestroy {
   private touchStartX = 0;
   private touchEndX = 0;
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngAfterViewInit(): void {
-    afterNextRender(() => {
-      this.updateTransform();
+    this.updateTransform();
 
-      if (this.autoPlay) {
-        this.startAutoplay();
-      }
-    });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['items']) {
-      this.currentIndex.set(0);
-
-      afterNextRender(() => {
-        this.updateTransform();
-
-        if (this.autoPlay) {
-          this.restartAutoplay();
-        }
-      });
+    if (this.autoPlay) {
+      this.startAutoplay();
     }
+
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy(): void {
     this.stopAutoplay();
   }
 
-  /* ------------------------------------ */
-  /* Autoplay                             */
-  /* ------------------------------------ */
+  /* ---------------------- */
+  /* Autoplay               */
+  /* ---------------------- */
 
   private startAutoplay(): void {
     if (!this.autoPlay || this.items.length <= 1) {
@@ -113,12 +116,14 @@ export class CarouselComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.startAutoplay();
   }
 
-  /* ------------------------------------ */
-  /* Navigation                           */
-  /* ------------------------------------ */
+  /* ---------------------- */
+  /* Navigation             */
+  /* ---------------------- */
 
   next(restart = true): void {
-    if (!this.items.length) return;
+    if (!this.items.length) {
+      return;
+    }
 
     if (this.currentIndex() >= this.items.length - 1) {
       if (this.infinite) {
@@ -136,7 +141,9 @@ export class CarouselComponent implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   previous(restart = true): void {
-    if (!this.items.length) return;
+    if (!this.items.length) {
+      return;
+    }
 
     if (this.currentIndex() <= 0) {
       if (this.infinite) {
@@ -163,8 +170,12 @@ export class CarouselComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.itemClick.emit(item);
   }
 
+  isActive(index: number): boolean {
+    return this.animation === 'fade' && this.currentIndex() === index;
+  }
+
   private updateTransform(): void {
-    if (!this.track?.nativeElement) {
+    if (!this.track) {
       return;
     }
 
