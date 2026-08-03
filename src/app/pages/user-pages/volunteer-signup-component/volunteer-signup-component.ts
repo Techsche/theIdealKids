@@ -1,12 +1,13 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from '../../../shared/validators/password.validator';
 import { matchPassword } from '../../../shared/validators/match-password.validator';
 import { VolunteerCategory } from '../../../core/models/user/volunteer.model';
 import { VolunteerService } from '../../../services/user/volunteer.services';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { NgSelectComponent } from '@ng-select/ng-select';
+import { ToastrAlertService } from '../../../services/common/toastr.services';
 
 @Component({
   selector: 'app-volunteer-signup-component',
@@ -26,7 +27,10 @@ export class VolunteerSignupComponent {
 
   grades = ['Grade 9', 'Grade 10', 'Grade 11', 'Grade 12'];
 
-  constructor(private volunteerService: VolunteerService) {}
+  private volunteerService = inject(VolunteerService);
+  private toastrService = inject(ToastrAlertService);
+  private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.getCategories();
@@ -38,12 +42,11 @@ export class VolunteerSignupComponent {
       next: (response: any) => {
         if (response) {
           this.volunteerCategories = response;
-          console.log('Volunteer Categories Response:', this.volunteerCategories);
         } else {
           // console.error('Failed to fetch volunteer categories:', response?.message);
         }
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error fetching volunteer categories:', error);
       },
     });
@@ -52,24 +55,29 @@ export class VolunteerSignupComponent {
   setForm(): void {
     this.volunteerForm = this.fb.group(
       {
-        studentName: ['', Validators.required],
-        studentEmail: ['', [Validators.required, Validators.email]],
-        schoolName: ['', Validators.required],
-        schoolCity: ['', Validators.required],
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        school_name: ['', Validators.required],
+        school_city: ['', Validators.required],
         grade: ['', Validators.required],
-        mobileNumber: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
-        momName: ['', Validators.required],
-        dadName: ['', Validators.required],
-        momMobile: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
-        dadMobile: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
-        momEmail: ['', [Validators.required, Validators.email]],
-        dadEmail: ['', [Validators.required, Validators.email]],
-        coachName: [''],
-        coachEmail: ['', Validators.email],
-        volunteerCategories: [[]],
-        expertise: [''],
+        mobileNo: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
         password: ['', [Validators.required, passwordValidator()]],
         confirmPassword: ['', Validators.required],
+
+        mom_name: ['', Validators.required],
+        mom_email: ['', [Validators.required, Validators.email]],
+        mom_mobile_number: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
+
+        dad_name: ['', Validators.required],
+        dad_email: ['', [Validators.required, Validators.email]],
+        dad_mobile_number: ['', [Validators.required, Validators.pattern(/^[6-9]\d{9}$/)]],
+
+        coach_name: [''],
+        coach_email: ['', Validators.email],
+
+        area_of_expertise: [''],
+        volunteer_categories: [[]],
+        selectedCategories: [[]],
       },
       {
         validators: matchPassword('password', 'confirmPassword'),
@@ -82,18 +90,19 @@ export class VolunteerSignupComponent {
   }
 
   get selectedCategories(): VolunteerCategory[] {
-    return (this.volunteerForm.get('volunteerCategories')?.value ?? []) as VolunteerCategory[];
+    return (this.volunteerForm.get('volunteer_categories')?.value ?? []) as VolunteerCategory[];
   }
 
   isCategorySelected(categoryId: string): boolean {
-    const selectedCategories = this.f['volunteerCategories'].value ?? [];
+    const selectedCategories = this.f['volunteer_categories'].value ?? [];
 
     return selectedCategories.includes(categoryId);
   }
+
   onCategoryChange(event: Event, categoryId: string): void {
     const checked = (event.target as HTMLInputElement).checked;
 
-    const selectedCategories = [...(this.f['volunteerCategories'].value ?? [])];
+    const selectedCategories = [...(this.f['volunteer_categories'].value ?? [])];
 
     if (checked) {
       if (!selectedCategories.includes(categoryId)) {
@@ -107,11 +116,11 @@ export class VolunteerSignupComponent {
       }
     }
 
-    this.f['volunteerCategories'].setValue(selectedCategories);
+    this.f['volunteer_categories'].setValue(selectedCategories);
 
-    this.f['volunteerCategories'].markAsDirty();
+    this.f['volunteer_categories'].markAsDirty();
 
-    this.f['volunteerCategories'].markAsTouched();
+    this.f['volunteer_categories'].markAsTouched();
   }
 
   signup(): void {
@@ -125,13 +134,26 @@ export class VolunteerSignupComponent {
 
     this.loading = true;
 
-    console.log(this.volunteerForm.getRawValue());
-
-    setTimeout(() => {
-      this.loading = false;
-
-      alert('Volunteer Registration Successful');
-    }, 1500);
+    this.volunteerService.createHighSchoolVolunteer(this.volunteerForm.value).subscribe({
+      next: (response: any) => {
+        this.loading = false;
+        this.cdr.detectChanges();
+        if (response.success) {
+          // Handle successful signup, e.g., show a success message or redirect
+          this.toastrService.success(response.message || 'Signup successful!');
+          this.router.navigate(['/login']);
+        } else {
+          // Handle error response, e.g., show an error message
+          this.toastrService.error(response.message || 'Signup failed.');
+        }
+      },
+      error: (error: any) => {
+        this.loading = false;
+        this.cdr.detectChanges();
+        // Handle error, e.g., show an error message
+        this.toastrService.error(error.message || 'An error occurred during signup.');
+      },
+    });
   }
 
   cancel(): void {

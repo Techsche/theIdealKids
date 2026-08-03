@@ -94,12 +94,13 @@
               <input
                 type="text"
                 class="form-control"
-                formControlName="mobileNumber"
+                formControlName="mobileNo"
                 placeholder="Mobile no. with Country Code"
+                maxlength="15"
               />
             </div>
 
-            @if ((submitted || f['mobileNumber'].touched) && f['mobileNumber'].errors) {
+            @if ((submitted || f['mobileNo'].touched) && f['mobileNo'].errors) {
               <small class="error"> Mobile Number is required. </small>
             }
           </div>
@@ -122,12 +123,12 @@
               <input
                 type="text"
                 class="form-control"
-                formControlName="secondaryName"
+                formControlName="secondary_name"
                 placeholder="Mom / Dad / Volunteer Name"
               />
             </div>
 
-            @if ((submitted || f['secondaryName'].touched) && f['secondaryName'].errors) {
+            @if ((submitted || f['secondary_name'].touched) && f['secondary_name'].errors) {
               <small class="error"> Secondary Name is required. </small>
             }
           </div>
@@ -149,13 +150,13 @@
               <input
                 type="email"
                 class="form-control"
-                formControlName="secondaryEmail"
+                formControlName="secondary_email"
                 placeholder="Secondary Email (Mom / Dad / Volunteer)"
               />
             </div>
 
             @if (
-              (submitted || f['secondaryEmail'].touched) && f['secondaryEmail'].errors?.['email']
+              (submitted || f['secondary_email'].touched) && f['secondary_email'].errors?.['email']
             ) {
               <small class="error"> Please enter a valid email address. </small>
             }
@@ -204,7 +205,16 @@
             </div>
 
             @if ((submitted || f['password'].touched) && f['password'].errors) {
-              <small class="error"> Password is required. </small>
+              @if (f['password'].errors['required']) {
+                <small class="error">Password is required.</small>
+              }
+
+              @if (f['password'].errors['passwordStrength']) {
+                <small class="error">
+                  Password must be at least 8 characters long and contain at least one uppercase
+                  letter, one lowercase letter, and one number.
+                </small>
+              }
             }
           </div>
 
@@ -237,8 +247,17 @@
               </button>
             </div>
 
-            @if ((submitted || f['confirmPassword'].touched) && f['confirmPassword'].errors) {
-              <small class="error"> Confirm Password is required. </small>
+            @if (
+              (submitted || f['confirmPassword'].touched) &&
+              f['confirmPassword'].errors?.['required']
+            ) {
+              <small class="error">Confirm Password is required.</small>
+            }
+
+            @if (
+              (submitted || f['confirmPassword'].touched) && signupForm.errors?.['passwordMismatch']
+            ) {
+              <small class="error">Passwords do not match.</small>
             }
           </div>
         </div>

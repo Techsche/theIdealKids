@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environment/environment.prod';
 import { ApiResponse } from '../../core/models/apiResponse.model';
 import { VolunteerCategory } from '../../core/models/user/volunteer.model';
+import { HighSchoolVolunteerRequest } from '../../core/models/user/high-school-volunteer.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,6 @@ export class VolunteerService {
   private readonly http = inject(HttpClient);
 
   private readonly apiUrl = environment.base;
-
-  constructor() {}
 
   /**
    * Get all volunteer categories
@@ -62,9 +61,12 @@ export class VolunteerService {
   /**
    * Create Volunteer
    */
-  //   create(payload: Volunteer): Observable<ApiResponse<Volunteer>> {
-  //     return this.http.post<ApiResponse<Volunteer>>(this.apiUrl, payload);
-  //   }
+  createHighSchoolVolunteer(request: HighSchoolVolunteerRequest): Observable<ApiResponse<null>> {
+    return this.http.post<ApiResponse<null>>(
+      `${this.apiUrl}api/user/high/school/volunteer/create`,
+      request,
+    );
+  }
 
   //   /**
   //    * Update Volunteer

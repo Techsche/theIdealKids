@@ -37,11 +37,11 @@
                 type="text"
                 class="form-control"
                 placeholder="Enter student name"
-                formControlName="studentName"
+                formControlName="name"
               />
             </div>
 
-            @if ((submitted || f['studentName'].touched) && f['studentName'].errors) {
+            @if ((submitted || f['name'].touched) && f['name'].errors) {
               <small class="error"> Student name is required. </small>
             }
           </div>
@@ -64,17 +64,17 @@
                 type="email"
                 class="form-control"
                 placeholder="Enter student email"
-                formControlName="studentEmail"
+                formControlName="email"
               />
             </div>
 
-            @if ((submitted || f['studentEmail'].touched) && f['studentEmail'].errors) {
+            @if ((submitted || f['email'].touched) && f['email'].errors) {
               <small class="error">
-                @if (f['studentEmail'].errors?.['required']) {
+                @if (f['email'].errors?.['required']) {
                   Student email is required.
                 }
 
-                @if (f['studentEmail'].errors?.['email']) {
+                @if (f['email'].errors?.['email']) {
                   Enter a valid email address.
                 }
               </small>
@@ -99,11 +99,11 @@
                 type="text"
                 class="form-control"
                 placeholder="Enter school name"
-                formControlName="schoolName"
+                formControlName="school_name"
               />
             </div>
 
-            @if ((submitted || f['schoolName'].touched) && f['schoolName'].errors) {
+            @if ((submitted || f['school_name'].touched) && f['school_name'].errors) {
               <small class="error"> School name is required. </small>
             }
           </div>
@@ -126,11 +126,11 @@
                 type="text"
                 class="form-control"
                 placeholder="Enter school city"
-                formControlName="schoolCity"
+                formControlName="school_city"
               />
             </div>
 
-            @if ((submitted || f['schoolCity'].touched) && f['schoolCity'].errors) {
+            @if ((submitted || f['school_city'].touched) && f['school_city'].errors) {
               <small class="error"> School city is required. </small>
             }
           </div>
@@ -173,7 +173,7 @@
 
               <span class="required">*</span>
 
-              <small class="helper-text"> 10-digit Mobile Number </small>
+              <small class="helper-text"> Include Country Code </small>
             </label>
 
             <div class="input-wrapper">
@@ -183,11 +183,12 @@
                 type="tel"
                 class="form-control"
                 placeholder="Enter mobile number"
-                formControlName="mobileNumber"
+                formControlName="mobileNo"
+                maxlength="15"
               />
             </div>
 
-            @if ((submitted || f['mobileNumber'].touched) && f['mobileNumber'].errors) {
+            @if ((submitted || f['mobileNo'].touched) && f['mobileNo'].errors) {
               <small class="error"> Enter a valid mobile number. </small>
             }
           </div>
@@ -221,11 +222,11 @@
                 type="text"
                 class="form-control"
                 placeholder="Enter mother's name"
-                formControlName="momName"
+                formControlName="mom_name"
               />
             </div>
 
-            @if ((submitted || f['momName'].touched) && f['momName'].errors) {
+            @if ((submitted || f['mom_name'].touched) && f['mom_name'].errors) {
               <small class="error"> Mother's name is required. </small>
             }
           </div>
@@ -248,11 +249,11 @@
                 type="text"
                 class="form-control"
                 placeholder="Enter father's name"
-                formControlName="dadName"
+                formControlName="dad_name"
               />
             </div>
 
-            @if ((submitted || f['dadName'].touched) && f['dadName'].errors) {
+            @if ((submitted || f['dad_name'].touched) && f['dad_name'].errors) {
               <small class="error"> Father's name is required. </small>
             }
           </div>
@@ -265,7 +266,7 @@
 
               <span class="required">*</span>
 
-              <small class="helper-text"> 10-digit Mobile Number </small>
+              <small class="helper-text"> Include Country Code </small>
             </label>
 
             <div class="input-wrapper">
@@ -275,11 +276,12 @@
                 type="tel"
                 class="form-control"
                 placeholder="Enter mother's mobile"
-                formControlName="momMobile"
+                formControlName="mom_mobile_number"
+                maxlength="15"
               />
             </div>
 
-            @if ((submitted || f['momMobile'].touched) && f['momMobile'].errors) {
+            @if ((submitted || f['mom_mobile_number'].touched) && f['mom_mobile_number'].errors) {
               <small class="error"> Enter a valid mobile number. </small>
             }
           </div>
@@ -292,7 +294,7 @@
 
               <span class="required">*</span>
 
-              <small class="helper-text"> 10-digit Mobile Number </small>
+              <small class="helper-text"> Include Country Code </small>
             </label>
 
             <div class="input-wrapper">
@@ -302,11 +304,12 @@
                 type="tel"
                 class="form-control"
                 placeholder="Enter father's mobile"
-                formControlName="dadMobile"
+                formControlName="dad_mobile_number"
+                maxlength="15"
               />
             </div>
 
-            @if ((submitted || f['dadMobile'].touched) && f['dadMobile'].errors) {
+            @if ((submitted || f['dad_mobile_number'].touched) && f['dad_mobile_number'].errors) {
               <small class="error"> Enter a valid mobile number. </small>
             }
           </div>
@@ -329,11 +332,11 @@
                 type="email"
                 class="form-control"
                 placeholder="Enter mother's email"
-                formControlName="momEmail"
+                formControlName="mom_email"
               />
             </div>
 
-            @if ((submitted || f['momEmail'].touched) && f['momEmail'].errors) {
+            @if ((submitted || f['mom_email'].touched) && f['mom_email'].errors) {
               <small class="error"> Enter a valid email address. </small>
             }
           </div>
@@ -356,11 +359,11 @@
                 type="email"
                 class="form-control"
                 placeholder="Enter father's email"
-                formControlName="dadEmail"
+                formControlName="dad_email"
               />
             </div>
 
-            @if ((submitted || f['dadEmail'].touched) && f['dadEmail'].errors) {
+            @if ((submitted || f['dad_email'].touched) && f['dad_email'].errors) {
               <small class="error"> Enter a valid email address. </small>
             }
           </div>
@@ -393,7 +396,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Enter coach name"
-                formControlName="coachName"
+                formControlName="coach_name"
               />
             </div>
           </div>
@@ -414,7 +417,7 @@
                 type="email"
                 class="form-control"
                 placeholder="Enter coach email"
-                formControlName="coachEmail"
+                formControlName="coach_email"
               />
             </div>
           </div>
@@ -437,8 +440,6 @@
             <label>
               Volunteer Categories
 
-              <span class="required">*</span>
-
               <small class="helper-text"> Select one or more categories </small>
             </label>
 
@@ -450,29 +451,9 @@
               [closeOnSelect]="false"
               appendTo="body"
               placeholder="Select categories"
-              formControlName="volunteerCategories"
+              formControlName="volunteer_categories"
             >
-              <!-- <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
-                @for (item of $any(items) | slice: 0 : 4; track item) {
-                  <div class="ng-value">
-                    <span class="ng-value-label">
-                      {{ $any(item).name }}
-                    </span>
-
-                    <span class="ng-value-icon right" (click)="clear(item)"> × </span>
-                  </div>
-                }
-
-                @if (items.length > 4) {
-                  <div class="ng-value more">+{{ items.length - 4 }} more</div>
-                }
-              </ng-template> -->
             </ng-select>
-            @if (
-              (submitted || f['volunteerCategories'].touched) && f['volunteerCategories'].errors
-            ) {
-              <small class="error"> Please select at least one category. </small>
-            }
           </div>
 
           <!-- Expertise -->
@@ -490,7 +471,7 @@
               rows="6"
               class="form-control"
               placeholder="Write about your skills..."
-              formControlName="expertise"
+              formControlName="area_of_expertise"
             ></textarea>
           </div>
         </div>

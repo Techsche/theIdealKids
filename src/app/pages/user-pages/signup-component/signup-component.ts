@@ -1,9 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from '../../../shared/validators/password.validator';
 import { matchPassword } from '../../../shared/validators/match-password.validator';
 import { Router, RouterModule } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { UserService } from '../../../services/user/user.service';
+import { ToastrAlertService } from '../../../services/common/toastr.services';
 
 @Component({
   selector: 'app-signup-component',
@@ -14,6 +16,9 @@ import { NgClass } from '@angular/common';
 export class SignupComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private userService = inject(UserService);
+  private toastrService = inject(ToastrAlertService);
+  private cdr = inject(ChangeDetectorRef);
 
   signupForm!: FormGroup;
 
@@ -34,11 +39,11 @@ export class SignupComponent {
 
         email: ['', [Validators.required, Validators.email]],
 
-        secondaryName: ['', Validators.required],
+        secondary_name: ['', Validators.required],
 
-        secondaryEmail: ['', Validators.email],
+        secondary_email: ['', Validators.email],
 
-        mobileNumber: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{7,14}$/)]],
+        mobileNo: ['', [Validators.required, Validators.pattern(/^\+?[1-9]\d{7,14}$/)]],
 
         password: ['', [Validators.required, passwordValidator()]],
 
@@ -65,20 +70,23 @@ export class SignupComponent {
 
     this.loading = true;
 
-    console.log(this.signupForm.getRawValue());
-
-    /**
-     * TODO
-     * Replace with your API
-     */
-
-    setTimeout(() => {
-      this.loading = false;
-
-      alert('Account Created Successfully');
-
-      // this.router.navigate(['/login']);
-    }, 1500);
+    this.userService.createUser(this.signupForm.value).subscribe({
+      next: (res) => {
+        this.loading = false;
+        this.cdr.detectChanges();
+        if (res.success) {
+          this.toastrService.success(res.message || 'Signup successful!');
+          this.router.navigate(['/login']);
+        } else {
+          this.toastrService.error(res.message || 'Signup failed.');
+        }
+      },
+      error: (err) => {
+        this.loading = false;
+        this.cdr.detectChanges();
+        this.toastrService.error(err.message || 'An error occurred during signup.');
+      },
+    });
   }
 
   cancel(): void {
