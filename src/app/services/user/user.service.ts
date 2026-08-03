@@ -13,6 +13,7 @@ import {
   ChangePasswordRequest,
   ChangePasswordResponse,
 } from '../../core/models/user/change-password.model';
+import { Children } from '../../core/models/user/children.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,5 +50,9 @@ export class UserService {
       `${this.apiUrl}api/session/user/change/password`,
       request,
     );
+  }
+
+  getChildren(): Observable<Children[]> {
+    return this.http.get<Children[]>(`${this.apiUrl}api/session/students`);
   }
 }

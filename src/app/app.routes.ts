@@ -14,6 +14,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { MyEventsComponent } from './pages/user-pages/accounts/my-events-component/my-events-component';
 import { ProfileComponent } from './pages/user-pages/accounts/profile-component/profile-component';
 import { ChangePasswordComponent } from './pages/user-pages/accounts/change-password-component/change-password-component';
+import { ChildrenComponent } from './pages/user-pages/accounts/children-component/children-component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,7 @@ export const routes: Routes = [
 
       { path: 'my-events', component: MyEventsComponent, canActivate: [authGuard] },
       { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+      { path: 'children', component: ChildrenComponent, canActivate: [authGuard] },
       { path: 'change-password', component: ChangePasswordComponent, canActivate: [authGuard] },
 
       // Must be the last child route

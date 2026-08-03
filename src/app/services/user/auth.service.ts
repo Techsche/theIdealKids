@@ -38,6 +38,7 @@ export class AuthService {
   logout(): void {
     if (this.isBrowser) {
       localStorage.clear();
+      sessionStorage.clear(); // optional
     }
   }
 

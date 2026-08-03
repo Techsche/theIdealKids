@@ -22,7 +22,7 @@ export class MyEventsComponent implements OnInit {
 
   private readonly router = inject(Router);
 
-  loading = signal(false);
+  loading = signal(true);
 
   searchText = '';
 
@@ -35,8 +35,6 @@ export class MyEventsComponent implements OnInit {
   }
 
   loadEvents(): void {
-    this.loading.set(true);
-
     this.userService.getMyEvents().subscribe({
       next: (response) => {
         this.loading.set(false);

@@ -1,0 +1,168 @@
+<div class="children-page">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>Children Information</h1>
+      <p>Manage your children's information before registering for events.</p>
+    </div>
+
+    <button mat-flat-button color="primary" routerLink="/add-child" class="add-btn">
+      <mat-icon>person_add</mat-icon>
+      Add Child
+    </button>
+  </div>
+
+  <!-- Search -->
+
+  <div class="search-wrapper">
+    <div class="search-box">
+      <mat-icon>search</mat-icon>
+
+      <input
+        type="text"
+        placeholder="Search by name, school, city..."
+        [(ngModel)]="searchText"
+        (input)="onSearch()"
+      />
+    </div>
+  </div>
+
+  <!-- Loading -->
+
+  @if (loading()) {
+    <div class="loading-wrapper">
+      @for (item of [1, 2, 3, 4, 5]; track item) {
+        <div class="skeleton-row">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      }
+    </div>
+  } @else {
+    @if (filteredChildren.length === 0) {
+      <div class="empty-state">
+        <mat-icon>child_care</mat-icon>
+
+        <h2>No Children Found</h2>
+
+        <p>Add your first child to begin event registration.</p>
+
+        <button mat-flat-button color="primary" routerLink="/add-child">Add Child</button>
+      </div>
+    } @else {
+      <!-- Desktop Table -->
+
+      <div class="table-wrapper">
+        <table class="children-table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Grade</th>
+              <th>School</th>
+              <th>City</th>
+              <th class="action-column">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (child of filteredChildren; track child.id) {
+              <tr>
+                <td>{{ child.first_name }}</td>
+
+                <td>{{ child.last_name }}</td>
+
+                <td>{{ child.age }}</td>
+
+                <td>{{ child.gender }}</td>
+
+                <td>{{ child.grade_info?.name || child.grade }}</td>
+
+                <td>{{ child.school }}</td>
+
+                <td>{{ child.school_city }}</td>
+
+                <td class="action-column">
+                  <button mat-icon-button color="primary" (click)="editChild(child)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Cards -->
+
+      <div class="mobile-children">
+        @for (child of filteredChildren; track child.id) {
+          <div class="child-card">
+            <div class="card-header">
+              <div>
+                <h3>
+                  {{ child.first_name }}
+                  {{ child.last_name }}
+                </h3>
+
+                <small>
+                  {{ child.grade }}
+                </small>
+              </div>
+
+              <button mat-icon-button color="primary" (click)="editChild(child)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+
+            <div class="card-body">
+              <div>
+                <label>Age</label>
+
+                <span>{{ child.age }}</span>
+              </div>
+
+              <div>
+                <label>Gender</label>
+
+                <span>{{ child.gender }}</span>
+              </div>
+
+              <div>
+                <label>School</label>
+
+                <span>{{ child.school }}</span>
+              </div>
+
+              <div>
+                <label>City</label>
+
+                <span>{{ child.school_city }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Note -->
+
+      <div class="note-card">
+        <mat-icon>info</mat-icon>
+
+        <div>
+          <strong>Next Step</strong>
+
+          <p>
+            After adding all your children, continue to the event registration page to register them
+            for upcoming events.
+          </p>
+        </div>
+      </div>
+    }
+  }
+</div>
