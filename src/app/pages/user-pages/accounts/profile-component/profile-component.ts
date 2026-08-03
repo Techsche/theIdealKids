@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { ILocation } from '../../../../core/models/user/location.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { mobileValidator } from '../../../../shared/validators/mobileNo.validators';
@@ -19,9 +19,9 @@ export class ProfileComponent implements OnInit {
 
   submitted = false;
 
-  loading = false;
+  loading = signal(false);
 
-  saving = false;
+  saving = signal(false);
 
   locations: ILocation[] = [];
 
@@ -62,11 +62,11 @@ export class ProfileComponent implements OnInit {
   }
 
   loadProfile(): void {
-    this.loading = true;
+    this.loading.set(true);
 
     this.userService.getProfile().subscribe({
       next: (profile: IUserProfile) => {
-        this.loading = false;
+        this.loading.set(false);
         this.userId = profile.id;
         this.profileForm.patchValue({
           id: profile.id,
@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
       },
 
       error: (err) => {
-        this.loading = false;
+        this.loading.set(false);
 
         this.toastService.error(err?.error?.message || 'Unable to load profile.');
       },
@@ -113,19 +113,19 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.saving = true;
+    this.saving.set(true);
 
     const payload = this.profileForm.getRawValue();
 
     this.userService.updateProfile(payload, this.userId).subscribe({
       next: (response: any) => {
-        this.saving = false;
+        this.saving.set(false);
 
         this.toastService.success(response.message || 'Profile updated successfully.');
       },
 
       error: (err) => {
-        this.saving = false;
+        this.saving.set(false);
 
         this.toastService.error(err?.error?.message || 'Unable to update profile.');
       },

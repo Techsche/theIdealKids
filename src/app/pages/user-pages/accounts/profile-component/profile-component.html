@@ -10,7 +10,7 @@
       <p>Manage your account information and keep your profile up to date.</p>
     </div>
 
-    @if (!loading) {
+    @if (!loading()) {
       <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
         <div class="profile-card">
           <!-- Profile Header -->
@@ -189,8 +189,8 @@
               Reset
             </button>
 
-            <button type="submit" class="btn btn-primary" [disabled]="saving">
-              @if (!saving) {
+            <button type="submit" class="btn btn-primary" [disabled]="saving()">
+              @if (!saving()) {
                 <i class="bi bi-check-circle me-2"></i>
 
                 Save Changes
