@@ -1,40 +1,104 @@
 <mat-toolbar class="main-header">
   <!-- Logo -->
   <div class="logo">
-    <a [routerLink]="''">
+    <a routerLink="/" (click)="closeMenu()">
       <img src="assets/images/logo.png" alt="The Ideal Kids Logo" />
     </a>
   </div>
 
-  <!-- Hamburger -->
+  <!-- Mobile Menu Toggle -->
   <button mat-icon-button class="menu-toggle" (click)="toggleMenu()">
-    <mat-icon>menu</mat-icon>
+    <mat-icon>
+      {{ menuOpen ? 'close' : 'menu' }}
+    </mat-icon>
   </button>
 
-  <!-- Center Menu -->
-  <nav class="nav-menu">
-    <a mat-button [routerLink]="'/about'" routerLinkActive="active">About Us</a>
-    <a mat-button [routerLink]="'/events'" routerLinkActive="active">Events</a>
-    <a mat-button [routerLink]="'/ideal-tips'" routerLinkActive="active">Ideal Tips</a>
-    <a mat-button [routerLink]="'/forms'" routerLinkActive="active">Forms</a>
+  <!-- Navigation -->
+  <nav class="nav-menu" [class.active]="menuOpen">
+    <a mat-button routerLink="/about" routerLinkActive="active" (click)="closeMenu()"> About Us </a>
 
-    <!-- Mobile Actions -->
+    <a mat-button routerLink="/events" routerLinkActive="active" (click)="closeMenu()"> Events </a>
+
+    <a mat-button routerLink="/ideal-tips" routerLinkActive="active" (click)="closeMenu()">
+      Ideal Tips
+    </a>
+
+    <a mat-button routerLink="/forms" routerLinkActive="active" (click)="closeMenu()"> Forms </a>
+
+    <!-- ================= MOBILE ================= -->
+
     <div class="mobile-actions">
       @if (!isLoggedIn) {
-        <button mat-button routerLink="/login">Login</button>
-        <button mat-button routerLink="/register">Signup</button>
-        <button mat-raised-button color="primary" routerLink="/volunteer-signup">
+        <button mat-button routerLink="/login" (click)="closeMenu()">Login</button>
+
+        <button mat-button routerLink="/register" (click)="closeMenu()">Signup</button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          routerLink="/volunteer-signup"
+          (click)="closeMenu()"
+        >
           High School Volunteer Signup
+        </button>
+      }
+
+      @if (isLoggedIn) {
+        <div class="mobile-user">
+          <mat-icon>account_circle</mat-icon>
+
+          <div>
+            <small>Welcome</small>
+            <h4>{{ userName }}</h4>
+          </div>
+        </div>
+
+        <button mat-button routerLink="/admin" (click)="closeMenu()">
+          <mat-icon>admin_panel_settings</mat-icon>
+          Admin
+        </button>
+
+        <button mat-button routerLink="/profile" (click)="closeMenu()">
+          <mat-icon>person</mat-icon>
+          My Profile
+        </button>
+
+        <button mat-button routerLink="/my-events" (click)="closeMenu()">
+          <mat-icon>event</mat-icon>
+          My Events
+        </button>
+
+        <button mat-button routerLink="/current-event-info" (click)="closeMenu()">
+          <mat-icon>campaign</mat-icon>
+          Current Event Info
+        </button>
+
+        <button mat-button routerLink="/children" (click)="closeMenu()">
+          <mat-icon>groups</mat-icon>
+          Add / Edit Child
+        </button>
+
+        <button mat-button routerLink="/change-password" (click)="closeMenu()">
+          <mat-icon>lock_reset</mat-icon>
+          Change Password
+        </button>
+
+        <button mat-button (click)="logout(); closeMenu()">
+          <mat-icon>logout</mat-icon>
+          Logout
         </button>
       }
     </div>
   </nav>
 
-  <!-- Right Section (Desktop) -->
+  <!-- ================= DESKTOP ================= -->
+
   <div class="right-section">
     @if (!isLoggedIn) {
       <button mat-button routerLink="/login">Login</button>
+
       <button mat-button routerLink="/register">Signup</button>
+
       <button mat-raised-button color="primary" routerLink="/volunteer-signup">
         High School Volunteer Signup
       </button>
@@ -46,20 +110,49 @@
 
         <span class="welcome-text">
           Welcome,
-          <!-- <strong>{{ userFullName }}</strong> -->
+          <strong>{{ userName }}</strong>
         </span>
 
         <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
 
       <mat-menu #profileMenu="matMenu">
-        <button mat-menu-item>Admin</button>
-        <button mat-menu-item routerLink="/profile">Profile</button>
-        <button mat-menu-item routerLink="/my-events">Events</button>
-        <button mat-menu-item>Current Event Info</button>
-        <button mat-menu-item>Add/Edit Child</button>
-        <button mat-menu-item>Change Password</button>
-        <button mat-menu-item (click)="logout()">Logout</button>
+        <button mat-menu-item routerLink="/admin">
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span>Admin</span>
+        </button>
+
+        <button mat-menu-item routerLink="/profile">
+          <mat-icon>person</mat-icon>
+          <span>My Profile</span>
+        </button>
+
+        <button mat-menu-item routerLink="/my-events">
+          <mat-icon>event</mat-icon>
+          <span>My Events</span>
+        </button>
+
+        <button mat-menu-item routerLink="/current-event-info">
+          <mat-icon>campaign</mat-icon>
+          <span>Current Event Info</span>
+        </button>
+
+        <button mat-menu-item routerLink="/children">
+          <mat-icon>groups</mat-icon>
+          <span>Add / Edit Child</span>
+        </button>
+
+        <button mat-menu-item routerLink="/change-password">
+          <mat-icon>lock_reset</mat-icon>
+          <span>Change Password</span>
+        </button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item (click)="logout()" class="logout-item">
+          <mat-icon color="warn">logout</mat-icon>
+          <span>Logout</span>
+        </button>
       </mat-menu>
     }
   </div>

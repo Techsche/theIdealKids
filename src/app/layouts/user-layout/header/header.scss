@@ -1,64 +1,38 @@
-/* ===========================
-   HEADER
-=========================== */
-
 .main-header {
   height: 80px;
+  padding: 0 24px;
   background: #fff;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
   border-bottom: 1px solid #ececec;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
-/* ===========================
-   LOGO
-=========================== */
+/* Logo */
 
-.logo {
-  display: flex;
-  align-items: center;
-
-  img {
-    height: 65px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-  }
+.logo img {
+  height: 65px;
+  display: block;
 }
 
-/* ===========================
-   NAVIGATION
-=========================== */
+/* Center Menu */
 
 .nav-menu {
   flex: 1;
   display: flex;
   justify-content: center;
+  gap: 18px;
   align-items: center;
-  gap: 20px;
-
-  a {
-    font-weight: 500;
-    color: #333;
-    transition: 0.3s;
-    text-decoration: none;
-
-    &:hover,
-    &.active {
-      color: #0d6efd;
-    }
-  }
 }
 
-/* ===========================
-   RIGHT SECTION
-=========================== */
+.nav-menu > a.active {
+  color: #1565c0;
+  font-weight: 600;
+}
+
+/* Desktop */
 
 .right-section {
   display: flex;
@@ -66,54 +40,41 @@
   gap: 12px;
 }
 
-.right-section button[color='primary'] {
-  border-radius: 25px;
-  padding: 0 18px;
-}
-
-/* ===========================
-   USER BUTTON
-=========================== */
+/* Welcome Button */
 
 .user-profile-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  height: 46px;
-  border-radius: 25px;
-  padding: 0 14px;
-  transition: 0.25s;
-  text-transform: none;
-
-  &:hover {
-    background: rgba(13, 110, 253, 0.08);
-  }
-
-  .mat-icon:first-child {
-    color: #0d6efd;
-    font-size: 30px;
-    width: 30px;
-    height: 30px;
-  }
-
-  .welcome-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.15;
-    white-space: nowrap;
-
-    strong {
-      font-weight: 600;
-      color: #222;
-      font-size: 14px;
-    }
-  }
+  gap: 10px;
+  border-radius: 30px;
+  padding: 8px 16px;
+  background: #f5f8fc;
 }
 
-/* ===========================
-   HAMBURGER
-=========================== */
+.user-profile-btn:hover {
+  background: #edf4ff;
+}
+
+.user-profile-btn mat-icon:first-child {
+  width: 34px;
+  height: 34px;
+  font-size: 34px;
+  color: #1565c0;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.2;
+  font-size: 13px;
+}
+
+.welcome-text strong {
+  color: #1565c0;
+}
+
+/* Mobile */
 
 .menu-toggle {
   display: none;
@@ -124,9 +85,7 @@
   display: none;
 }
 
-/* ===========================
-   TABLET
-=========================== */
+/* =============================== */
 
 @media (max-width: 992px) {
   .main-header {
@@ -139,7 +98,7 @@
   }
 
   .menu-toggle {
-    display: flex;
+    display: block;
   }
 
   .right-section {
@@ -148,64 +107,92 @@
 
   .nav-menu {
     position: absolute;
-
     top: 70px;
     left: 0;
 
     width: 100%;
 
-    background: #fff;
-
     display: none;
 
     flex-direction: column;
 
-    align-items: center;
+    align-items: stretch;
 
-    justify-content: center;
-
-    gap: 12px;
+    background: white;
 
     padding: 20px;
 
+    gap: 0;
+
     border-top: 1px solid #eee;
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-
-    animation: menuSlide 0.25s ease;
-
-    z-index: 999;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
   }
 
   .nav-menu.active {
     display: flex;
   }
 
+  .nav-menu > a {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 14px 0;
+  }
+
   .mobile-actions {
     display: flex;
-
     flex-direction: column;
+    gap: 8px;
+    margin-top: 18px;
+    border-top: 1px solid #ececec;
+    padding-top: 18px;
+  }
 
-    gap: 10px;
-
+  .mobile-actions button {
+    justify-content: flex-start;
     width: 100%;
+    border-radius: 10px;
+  }
 
-    margin-top: 10px;
+  .mobile-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
-    button {
-      width: 100%;
-    }
+    padding: 14px;
+
+    background: #f5f8fc;
+
+    border-radius: 12px;
+
+    margin-bottom: 10px;
+  }
+
+  .mobile-user mat-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 42px;
+    color: #1565c0;
+  }
+
+  .mobile-user small {
+    color: #777;
+    font-size: 12px;
+  }
+
+  .mobile-user h4 {
+    margin: 2px 0 0;
+    color: #1565c0;
+    font-size: 16px;
+    font-weight: 600;
   }
 }
 
-/* ===========================
-   MOBILE
-=========================== */
+/* =============================== */
 
 @media (max-width: 600px) {
   .main-header {
-    height: 65px;
-
+    height: 64px;
     padding: 0 12px;
   }
 
@@ -214,24 +201,15 @@
   }
 
   .nav-menu {
-    top: 65px;
-
+    top: 64px;
     padding: 16px;
   }
-}
 
-/* ===========================
-   ANIMATION
-=========================== */
-
-@keyframes menuSlide {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+  .mobile-user {
+    padding: 12px;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .mobile-user h4 {
+    font-size: 15px;
   }
 }

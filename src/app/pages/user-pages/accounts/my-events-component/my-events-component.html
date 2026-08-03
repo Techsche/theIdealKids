@@ -9,7 +9,12 @@
     <div class="search-box">
       <mat-icon>search</mat-icon>
 
-      <input type="text" placeholder="Search events..." [(ngModel)]="searchText" />
+      <input
+        type="text"
+        placeholder="Search events..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
     </div>
   </div>
 

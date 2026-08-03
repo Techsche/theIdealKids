@@ -5,19 +5,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../../services/user/auth.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, RouterModule],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, MatDividerModule, RouterModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 export class Header implements OnInit {
-  private authService = inject(AuthService);
-  private router = inject(Router);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   isLoggedIn = false;
   userName = '';
+
+  // Mobile menu state
+  menuOpen = false;
 
   ngOnInit(): void {
     this.loadUser();
@@ -28,14 +33,21 @@ export class Header implements OnInit {
     this.userName = this.authService.getName();
   }
 
-  logout(): void {
-    this.authService.logout();
-    this.isLoggedIn = false;
-    this.userName = '';
-    this.router.navigate(['/login']);
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
   }
 
-  toggleMenu(): void {
-    document.querySelector('.nav-menu')?.classList.toggle('active');
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
+
+  logout(): void {
+    this.authService.logout();
+
+    this.isLoggedIn = false;
+    this.userName = '';
+    this.menuOpen = false;
+
+    this.router.navigate(['/login']);
   }
 }

@@ -40,7 +40,6 @@ export class MyEventsComponent implements OnInit {
     this.userService.getMyEvents().subscribe({
       next: (response) => {
         this.loading.set(false);
-
         if (response) {
           this.events = response ?? [];
 
@@ -76,18 +75,6 @@ export class MyEventsComponent implements OnInit {
         event.student.last_name?.toLowerCase().includes(keyword) ||
         event.register_number?.toString().includes(keyword),
     );
-  }
-
-  clearSearch(): void {
-    this.searchText = '';
-
-    this.filteredEvents = [...this.events];
-  }
-
-  refresh(): void {
-    this.searchText = '';
-
-    this.loadEvents();
   }
 
   viewCompetition(event: RegisteredEvent): void {

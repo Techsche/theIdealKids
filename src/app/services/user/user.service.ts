@@ -9,6 +9,10 @@ import { CreateUserRequest } from '../../core/models/user/signup.models';
 import { RegisteredEvent } from '../../core/models/user/registered-event.model';
 import { IUserProfile } from '../../core/models/user/profile.model';
 import { ILocation } from '../../core/models/user/location.model';
+import {
+  ChangePasswordRequest,
+  ChangePasswordResponse,
+} from '../../core/models/user/change-password.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +42,12 @@ export class UserService {
 
   updateProfile(payload: any, userId: string) {
     return this.http.put<any>(`${environment.base}api/user/update/${userId}`, payload);
+  }
+
+  changePassword(request: ChangePasswordRequest): Observable<ChangePasswordResponse> {
+    return this.http.post<ChangePasswordResponse>(
+      `${this.apiUrl}api/session/user/change/password`,
+      request,
+    );
   }
 }
