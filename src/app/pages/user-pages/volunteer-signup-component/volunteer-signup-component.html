@@ -514,7 +514,15 @@
             </div>
 
             @if ((submitted || f['password'].touched) && f['password'].errors) {
-              <small class="error"> Password must contain uppercase, lowercase and number. </small>
+              @if (f['password'].errors['required']) {
+                <small class="error">Password is required.</small>
+              }
+
+              @if (f['password'].errors['passwordStrength']) {
+                <small class="error">
+                  Password must contain uppercase, lowercase and number.
+                </small>
+              }
             }
           </div>
 
@@ -544,10 +552,17 @@
             </div>
 
             @if (
-              (submitted || volunteerForm.errors?.['passwordMismatch']) &&
-              f['confirmPassword'].touched
+              (submitted || f['confirmPassword'].touched) &&
+              f['confirmPassword'].errors?.['required']
             ) {
-              <small class="error"> Passwords do not match. </small>
+              <small class="error">Confirm Password is required.</small>
+            }
+
+            @if (
+              (submitted || f['confirmPassword'].touched) &&
+              volunteerForm.errors?.['passwordMismatch']
+            ) {
+              <small class="error">Passwords do not match.</small>
             }
           </div>
         </div>

@@ -1,0 +1,214 @@
+<section class="profile-section">
+  <div class="container">
+    <!-- Header -->
+
+    <div class="page-header">
+      <span class="section-tag"> My Account </span>
+
+      <h2>My Profile</h2>
+
+      <p>Manage your account information and keep your profile up to date.</p>
+    </div>
+
+    @if (!loading) {
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <div class="profile-card">
+          <!-- Profile Header -->
+
+          <div class="profile-avatar">
+            <div class="avatar-circle">
+              <i class="bi bi-person-fill"></i>
+            </div>
+
+            <h3>
+              {{ profileForm.get('name')?.value || 'User' }}
+            </h3>
+
+            <span>
+              {{ profileForm.get('email')?.value }}
+            </span>
+          </div>
+
+          <!-- Form -->
+
+          <div class="row g-4">
+            <!-- Name -->
+
+            <div class="col-lg-6">
+              <label class="form-label"> Full Name <span>*</span> </label>
+
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-person"></i>
+                </span>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  placeholder="Enter your full name"
+                />
+              </div>
+
+              @if ((submitted || f['name'].touched) && f['name'].errors?.['required']) {
+                <small class="text-danger"> Full Name is required. </small>
+              }
+            </div>
+
+            <!-- Mobile -->
+
+            <div class="col-lg-6">
+              <label class="form-label"> Mobile Number <span>*</span> </label>
+
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-telephone"></i>
+                </span>
+
+                <input
+                  type="tel"
+                  maxlength="15"
+                  class="form-control"
+                  formControlName="mobileNo"
+                  placeholder="Enter mobile number"
+                />
+              </div>
+
+              @if ((submitted || f['mobileNo'].touched) && f['mobileNo'].errors) {
+                @if (f['mobileNo'].errors?.['required']) {
+                  <small class="text-danger"> Mobile number is required. </small>
+                }
+
+                @if (f['mobileNo'].errors?.['invalidMobile']) {
+                  <small class="text-danger">
+                    Mobile number should contain only digits (10 - 15 digits).
+                  </small>
+                }
+              }
+            </div>
+
+            <!-- Email -->
+
+            <div class="col-lg-6">
+              <label class="form-label"> Email Address </label>
+
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-envelope"></i>
+                </span>
+
+                <input
+                  type="email"
+                  class="form-control readonly"
+                  formControlName="email"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <!-- Location -->
+
+            <div class="col-lg-6">
+              <label class="form-label"> Location <span>*</span> </label>
+
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-geo-alt"></i>
+                </span>
+
+                <select class="form-select" formControlName="location_id">
+                  <option value="">Select Location</option>
+
+                  @for (location of locations; track location.id) {
+                    <option [value]="location.id">
+                      {{ location.name }}
+                    </option>
+                  }
+                </select>
+              </div>
+
+              @if (
+                (submitted || f['location_id'].touched) && f['location_id'].errors?.['required']
+              ) {
+                <small class="text-danger"> Please select a location. </small>
+              }
+            </div>
+
+            <!-- Secondary Name -->
+
+            <div class="col-lg-6">
+              <label class="form-label"> Secondary Name </label>
+
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-person-plus"></i>
+                </span>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="secondary_name"
+                  placeholder="Enter secondary name"
+                />
+              </div>
+            </div>
+
+            <!-- Secondary Email -->
+
+            <div class="col-lg-6">
+              <label class="form-label"> Secondary Email </label>
+
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-envelope-paper"></i>
+                </span>
+
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="secondary_email"
+                  placeholder="Enter secondary email"
+                />
+              </div>
+
+              @if (
+                (submitted || f['secondary_email'].touched) &&
+                f['secondary_email'].errors?.['email']
+              ) {
+                <small class="text-danger"> Invalid email address. </small>
+              }
+            </div>
+          </div>
+
+          <!-- Footer -->
+
+          <div class="button-area">
+            <button type="button" class="btn btn-outline-secondary" (click)="resetForm()">
+              <i class="bi bi-arrow-clockwise me-2"></i>
+
+              Reset
+            </button>
+
+            <button type="submit" class="btn btn-primary" [disabled]="saving">
+              @if (!saving) {
+                <i class="bi bi-check-circle me-2"></i>
+
+                Save Changes
+              } @else {
+                <span class="spinner-border spinner-border-sm me-2"> </span>
+
+                Saving...
+              }
+            </button>
+          </div>
+        </div>
+      </form>
+    } @else {
+      <div class="loading-card">
+        <div class="spinner-border text-primary"></div>
+
+        <p>Loading Profile...</p>
+      </div>
+    }
+  </div>
+</section>

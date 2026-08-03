@@ -12,6 +12,7 @@ import { EventsComponent } from './pages/user-pages/events-component/events-comp
 import { guestGuard } from './core/guards/guest.guard';
 import { authGuard } from './core/guards/auth.guard';
 import { MyEventsComponent } from './pages/user-pages/accounts/my-events-component/my-events-component';
+import { ProfileComponent } from './pages/user-pages/accounts/profile-component/profile-component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,7 @@ export const routes: Routes = [
       { path: 'forgot-password', component: ForgotPasswordComponent },
 
       { path: 'my-events', component: MyEventsComponent, canActivate: [authGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
 
       // Must be the last child route
       { path: '**', redirectTo: '' },

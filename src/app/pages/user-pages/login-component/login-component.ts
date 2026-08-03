@@ -56,7 +56,7 @@ export class LoginComponent {
 
         if (res.success) {
           this.toastrService.success(res.message || 'Login successful!');
-          this.router.navigate(['/home']);
+          this.router.navigate(['/my-events']);
         } else {
           this.toastrService.error(res.message || 'Login failed.');
         }

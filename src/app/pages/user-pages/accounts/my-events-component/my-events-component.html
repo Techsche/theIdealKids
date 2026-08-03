@@ -1,1 +1,190 @@
-<p>my-events-component works!</p>
+<div class="events-page">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>My Registered Events</h1>
+      <p>View all your registered events and competition details.</p>
+    </div>
+
+    <div class="search-box">
+      <mat-icon>search</mat-icon>
+
+      <input type="text" placeholder="Search events..." [(ngModel)]="searchText" />
+    </div>
+  </div>
+
+  <!-- Loading -->
+
+  @if (loading()) {
+    <div class="loading-wrapper">
+      @for (item of [1, 2, 3, 4, 5]; track item) {
+        <div class="skeleton-row">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      }
+    </div>
+  } @else {
+    <!-- No Data -->
+
+    @if (filteredEvents.length === 0) {
+      <div class="empty-state">
+        <mat-icon>event_busy</mat-icon>
+
+        <h2>No Registered Events</h2>
+
+        <p>You haven't registered for any events yet.</p>
+
+        <button mat-flat-button color="primary" routerLink="/events">Browse Events</button>
+      </div>
+    } @else {
+      <!-- Desktop Table -->
+
+      <div class="table-wrapper">
+        <table class="events-table">
+          <thead>
+            <tr>
+              <th>Event Name</th>
+
+              <th>Date</th>
+
+              <th>First Name</th>
+
+              <th>Last Name</th>
+
+              <th>Registration No.</th>
+
+              <th class="action-column">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (event of filteredEvents; track event.id) {
+              <tr>
+                <td>
+                  <div class="event-name">
+                    <mat-icon>event</mat-icon>
+
+                    <span>{{ event.event.name }}</span>
+                  </div>
+                </td>
+
+                <td>
+                  {{ event.event.start_date | date: 'dd MMM yyyy' }}
+                </td>
+
+                <td>
+                  {{ event.student.first_name }}
+                </td>
+
+                <td>
+                  {{ event.student.last_name }}
+                </td>
+
+                <td>
+                  <span class="registration"> {{ event.register_number }} </span>
+                </td>
+
+                <td class="action-column">
+                  @if (event.event.eventCompetitions && event.event.eventCompetitions.length > 0) {
+                    <button mat-flat-button color="accent" (click)="viewCompetition(event)">
+                      <mat-icon>emoji_events</mat-icon>
+
+                      Competitions
+                    </button>
+                  } @else {
+                    <button mat-flat-button color="primary" (click)="viewAttendance(event)">
+                      <mat-icon>assignment</mat-icon>
+
+                      Attendance
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Cards -->
+
+      <div class="mobile-events">
+        @for (event of filteredEvents; track event.id) {
+          <div class="event-card">
+            <div class="card-header">
+              <div>
+                <h3>{{ event.event.name }}</h3>
+
+                <small>
+                  {{ event.event.start_date | date: 'dd MMM yyyy' }}
+                </small>
+              </div>
+
+              <span class="badge"> #{{ event.register_number }} </span>
+            </div>
+
+            <div class="card-body">
+              <div>
+                <label>First Name</label>
+
+                <span>{{ event.student.first_name }}</span>
+              </div>
+
+              <div>
+                <label>Last Name</label>
+
+                <span>{{ event.student.last_name }}</span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              @if (event.attendance) {
+                <button mat-flat-button color="primary" (click)="viewAttendance(event)">
+                  View Attendance
+                </button>
+              } @else {
+                <button mat-flat-button color="accent" (click)="viewCompetition(event)">
+                  View Competitions
+                </button>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Bottom Buttons -->
+
+      <div class="bottom-actions">
+        <div class="action-card">
+          <div class="action-text">
+            <h3>Add another child?</h3>
+            <p>Register siblings or update your family profile before joining more events.</p>
+          </div>
+
+          <button mat-flat-button class="btn-success" routerLink="/children">
+            <mat-icon>person_add</mat-icon>
+            Add More Children
+          </button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-text">
+            <h3>Looking for new events?</h3>
+            <p>
+              Explore upcoming events, register your children, and participate in exciting
+              competitions.
+            </p>
+          </div>
+
+          <button mat-flat-button class="btn-primary" routerLink="/events">
+            <mat-icon>rocket_launch</mat-icon>
+            Browse Upcoming Events
+          </button>
+        </div>
+      </div>
+    }
+  }
+</div>

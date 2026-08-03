@@ -41,13 +41,20 @@
     }
 
     @if (isLoggedIn) {
-      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
-        <img src="assets/images/user.png" class="profile-img" />
+      <button mat-button class="user-profile-btn" [matMenuTriggerFor]="profileMenu">
+        <mat-icon>account_circle</mat-icon>
+
+        <span class="welcome-text">
+          Welcome,
+          <!-- <strong>{{ userFullName }}</strong> -->
+        </span>
+
+        <mat-icon>keyboard_arrow_down</mat-icon>
       </button>
 
       <mat-menu #profileMenu="matMenu">
         <button mat-menu-item>Admin</button>
-        <button mat-menu-item>Profile</button>
+        <button mat-menu-item routerLink="/profile">Profile</button>
         <button mat-menu-item routerLink="/my-events">Events</button>
         <button mat-menu-item>Current Event Info</button>
         <button mat-menu-item>Add/Edit Child</button>
