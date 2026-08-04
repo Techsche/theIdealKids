@@ -15,6 +15,10 @@ import { MyEventsComponent } from './pages/user-pages/accounts/my-events-compone
 import { ProfileComponent } from './pages/user-pages/accounts/profile-component/profile-component';
 import { ChangePasswordComponent } from './pages/user-pages/accounts/change-password-component/change-password-component';
 import { ChildrenComponent } from './pages/user-pages/accounts/children-component/children-component';
+import { ChildFormComponent } from './pages/user-pages/accounts/child-form-component/child-form-component';
+import { CurrentEventInfoComponent } from './pages/user-pages/accounts/current-event-info-component/current-event-info-component';
+import { AttendanceComponent } from './pages/user-pages/accounts/my-events-component/component/attendance.component/attendance.component';
+import { CompetitionComponent } from './pages/user-pages/accounts/my-events-component/component/competition.component/competition.component';
 
 export const routes: Routes = [
   {
@@ -33,8 +37,25 @@ export const routes: Routes = [
       { path: 'forgot-password', component: ForgotPasswordComponent },
 
       { path: 'my-events', component: MyEventsComponent, canActivate: [authGuard] },
+      {
+        path: 'student-attendance/:registerId',
+        component: AttendanceComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'student-competition/:eventId/:studentId/:registrationNo',
+        component: CompetitionComponent,
+        canActivate: [authGuard],
+      },
       { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
       { path: 'children', component: ChildrenComponent, canActivate: [authGuard] },
+      { path: 'child/add', component: ChildFormComponent, canActivate: [authGuard] },
+      { path: 'child/edit/:id', component: ChildFormComponent, canActivate: [authGuard] },
+      {
+        path: 'current-event-info',
+        component: CurrentEventInfoComponent,
+        canActivate: [authGuard],
+      },
       { path: 'change-password', component: ChangePasswordComponent, canActivate: [authGuard] },
 
       // Must be the last child route

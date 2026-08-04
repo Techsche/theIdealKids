@@ -1,18 +1,24 @@
 <div class="children-page">
-  <!-- Header -->
+  <!-- ===========================
+       HEADER
+  ============================ -->
+
   <div class="page-header">
     <div>
       <h1>Children Information</h1>
       <p>Manage your children's information before registering for events.</p>
     </div>
 
-    <button mat-flat-button color="primary" routerLink="/add-child" class="add-btn">
+    <button mat-flat-button color="primary" routerLink="/child/add" class="add-btn">
       <mat-icon>person_add</mat-icon>
+
       Add Child
     </button>
   </div>
 
-  <!-- Search -->
+  <!-- ===========================
+       SEARCH
+  ============================ -->
 
   <div class="search-wrapper">
     <div class="search-box">
@@ -20,14 +26,16 @@
 
       <input
         type="text"
-        placeholder="Search by name, school, city..."
+        placeholder="Search by name, school or city..."
         [(ngModel)]="searchText"
-        (input)="onSearch()"
+        (ngModelChange)="onSearch()"
       />
     </div>
   </div>
 
-  <!-- Loading -->
+  <!-- ===========================
+       LOADING
+  ============================ -->
 
   @if (loading()) {
     <div class="loading-wrapper">
@@ -41,6 +49,7 @@
         </div>
       }
     </div>
+
   } @else {
     @if (filteredChildren.length === 0) {
       <div class="empty-state">
@@ -50,23 +59,33 @@
 
         <p>Add your first child to begin event registration.</p>
 
-        <button mat-flat-button color="primary" routerLink="/add-child">Add Child</button>
+        <button mat-flat-button color="primary" routerLink="/child/add">Add Child</button>
       </div>
+
     } @else {
-      <!-- Desktop Table -->
+      <!-- ===========================
+            DESKTOP TABLE
+      ============================ -->
 
       <div class="table-wrapper">
         <table class="children-table">
           <thead>
             <tr>
               <th>First Name</th>
+
               <th>Last Name</th>
+
               <th>Age</th>
+
               <th>Gender</th>
+
               <th>Grade</th>
+
               <th>School</th>
+
               <th>City</th>
-              <th class="action-column">Action</th>
+
+              <th class="action-column">Actions</th>
             </tr>
           </thead>
 
@@ -87,10 +106,16 @@
 
                 <td>{{ child.school_city }}</td>
 
-                <td class="action-column">
-                  <button mat-icon-button color="primary" (click)="editChild(child)">
-                    <mat-icon>edit</mat-icon>
-                  </button>
+                <td>
+                  <div class="actions">
+                    <button class="icon-btn edit" (click)="editChild(child)" title="Edit">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <button class="icon-btn delete" (click)="deleteChild(child.id)" title="Delete">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
                 </td>
               </tr>
             }
@@ -98,7 +123,9 @@
         </table>
       </div>
 
-      <!-- Mobile Cards -->
+      <!-- ===========================
+            MOBILE VIEW
+      ============================ -->
 
       <div class="mobile-children">
         @for (child of filteredChildren; track child.id) {
@@ -111,13 +138,19 @@
                 </h3>
 
                 <small>
-                  {{ child.grade }}
+                  {{ child.grade_info?.name || child.grade }}
                 </small>
               </div>
 
-              <button mat-icon-button color="primary" (click)="editChild(child)">
-                <mat-icon>edit</mat-icon>
-              </button>
+              <div class="actions">
+                <button class="icon-btn edit" (click)="editChild(child)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button class="icon-btn delete" (click)="deleteChild(child.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
             </div>
 
             <div class="card-body">
@@ -149,7 +182,9 @@
         }
       </div>
 
-      <!-- Note -->
+      <!-- ===========================
+            NOTE
+      ============================ -->
 
       <div class="note-card">
         <mat-icon>info</mat-icon>

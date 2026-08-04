@@ -1,0 +1,412 @@
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.student-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.student-container {
+  width: 100%;
+  max-width: 980px;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.student-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.student-card h2 {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  color: #263238;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6c757d;
+  font-size: 15px;
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* ==========================================================
+   SECTION TITLE
+========================================================== */
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 35px 0 25px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf1f5;
+  font-size: 18px;
+  font-weight: 700;
+  color: #263238;
+
+  i {
+    color: #0d6efd;
+    font-size: 20px;
+  }
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+
+  span:first-child {
+    font-size: 16px;
+    font-weight: 600;
+    color: #263238;
+  }
+}
+
+.required {
+  margin-left: 7px;
+  color: #dc3545;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.helper-text {
+  display: block;
+  color: #7d8894;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ==========================================================
+   INPUT WRAPPER
+========================================================== */
+
+.input-wrapper {
+  position: relative;
+
+  > i:first-child {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #98a4b3;
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 5;
+    transition: 0.25s;
+  }
+}
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.form-control {
+  width: 100%;
+  height: 54px;
+  border: 1px solid #d6dce5;
+  border-radius: 10px;
+  padding: 0 16px 0 48px;
+  font-size: 15px;
+  background: #fff;
+  color: #263238;
+  transition: all 0.25s ease;
+}
+
+.form-control::placeholder {
+  color: #a4adb8;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.18rem rgba(13, 110, 253, 0.15);
+}
+
+.input-wrapper:focus-within > i:first-child {
+  color: #0d6efd;
+}
+
+select.form-control {
+  cursor: pointer;
+  appearance: none;
+}
+
+/* ==========================================================
+   NG SELECT
+========================================================== */
+
+::ng-deep .ng-select {
+  width: 100%;
+}
+
+::ng-deep .ng-select .ng-select-container {
+  height: 54px !important;
+  min-height: 54px;
+  border: 1px solid #d6dce5;
+  border-radius: 10px;
+  padding-left: 46px;
+  transition: 0.25s;
+  box-shadow: none;
+}
+
+::ng-deep .ng-select .ng-placeholder {
+  color: #a4adb8;
+}
+
+::ng-deep .ng-select .ng-value-container {
+  padding-left: 0 !important;
+}
+
+::ng-deep .ng-select .ng-input {
+  padding-left: 0 !important;
+}
+
+::ng-deep .ng-select.ng-select-focused .ng-select-container {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.18rem rgba(13, 110, 253, 0.15);
+}
+
+::ng-deep .ng-select .ng-arrow-wrapper {
+  padding-right: 14px;
+}
+
+::ng-deep .ng-dropdown-panel {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #d6dce5;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep .ng-option {
+  padding: 10px 16px;
+}
+
+::ng-deep .ng-option.ng-option-marked {
+  background: #eef5ff;
+  color: #0d6efd;
+}
+
+::ng-deep .ng-option.ng-option-selected {
+  background: #0d6efd;
+  color: #fff;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.button-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 35px;
+}
+
+.button-row .btn {
+  flex: 1;
+  height: 52px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+.button-row .btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.18);
+}
+
+.btn-danger {
+  box-shadow: 0 8px 20px rgba(220, 53, 69, 0.15);
+}
+
+/* ==========================================================
+   ERROR
+========================================================== */
+
+.error {
+  display: block;
+  margin-top: 6px;
+  color: #dc3545;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ==========================================================
+   VALIDATION STATES
+========================================================== */
+
+.form-control.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+.form-control.ng-valid.ng-touched {
+  border-color: #198754;
+}
+
+::ng-deep .ng-select.ng-invalid.ng-touched .ng-select-container {
+  border-color: #dc3545;
+}
+
+::ng-deep .ng-select.ng-valid.ng-touched .ng-select-container {
+  border-color: #198754;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 992px) {
+  .student-container {
+    max-width: 760px;
+  }
+
+  .student-card {
+    padding: 32px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-page {
+    padding: 24px 15px;
+    align-items: flex-start;
+  }
+
+  .student-card {
+    padding: 26px 20px;
+    border-radius: 14px;
+  }
+
+  .student-card h2 {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  .section-title {
+    margin: 28px 0 18px;
+    font-size: 17px;
+  }
+
+  .section-title i {
+    font-size: 18px;
+  }
+
+  .label-row span:first-child {
+    font-size: 15px;
+  }
+
+  .helper-text {
+    font-size: 12px;
+  }
+
+  .form-control,
+  ::ng-deep .ng-select .ng-select-container {
+    height: 50px !important;
+    min-height: 50px;
+    font-size: 14px;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .button-row .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .student-page {
+    padding: 18px 12px;
+  }
+
+  .student-card {
+    padding: 22px 16px;
+    border-radius: 12px;
+  }
+
+  .student-card h2 {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .form-control,
+  ::ng-deep .ng-select .ng-select-container {
+    height: 48px !important;
+    min-height: 48px;
+  }
+
+  .helper-text {
+    font-size: 11px;
+  }
+}

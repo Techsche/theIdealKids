@@ -1,0 +1,239 @@
+<div class="student-page">
+  <div class="student-container">
+    <div class="student-card">
+      <h2>
+        {{ isEditMode ? 'Edit Child Information' : 'Add Child Information' }}
+      </h2>
+
+      <p class="subtitle">Enter your child's information below.</p>
+
+      <form [formGroup]="childrenForm" (ngSubmit)="onSubmit()">
+        <!-- ==========================================
+                     CHILD INFORMATION
+        =========================================== -->
+
+        <div class="section-title">
+          <i class="bi bi-person-vcard-fill"></i>
+          <span>Child Information</span>
+        </div>
+
+        <div class="form-grid">
+          <!-- First Name -->
+
+          <div class="form-group">
+            <label class="form-label">
+              <div class="label-row">
+                <span>First Name</span>
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> Child's First Name </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person-fill"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                formControlName="first_name"
+                placeholder="Enter First Name"
+              />
+            </div>
+
+            @if ((submitted || f['first_name'].touched) && f['first_name'].errors) {
+              <small class="error"> First Name is required. </small>
+            }
+          </div>
+
+          <!-- Last Name -->
+
+          <div class="form-group">
+            <label class="form-label">
+              <div class="label-row">
+                <span>Last Name</span>
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> Child's Last Name </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-person-badge-fill"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                formControlName="last_name"
+                placeholder="Enter Last Name"
+              />
+            </div>
+
+            @if ((submitted || f['last_name'].touched) && f['last_name'].errors) {
+              <small class="error"> Last Name is required. </small>
+            }
+          </div>
+
+          <!-- Age -->
+
+          <div class="form-group">
+            <label class="form-label">
+              <div class="label-row">
+                <span>Age</span>
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> Child's Current Age </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-123"></i>
+
+              <input
+                type="number"
+                class="form-control"
+                formControlName="age"
+                placeholder="Enter Age"
+              />
+            </div>
+
+            @if ((submitted || f['age'].touched) && f['age'].errors) {
+              <small class="error"> Age is required. </small>
+            }
+          </div>
+
+          <!-- Gender -->
+
+          <div class="form-group">
+            <label class="form-label">
+              <div class="label-row">
+                <span>Gender</span>
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> Select Gender </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-gender-ambiguous"></i>
+
+              <select class="form-control" formControlName="gender">
+                <option value="">Select Gender</option>
+
+                <option value="Male">Male</option>
+
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            @if ((submitted || f['gender'].touched) && f['gender'].errors) {
+              <small class="error"> Gender is required. </small>
+            }
+          </div>
+
+          <!-- Grade -->
+
+          <div class="form-group">
+            <label class="form-label">
+              <div class="label-row">
+                <span>Grade</span>
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> Current Grade </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-mortarboard-fill"></i>
+
+              <ng-select
+                [items]="grades"
+                bindLabel="name"
+                bindValue="grade"
+                formControlName="grade"
+                placeholder="Select Grade"
+                [searchable]="true"
+                [clearable]="false"
+              >
+              </ng-select>
+            </div>
+
+            @if ((submitted || f['grade'].touched) && f['grade'].errors) {
+              <small class="error"> Grade is required. </small>
+            }
+          </div>
+
+          <!-- School Name -->
+
+          <div class="form-group">
+            <label class="form-label">
+              <div class="label-row">
+                <span>School Name</span>
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> Current School Name </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-building"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                formControlName="school"
+                placeholder="Enter School Name"
+              />
+            </div>
+
+            @if ((submitted || f['school'].touched) && f['school'].errors) {
+              <small class="error"> School Name is required. </small>
+            }
+          </div>
+
+          <!-- School City -->
+
+          <div class="form-group full-width">
+            <label class="form-label">
+              <div class="label-row">
+                <span>School City</span>
+                <span class="required">*</span>
+              </div>
+
+              <small class="helper-text"> City where the school is located </small>
+            </label>
+
+            <div class="input-wrapper">
+              <i class="bi bi-geo-alt-fill"></i>
+
+              <input
+                type="text"
+                class="form-control"
+                formControlName="school_city"
+                placeholder="Enter School City"
+              />
+            </div>
+
+            @if ((submitted || f['school_city'].touched) && f['school_city'].errors) {
+              <small class="error"> School City is required. </small>
+            }
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check-circle-fill me-2"></i>
+
+            {{ isEditMode ? 'Update Child' : 'Save Child' }}
+          </button>
+
+          <button type="button" class="btn btn-danger" (click)="cancel()">
+            <i class="bi bi-x-circle me-2"></i>
+
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

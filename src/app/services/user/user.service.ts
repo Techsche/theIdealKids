@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { ApiResponse } from '../../core/models/apiResponse.model';
 import { environment } from '../../../environment/environment.prod';
 import { CreateUserRequest } from '../../core/models/user/signup.models';
-import { RegisteredEvent } from '../../core/models/user/registered-event.model';
 import { IUserProfile } from '../../core/models/user/profile.model';
 import { ILocation } from '../../core/models/user/location.model';
 import {
@@ -29,10 +28,6 @@ export class UserService {
     return this.http.post<ApiResponse<null>>(`${this.apiUrl}api/user/create`, request);
   }
 
-  getMyEvents(): Observable<RegisteredEvent[]> {
-    return this.http.get<RegisteredEvent[]>(`${this.apiUrl}api/session/user/registered/event`);
-  }
-
   getProfile() {
     return this.http.get<IUserProfile>(`${this.apiUrl}api/session/user`);
   }
@@ -50,9 +45,5 @@ export class UserService {
       `${this.apiUrl}api/session/user/change/password`,
       request,
     );
-  }
-
-  getChildren(): Observable<Children[]> {
-    return this.http.get<Children[]>(`${this.apiUrl}api/session/students`);
   }
 }

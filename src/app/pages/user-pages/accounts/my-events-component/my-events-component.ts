@@ -6,9 +6,8 @@ import { Router, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastrAlertService } from '../../../../services/common/toastr.services';
-import { UserService } from '../../../../services/user/user.service';
 import { RegisteredEvent } from '../../../../core/models/user/registered-event.model';
-
+import { EventService } from '../../../../services/user/event.service';
 @Component({
   selector: 'app-my-events-component',
   imports: [CommonModule, FormsModule, RouterModule, MatButtonModule, MatIconModule],
@@ -16,7 +15,7 @@ import { RegisteredEvent } from '../../../../core/models/user/registered-event.m
   styleUrl: './my-events-component.scss',
 })
 export class MyEventsComponent implements OnInit {
-  private readonly userService = inject(UserService);
+  private readonly eventService = inject(EventService);
 
   private readonly toastrService = inject(ToastrAlertService);
 
@@ -35,7 +34,7 @@ export class MyEventsComponent implements OnInit {
   }
 
   loadEvents(): void {
-    this.userService.getMyEvents().subscribe({
+    this.eventService.getMyEvents().subscribe({
       next: (response) => {
         this.loading.set(false);
         if (response) {
@@ -76,18 +75,10 @@ export class MyEventsComponent implements OnInit {
   }
 
   viewCompetition(event: RegisteredEvent): void {
-    this.router.navigate(['/my-event-competition'], {
-      queryParams: {
-        id: event.id,
-      },
-    });
+    this.router.navigate(['/student-competition', event.event_id, event.student_id, event.register_number]);
   }
 
   viewAttendance(event: RegisteredEvent): void {
-    this.router.navigate(['/attendance'], {
-      queryParams: {
-        id: event.id,
-      },
-    });
+    this.router.navigate(['/student-attendance', event.id]);
   }
 }

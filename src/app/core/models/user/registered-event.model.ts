@@ -109,7 +109,6 @@ export interface StudentInfo {
   id: string;
 
   first_name: string;
-
   last_name: string;
 
   age: number;
@@ -122,7 +121,7 @@ export interface StudentInfo {
 
   school_city: string;
 
-  grade_info: any;
+  grade_info: GradeInfo | null;
 
   competitionList: CompetitionInfo[] | null;
 
@@ -138,11 +137,26 @@ export interface EventCompetition {
 }
 
 export interface CompetitionInfo {
-  id?: string;
+  id: string;
 
-  name?: string;
+  name: string;
 
-  description?: string;
+  short_description: string;
+
+  gradeList: string[];
+
+  criterias: CompetitionCriteria[] | null;
+
+  user_id: string;
+
+  user?: UserInfo | null;
+}
+export interface CompetitionCriteria {
+  name: string;
+
+  visible: boolean;
+
+  maxScore: number;
 }
 
 export interface AttendanceInfo {
@@ -199,4 +213,9 @@ export interface UserInfo {
 
 export interface RegisterInfo {
   id?: string;
+}
+
+export interface GradeInfo {
+  name: string;
+  grade: string;
 }

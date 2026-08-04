@@ -1,4 +1,4 @@
-import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable, tap } from 'rxjs';
@@ -17,10 +17,27 @@ export class AuthService {
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
 
+  readonly isLoggedIn = signal(false);
+  readonly userName = signal('');
+
   private api = environment.base;
+
+  constructor() {
+    this.restoreSession();
+  }
 
   private get isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
+  }
+
+  private restoreSession(): void {
+    if (!this.isBrowser) return;
+
+    const token = localStorage.getItem('token');
+    const name = localStorage.getItem('name');
+
+    this.isLoggedIn.set(!!token);
+    this.userName.set(name ?? '');
   }
 
   login(payload: LoginRequest): Observable<LoginResponse> {
@@ -30,6 +47,9 @@ export class AuthService {
           localStorage.setItem('token', res.token);
           localStorage.setItem('name', res.name ?? '');
           localStorage.setItem('roles', JSON.stringify(res.roles ?? []));
+
+          this.isLoggedIn.set(true);
+          this.userName.set(res.name ?? '');
         }
       }),
     );
@@ -38,8 +58,11 @@ export class AuthService {
   logout(): void {
     if (this.isBrowser) {
       localStorage.clear();
-      sessionStorage.clear(); // optional
+      sessionStorage.clear();
     }
+
+    this.isLoggedIn.set(false);
+    this.userName.set('');
   }
 
   forgotPassword(payload: ForgotPasswordRequest): Observable<ForgotPasswordResponse> {
@@ -47,30 +70,14 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    if (!this.isBrowser) {
-      return null;
-    }
+    if (!this.isBrowser) return null;
 
     return localStorage.getItem('token');
   }
 
   getRoles(): string[] {
-    if (!this.isBrowser) {
-      return [];
-    }
+    if (!this.isBrowser) return [];
 
     return JSON.parse(localStorage.getItem('roles') || '[]');
-  }
-
-  getName(): string {
-    if (!this.isBrowser) {
-      return '';
-    }
-
-    return localStorage.getItem('name') || '';
-  }
-
-  isLoggedIn(): boolean {
-    return this.getToken() !== null;
   }
 }

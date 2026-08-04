@@ -1,0 +1,240 @@
+.competition-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 32px 20px;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  p {
+    margin-top: 6px;
+    color: #64748b;
+  }
+}
+
+/* ===========================
+   Back Button
+=========================== */
+
+.back-btn {
+  border-radius: 999px !important;
+}
+
+/* ===========================
+   Search
+=========================== */
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 52px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  margin-bottom: 25px;
+
+  mat-icon {
+    color: #64748b;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0 12px;
+    font-size: 15px;
+    background: transparent;
+  }
+}
+
+/* ===========================
+   Info Card
+=========================== */
+
+.info-card {
+  margin-bottom: 25px;
+  border-radius: 16px !important;
+  padding: 24px !important;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  label {
+    display: block;
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  span {
+    display: block;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.5;
+  }
+}
+
+/* ===========================
+   Table
+=========================== */
+
+.table-wrapper {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+
+  table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+  }
+
+  thead {
+    background: #2563eb;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  th,
+  td {
+    padding: 18px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f8fafc;
+  }
+
+  tbody tr:hover {
+    background: #eef6ff;
+  }
+
+  tbody td {
+    border-bottom: 1px solid #edf2f7;
+  }
+}
+
+.competition-name {
+  font-weight: 600;
+  color: #1e293b;
+
+  small {
+    display: block;
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+/* ===========================
+   Empty State
+=========================== */
+
+.empty-state {
+  text-align: center;
+  padding: 70px 20px;
+
+  mat-icon {
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+    color: #94a3b8;
+  }
+
+  h2 {
+    margin: 18px 0 8px;
+  }
+
+  p {
+    color: #64748b;
+  }
+}
+
+/* ===========================
+   Loading Skeleton
+=========================== */
+
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skeleton-row {
+  height: 70px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 37%, #f1f5f9 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 992px) {
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-header .back-btn {
+    width: 100%;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-box {
+    height: 48px;
+  }
+
+  .table-wrapper {
+    table {
+      min-width: 850px;
+    }
+  }
+}

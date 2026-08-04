@@ -1,0 +1,115 @@
+<div class="competition-page">
+  <!-- Header -->
+
+  <div class="page-header">
+    <div>
+      <h1>Student Competitions</h1>
+      <p>View competition schedule for the selected event.</p>
+    </div>
+
+    <button mat-stroked-button color="primary" class="back-btn" routerLink="/my-events">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+  </div>
+
+  <!-- Search -->
+
+  <div class="search-box">
+    <mat-icon>search</mat-icon>
+
+    <input
+      type="text"
+      placeholder="Search competition..."
+      [(ngModel)]="searchText"
+      (ngModelChange)="onSearch()"
+    />
+  </div>
+
+  @if (loading()) {
+    <div class="loading-wrapper">
+      @for (item of [1, 2, 3, 4]; track item) {
+        <div class="skeleton-row"></div>
+      }
+    </div>
+  } @else {
+    @if (filteredCompetitions.length) {
+      <!-- Event Information -->
+
+      <mat-card class="info-card">
+        <div class="info-grid">
+          <div>
+            <label>Event</label>
+            <span>{{ event.name }}</span>
+          </div>
+
+          <div>
+            <label>Date</label>
+            <span>{{ event.start_date | date: 'dd MMM yyyy' }}</span>
+          </div>
+
+          <div>
+            <label>Student</label>
+            <span>{{ student.first_name }} {{ student.last_name }}</span>
+          </div>
+        </div>
+      </mat-card>
+
+      <!-- Table -->
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Competition Name</th>
+
+              <th>Registration No.</th>
+
+              <th>Competition Date</th>
+
+              <th>Room</th>
+
+              <th>Time</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of filteredCompetitions; track item.id) {
+              <tr>
+                <td>
+                  <strong>{{ item.competition?.name }}</strong>
+
+                  @if (item.competition?.short_description) {
+                    <div class="sub-title">({{ item.competition?.short_description }})</div>
+                  }
+                </td>
+
+                <td>
+                  {{ registrationNo }}
+                </td>
+
+                <td>
+                  {{ item.competition_date | date: 'dd MMM yyyy' }}
+                </td>
+
+                <td>
+                  {{ item.room?.room_name }}
+                </td>
+
+                <td>{{ item.slot?.start_time }} - {{ item.slot?.end_time }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <mat-icon>emoji_events</mat-icon>
+
+        <h2>No Competitions Found</h2>
+
+        <p>No competition schedule available.</p>
+      </div>
+    }
+  }
+</div>

@@ -28,7 +28,7 @@
     <!-- ================= MOBILE ================= -->
 
     <div class="mobile-actions">
-      @if (!isLoggedIn) {
+      @if (!isLoggedIn()) {
         <button mat-button routerLink="/login" (click)="closeMenu()">Login</button>
 
         <button mat-button routerLink="/register" (click)="closeMenu()">Signup</button>
@@ -43,13 +43,13 @@
         </button>
       }
 
-      @if (isLoggedIn) {
+      @if (isLoggedIn()) {
         <div class="mobile-user">
           <mat-icon>account_circle</mat-icon>
 
           <div>
             <small>Welcome</small>
-            <h4>{{ userName }}</h4>
+            <h4>{{ userName() }}</h4>
           </div>
         </div>
 
@@ -94,7 +94,7 @@
   <!-- ================= DESKTOP ================= -->
 
   <div class="right-section">
-    @if (!isLoggedIn) {
+    @if (!isLoggedIn()) {
       <button mat-button routerLink="/login">Login</button>
 
       <button mat-button routerLink="/register">Signup</button>
@@ -104,13 +104,13 @@
       </button>
     }
 
-    @if (isLoggedIn) {
+    @if (isLoggedIn() ) {
       <button mat-button class="user-profile-btn" [matMenuTriggerFor]="profileMenu">
         <mat-icon>account_circle</mat-icon>
 
         <span class="welcome-text">
           Welcome,
-          <strong>{{ userName }}</strong>
+          <strong>{{ userName() }}</strong>
         </span>
 
         <mat-icon>keyboard_arrow_down</mat-icon>

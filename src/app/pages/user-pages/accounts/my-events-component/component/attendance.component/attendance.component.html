@@ -1,0 +1,163 @@
+<div class="attendance-page">
+  <!-- Header -->
+
+  <div class="page-header">
+    <div>
+      <h1>Student Attendance</h1>
+
+      <p>View attendance history for the selected event.</p>
+    </div>
+
+    <button mat-stroked-button color="primary" routerLink="/my-events">
+      <mat-icon>arrow_back</mat-icon>
+
+      Back
+    </button>
+  </div>
+
+  <!-- Search -->
+
+  <div class="search-box">
+    <mat-icon>search</mat-icon>
+
+    <input
+      type="text"
+      placeholder="Search attendance..."
+      [(ngModel)]="searchText"
+      (ngModelChange)="onSearch()"
+    />
+  </div>
+
+  @if (loading()) {
+    <!-- Skeleton -->
+
+    <div class="loading-wrapper">
+      @for (item of [1, 2, 3, 4]; track item) {
+        <div class="skeleton-row"></div>
+      }
+    </div>
+  } @else {
+    @if (filteredAttendance.length > 0) {
+      <!-- Event Info -->
+
+      <mat-card class="info-card">
+        <div class="info-grid">
+          <div>
+            <label>Event</label>
+
+            <span>{{ registeredStudent.event.name }}</span>
+          </div>
+
+          <div>
+            <label>Date</label>
+
+            <span>{{ registeredStudent.event.start_date | date: 'dd MMM yyyy' }}</span>
+          </div>
+
+          <div>
+            <label>Student</label>
+
+            <span
+              >{{ registeredStudent.student.first_name }}
+              {{ registeredStudent.student.last_name }}</span
+            >
+          </div>
+
+          <div>
+            <label>Registration</label>
+
+            <span>#{{ registeredStudent.register_number }}</span>
+          </div>
+        </div>
+      </mat-card>
+
+      <!-- Statistics -->
+
+      <div class="stats-grid">
+        <mat-card>
+          <h2>{{ filteredAttendance.length }}</h2>
+
+          <p>Total Sessions</p>
+        </mat-card>
+
+        <mat-card>
+          <h2>{{ presentCount }}</h2>
+
+          <p>Present</p>
+        </mat-card>
+
+        <mat-card>
+          <h2>{{ absentCount }}</h2>
+
+          <p>Absent</p>
+        </mat-card>
+
+        <mat-card>
+          <h2>{{ attendancePercentage }}%</h2>
+
+          <p>Attendance</p>
+        </mat-card>
+      </div>
+
+      <!-- Desktop Table -->
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of filteredAttendance; track $index) {
+              <tr>
+                <td>
+                  {{ item.subevent_date | date: 'dd MMM yyyy' }}
+                </td>
+
+                <td>
+                  <span
+                    class="status"
+                    [class.present]="item.present"
+                    [class.absent]="!item.present"
+                  >
+                    {{ item.present ? 'Present' : 'Absent' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile -->
+
+      <div class="mobile-list">
+        @for (item of filteredAttendance; track $index) {
+          <mat-card class="attendance-card">
+            <div>
+              <small>Date</small>
+
+              <h4>{{ item.subevent_date | date: 'dd MMM yyyy' }}</h4>
+            </div>
+
+            <span class="status" [class.present]="item.present" [class.absent]="!item.present">
+              {{ item.present ? 'Present' : 'Absent' }}
+            </span>
+          </mat-card>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <mat-icon>event_busy</mat-icon>
+
+        <h2>No Attendance Found</h2>
+
+        <p>No attendance has been recorded for this event.</p>
+      </div>
+    }
+  }
+</div>
