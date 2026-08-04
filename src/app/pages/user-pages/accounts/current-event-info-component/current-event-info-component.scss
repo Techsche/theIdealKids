@@ -1,0 +1,1091 @@
+/* ==========================================================
+   PAGE
+========================================================== */
+
+.current-event-page {
+  background: #f4f7fb;
+  min-height: 100vh;
+  padding: 40px 20px 60px;
+}
+
+.event-container {
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: 50px;
+  color: white;
+  background: linear-gradient(135deg, #0d6efd 0%, #2563eb 100%);
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.25);
+  margin-bottom: 35px;
+}
+
+.hero-card::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  right: -120px;
+  top: -120px;
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  left: -80px;
+  bottom: -80px;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.hero-content h1{
+  font-size:42px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.hero-content p{
+  font-size:16px;
+  opacity:.92;
+  line-height:1.7;
+  max-width:800px;
+}
+
+/* ==========================================================
+   REGISTER BUTTON
+========================================================== */
+
+.register-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  margin-top:28px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:white;
+
+  color:#0d6efd;
+
+  padding:14px 32px;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.register-btn:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.register-btn.large{
+
+  padding:18px 42px;
+
+  font-size:18px;
+
+}
+
+/* ==========================================================
+   CONTENT SECTION
+========================================================== */
+
+.content-section{
+
+  margin-bottom:40px;
+
+}
+
+.section-heading{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  margin-bottom:22px;
+
+}
+
+.section-heading i{
+
+  width:54px;
+
+  height:54px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:50%;
+
+  background:#0d6efd;
+
+  color:white;
+
+  font-size:22px;
+
+}
+
+.section-heading h2{
+
+  margin:0;
+
+  font-size:28px;
+
+  font-weight:700;
+
+  color:#263238;
+
+}
+
+.section-heading p{
+
+  margin:4px 0 0;
+
+  color:#7b8794;
+
+}
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.info-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:25px;
+
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.info-card{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:28px;
+
+  box-shadow:0 12px 30px rgba(15,23,42,.08);
+
+  transition:.3s;
+
+  height:100%;
+
+}
+
+.info-card:hover{
+
+  transform:translateY(-6px);
+
+  box-shadow:0 18px 40px rgba(15,23,42,.12);
+
+}
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.card-icon{
+
+  width:70px;
+
+  height:70px;
+
+  border-radius:16px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#eef4ff;
+
+  color:#0d6efd;
+
+  font-size:28px;
+
+  margin-bottom:20px;
+
+}
+
+/* ==========================================================
+   CARD CONTENT
+========================================================== */
+
+.info-card h3{
+
+  font-size:22px;
+
+  font-weight:700;
+
+  margin-bottom:18px;
+
+  color:#263238;
+
+}
+
+.info-card p{
+
+  color:#616d79;
+
+  line-height:1.8;
+
+}
+
+.info-card strong{
+
+  color:#263238;
+
+}
+
+/* ==========================================================
+   DATE BLOCK
+========================================================== */
+
+.date-block{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:15px;
+
+  padding-bottom:15px;
+
+  border-bottom:1px solid #edf1f5;
+
+}
+
+.date-block:last-child{
+
+  border:none;
+
+  margin-bottom:0;
+
+  padding-bottom:0;
+
+}
+
+.date-label{
+
+  font-weight:600;
+
+  color:#607080;
+
+}
+
+.date-value{
+
+  font-weight:700;
+
+  color:#263238;
+
+}
+
+/* ==========================================================
+   LOCATION
+========================================================== */
+
+.location-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:14px;
+
+}
+
+.location-item{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  background:#f8fafc;
+
+  transition:.25s;
+
+}
+
+.location-item:hover{
+
+  background:#eef5ff;
+
+}
+
+.location-item i{
+
+  color:#0d6efd;
+
+  font-size:20px;
+
+}
+
+.location-item a{
+
+  color:#0d6efd;
+
+  font-weight:600;
+
+  text-decoration:none;
+
+}
+
+.location-item small{
+
+  display:block;
+
+  color:#7b8794;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:992px){
+
+.info-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero-card{
+
+padding:35px;
+
+}
+
+.hero-content h1{
+
+font-size:34px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.current-event-page{
+
+padding:20px 15px;
+
+}
+
+.hero-card{
+
+padding:28px;
+
+border-radius:18px;
+
+}
+
+.hero-content h1{
+
+font-size:28px;
+
+}
+
+.section-heading{
+
+align-items:flex-start;
+
+}
+
+.section-heading h2{
+
+font-size:24px;
+
+}
+
+.register-btn{
+
+width:100%;
+
+}
+
+}
+/* ==========================================================
+   COMPETITION GRID
+========================================================== */
+
+.competition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.competition-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid #edf1f5;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  transition: all 0.3s ease;
+}
+
+.competition-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+}
+
+.competition-date {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.date-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #eef4ff;
+  color: #0d6efd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
+
+.competition-date span {
+  display: block;
+  color: #7d8894;
+  font-size: 13px;
+}
+
+.competition-date h4 {
+  margin: 4px 0 0;
+  color: #263238;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.competition-details {
+  color: #5f6d7a;
+  line-height: 1.8;
+}
+
+.competition-details ul {
+  padding-left: 18px;
+}
+
+.competition-details li {
+  margin-bottom: 8px;
+}
+
+/* ==========================================================
+   SUMMER RUN
+========================================================== */
+
+.summer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.summer-card {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #edf1f5;
+  transition: .3s;
+}
+
+.summer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.08);
+}
+
+.summer-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: #0d6efd;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
+
+.summer-card strong {
+  display: block;
+  font-size: 17px;
+  color: #263238;
+}
+
+.summer-card span {
+  color: #7d8894;
+}
+
+/* ==========================================================
+   AWARDS
+========================================================== */
+
+.award-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 24px;
+}
+
+.award-card {
+  background: white;
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid #edf1f5;
+  transition: .3s;
+}
+
+.award-card:hover {
+  transform: translateY(-6px);
+}
+
+.award-card i {
+  font-size: 42px;
+  margin-bottom: 18px;
+}
+
+.award-card h4 {
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.award-card p {
+  color: #7b8794;
+}
+
+.award-card.gold i {
+  color: #f4b400;
+}
+
+.award-card.silver i {
+  color: #8b95a1;
+}
+
+.award-card.bronze i {
+  color: #c47c3d;
+}
+
+/* ==========================================================
+   IMPORTANT NOTE
+========================================================== */
+
+.important-note {
+  margin-top: 28px;
+  background: #fff8e5;
+  border-left: 5px solid #f4b400;
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.important-note i {
+  color: #f4b400;
+  font-size: 22px;
+}
+
+.important-note span {
+  color: #5f6d7a;
+  line-height: 1.7;
+}
+
+/* ==========================================================
+   AGENDA
+========================================================== */
+
+.agenda-card {
+  background: white;
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(15,23,42,.06);
+}
+
+.agenda-content {
+  color: #5f6d7a;
+  line-height: 1.9;
+}
+
+.agenda-content ul {
+  padding-left: 20px;
+}
+
+.agenda-content li {
+  margin-bottom: 10px;
+}
+
+/* ==========================================================
+   WEEKLY THEMES
+========================================================== */
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 22px;
+}
+
+.theme-card {
+  background: white;
+  border-radius: 18px;
+  padding: 28px;
+  transition: .3s;
+  border: 1px solid #edf1f5;
+}
+
+.theme-card:hover {
+  transform: translateY(-5px);
+}
+
+.week {
+  display: inline-block;
+  background: #0d6efd;
+  color: white;
+  border-radius: 30px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.theme-card h5 {
+  margin-bottom: 12px;
+  color: #263238;
+}
+
+.theme-card p {
+  color: #7b8794;
+  line-height: 1.7;
+}
+
+/* ==========================================================
+   CHERRIES RULES
+========================================================== */
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+  gap: 22px;
+}
+
+.rule-card {
+  background: white;
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+  transition: .3s;
+  border: 1px solid #edf1f5;
+}
+
+.rule-card:hover {
+  transform: translateY(-5px);
+}
+
+.rule-card span {
+  width: 56px;
+  height: 56px;
+  background: #0d6efd;
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.rule-card h5 {
+  margin-bottom: 10px;
+  color: #263238;
+}
+
+.rule-card p {
+  color: #7b8794;
+  line-height: 1.7;
+}
+/* ==========================================================
+   BOTTOM REGISTER CTA
+========================================================== */
+
+.bottom-register {
+  margin-top: 50px;
+  padding: 45px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #0d6efd 0%, #2563eb 100%);
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+
+  box-shadow: 0 20px 45px rgba(37, 99, 235, .25);
+}
+
+.bottom-register h2 {
+  margin: 0 0 10px;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.bottom-register p {
+  margin: 0;
+  max-width: 650px;
+  opacity: .95;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.bottom-register .register-btn {
+  flex-shrink: 0;
+}
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.empty-event {
+  background: white;
+  border-radius: 22px;
+  padding: 80px 30px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, .08);
+}
+
+.empty-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: auto auto 30px;
+  background: #eef4ff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-icon i {
+  font-size: 60px;
+  color: #0d6efd;
+}
+
+.empty-event h2 {
+  color: #263238;
+  font-size: 34px;
+  margin-bottom: 15px;
+}
+
+.empty-event p {
+  color: #7d8894;
+  max-width: 550px;
+  margin: auto;
+  line-height: 1.8;
+}
+
+/* ==========================================================
+   LOADING SKELETON
+========================================================== */
+
+.loading-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.skeleton-card {
+  height: 170px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(
+      90deg,
+      #f3f5f7 25%,
+      #ffffff 50%,
+      #f3f5f7 75%
+  );
+
+  background-size: 300% 100%;
+
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes shimmer {
+
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9d1d9;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #adb5bd;
+}
+
+/* ==========================================================
+   TEXT SELECTION
+========================================================== */
+
+::selection {
+  background: rgba(13,110,253,.18);
+}
+
+/* ==========================================================
+   LINK
+========================================================== */
+
+a {
+  transition: .25s;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* ==========================================================
+   BUTTON ANIMATION
+========================================================== */
+
+button {
+
+  transition: .25s ease;
+
+}
+
+button:hover {
+
+  transform: translateY(-2px);
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:1200px) {
+
+  .bottom-register {
+
+    padding: 35px;
+
+  }
+
+}
+
+@media (max-width:992px) {
+
+  .bottom-register {
+
+    flex-direction: column;
+    text-align: center;
+
+  }
+
+  .bottom-register p {
+
+    max-width: 100%;
+
+  }
+
+  .competition-grid,
+  .theme-grid,
+  .award-grid,
+  .rules-grid,
+  .summer-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+@media (max-width:768px) {
+
+  .current-event-page {
+
+    padding: 20px 15px;
+
+  }
+
+  .hero-card {
+
+    padding: 28px;
+
+  }
+
+  .hero-content h1 {
+
+    font-size: 28px;
+
+  }
+
+  .section-heading {
+
+    align-items: flex-start;
+
+  }
+
+  .section-heading i {
+
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+
+  }
+
+  .section-heading h2 {
+
+    font-size: 24px;
+
+  }
+
+  .info-card,
+  .competition-card,
+  .agenda-card,
+  .theme-card,
+  .rule-card,
+  .award-card,
+  .summer-card {
+
+    padding: 22px;
+
+  }
+
+  .bottom-register {
+
+    padding: 28px;
+
+  }
+
+  .bottom-register h2 {
+
+    font-size: 28px;
+
+  }
+
+  .register-btn {
+
+    width: 100%;
+
+  }
+
+}
+
+@media (max-width:576px) {
+
+  .hero-content h1 {
+
+    font-size: 24px;
+
+  }
+
+  .hero-content p {
+
+    font-size: 14px;
+
+  }
+
+  .bottom-register h2 {
+
+    font-size: 24px;
+
+  }
+
+  .empty-event {
+
+    padding: 60px 20px;
+
+  }
+
+  .empty-icon {
+
+    width: 90px;
+    height: 90px;
+
+  }
+
+  .empty-icon i {
+
+    font-size: 42px;
+
+  }
+
+  .empty-event h2 {
+
+    font-size: 26px;
+
+  }
+
+}

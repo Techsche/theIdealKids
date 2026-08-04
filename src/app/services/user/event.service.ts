@@ -66,4 +66,11 @@ export class EventService {
       `${this.apiUrl}api/session/register/competitionList/${eventId}/${studentId}`,
     );
   }
+
+  /**
+   * Get Upcoming Event
+   */
+  getUpcomingEvent(): Observable<EventDetails> {
+    return this.http.get<EventDetails>(`${this.apiUrl}api/event/upcoming`);
+  }
 }
