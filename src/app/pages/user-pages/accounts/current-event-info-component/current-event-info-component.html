@@ -1,704 +1,869 @@
 <div class="event-page">
-  <!-- =====================================================
-       HERO SECTION
-  ====================================================== -->
 
-  <div class="hero-section">
-    <div class="hero-content">
-      <div class="hero-text">
-        <div class="page-badge">
-          <i class="bi bi-calendar-event-fill"></i>
-          Current Event
-        </div>
+  <!-- =========================================
+       HERO
+  ========================================== -->
 
-        <h1>Current Event Information</h1>
+  <section class="hero">
 
-        <p>
-          View all event details, schedule, venue and competition information before registering.
-        </p>
-      </div>
+    <div class="hero-left">
 
-      @if (event && !isRegistrationClosed) {
-        <button class="register-btn" type="button" (click)="register()">
-          <i class="bi bi-person-plus-fill"></i>
+      <span class="page-tag">
+        <i class="bi bi-calendar-event-fill"></i>
+        Current Event
+      </span>
 
-          Register Now
-        </button>
-      }
-    </div>
-  </div>
+      <h1>
+        {{ event?.name || 'Upcoming Event' }}
+      </h1>
 
-  <!-- =====================================================
-       EVENT CONTENT
-  ====================================================== -->
+      <p>
+        View complete event schedule, competition details,
+        locations and registration information.
+      </p>
 
-  @if (event) {
-    <div class="summary-grid">
-      <!-- =====================================================
-         EVENT CARD
-    ====================================================== -->
-
-      <div class="summary-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="bi bi-award-fill"></i>
-          </div>
-
-          <div>
-            <h3>Event Information</h3>
-
-            <span>Overview</span>
-          </div>
-        </div>
-
-        <div class="card-body">
-          <div class="info-row">
-            <label>Event Name</label>
-
-            <div class="value">
-              {{ event.name }}
-            </div>
-          </div>
-
-          <div class="info-row">
-            <label>Description</label>
-
-            <div
-              class="value description"
-              [innerHTML]="sanitizer.bypassSecurityTrustHtml(event.event_description)"
-            ></div>
-          </div>
-
-          @if (!talentEvent) {
-            <div class="highlight-box">
-              <h5>
-                <i class="bi bi-exclamation-circle-fill"></i>
-                Important Information
-              </h5>
-
-              <ul>
-                <li>One parent must participate with the child.</li>
-
-                <li>Level 1 Trophy for all 6 weeks runners.</li>
-
-                <li>Level 2 Trophy for all 5 weeks runners.</li>
-
-                <li>Level 3 Trophy for all 4 weeks runners.</li>
-
-                <li>Medals for participants below 4 weeks.</li>
-
-                <li>
-                  Kids must be present during the award ceremony to receive trophies or medals.
-                </li>
-              </ul>
-            </div>
-          }
-        </div>
-      </div>
-
-      <!-- =====================================================
-         DATE CARD
-    ====================================================== -->
-
-      <div class="summary-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="bi bi-calendar-week-fill"></i>
-          </div>
-
-          <div>
-            <h3>Schedule</h3>
-
-            <span>Date & Time</span>
-          </div>
-        </div>
-
-        <div class="card-body">
-          <div class="info-row">
-            <label>Event Start</label>
-
-            <div class="value">
-              {{ event.start_date | date: 'EEEE, MMM dd, yyyy' }}
-            </div>
-          </div>
-
-          <div class="info-row">
-            <label>Award Ceremony</label>
-
-            <div class="value">
-              {{ event.award_ceremony_time | date: 'EEEE, MMM dd, yyyy hh:mm a' }}
-            </div>
-          </div>
-
-          <div class="info-row">
-            <label>Registration Ends</label>
-
-            <div class="value danger">
-              {{ event.registration_close_date | date: 'EEEE, MMM dd, yyyy' }}
-            </div>
-          </div>
-
-          @if (event.summer_run) {
-            <div class="info-row">
-              <label>Run Time</label>
-
-              <div class="value">
-                {{ event.run_time }}
-              </div>
-            </div>
-          }
-        </div>
-      </div>
-
-      <!-- =====================================================
-         LOCATION CARD
-    ====================================================== -->
-
-      <div class="summary-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="bi bi-geo-alt-fill"></i>
-          </div>
-
-          <div>
-            <h3>Locations</h3>
-
-            <span>Event Venues</span>
-          </div>
-        </div>
-
-        <div class="card-body">
-          @for (location of locations; track location.name) {
-            <a
-              class="location-card"
-              target="_blank"
-              [href]="'https://maps.google.com/?q=' + location.address"
-            >
-              <div class="location-icon">
-                <i class="bi bi-geo-fill"></i>
-              </div>
-
-              <div class="location-content">
-                <strong>
-                  {{ location.name }}
-                </strong>
-
-                <small>
-                  {{ location.address }}
-                </small>
-              </div>
-
-              <i class="bi bi-box-arrow-up-right"></i>
-            </a>
-          }
-        </div>
-      </div>
-    </div>
-  }
-  <div class="event-page">
-    <!-- =====================================================
-       HERO SECTION
-  ====================================================== -->
-
-    <div class="hero-section">
-      <div class="hero-content">
-        <div class="hero-text">
-          <div class="page-badge">
-            <i class="bi bi-calendar-event-fill"></i>
-            Current Event
-          </div>
-
-          <h1>Current Event Information</h1>
-
-          <p>
-            View all event details, schedule, venue and competition information before registering.
-          </p>
-        </div>
-
-        @if (event && !isRegistrationClosed) {
-          <button class="register-btn" type="button" (click)="register()">
-            <i class="bi bi-person-plus-fill"></i>
-
-            Register Now
-          </button>
-        }
-      </div>
     </div>
 
-    <!-- =====================================================
-       EVENT CONTENT
-  ====================================================== -->
+    @if(event && !isRegistrationClosed){
 
-    @if (event) {
-      <div class="summary-grid">
-        <!-- =====================================================
-         EVENT CARD
-    ====================================================== -->
+      <button
+        class="primary-btn"
+        (click)="register()">
 
-        <div class="summary-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <i class="bi bi-award-fill"></i>
-            </div>
+        <i class="bi bi-person-plus-fill"></i>
 
-            <div>
-              <h3>Event Information</h3>
+        Register Now
 
-              <span>Overview</span>
-            </div>
-          </div>
+      </button>
 
-          <div class="card-body">
-            <div class="info-row">
-              <label>Event Name</label>
-
-              <div class="value">
-                {{ event.name }}
-              </div>
-            </div>
-
-            <div class="info-row">
-              <label>Description</label>
-
-              <div
-                class="value description"
-                [innerHTML]="sanitizer.bypassSecurityTrustHtml(event.event_description)"
-              ></div>
-            </div>
-
-            @if (!talentEvent) {
-              <div class="highlight-box">
-                <h5>
-                  <i class="bi bi-exclamation-circle-fill"></i>
-                  Important Information
-                </h5>
-
-                <ul>
-                  <li>One parent must participate with the child.</li>
-
-                  <li>Level 1 Trophy for all 6 weeks runners.</li>
-
-                  <li>Level 2 Trophy for all 5 weeks runners.</li>
-
-                  <li>Level 3 Trophy for all 4 weeks runners.</li>
-
-                  <li>Medals for participants below 4 weeks.</li>
-
-                  <li>
-                    Kids must be present during the award ceremony to receive trophies or medals.
-                  </li>
-                </ul>
-              </div>
-            }
-          </div>
-        </div>
-
-        <!-- =====================================================
-         DATE CARD
-    ====================================================== -->
-
-        <div class="summary-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <i class="bi bi-calendar-week-fill"></i>
-            </div>
-
-            <div>
-              <h3>Schedule</h3>
-
-              <span>Date & Time</span>
-            </div>
-          </div>
-
-          <div class="card-body">
-            <div class="info-row">
-              <label>Event Start</label>
-
-              <div class="value">
-                {{ event.start_date | date: 'EEEE, MMM dd, yyyy' }}
-              </div>
-            </div>
-
-            <div class="info-row">
-              <label>Award Ceremony</label>
-
-              <div class="value">
-                {{ event.award_ceremony_time | date: 'EEEE, MMM dd, yyyy hh:mm a' }}
-              </div>
-            </div>
-
-            <div class="info-row">
-              <label>Registration Ends</label>
-
-              <div class="value danger">
-                {{ event.registration_close_date | date: 'EEEE, MMM dd, yyyy' }}
-              </div>
-            </div>
-
-            @if (event.summer_run) {
-              <div class="info-row">
-                <label>Run Time</label>
-
-                <div class="value">
-                  {{ event.run_time }}
-                </div>
-              </div>
-            }
-          </div>
-        </div>
-
-        <!-- =====================================================
-         LOCATION CARD
-    ====================================================== -->
-
-        <div class="summary-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <i class="bi bi-geo-alt-fill"></i>
-            </div>
-
-            <div>
-              <h3>Locations</h3>
-
-              <span>Event Venues</span>
-            </div>
-          </div>
-
-          <div class="card-body">
-            @for (location of locations; track location.name) {
-              <a
-                class="location-card"
-                target="_blank"
-                [href]="'https://maps.google.com/?q=' + location.address"
-              >
-                <div class="location-icon">
-                  <i class="bi bi-geo-fill"></i>
-                </div>
-
-                <div class="location-content">
-                  <strong>
-                    {{ location.name }}
-                  </strong>
-
-                  <small>
-                    {{ location.address }}
-                  </small>
-                </div>
-
-                <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-            }
-          </div>
-        </div>
-      </div>
     }
-    @if (event?.summer_run) {
-      <div class="content-section">
-        <div class="section-heading">
-          <i class="bi bi-stopwatch-fill"></i>
+
+  </section>
+
+
+  @if(event){
+
+  <!-- =========================================
+       QUICK INFO
+  ========================================== -->
+
+  <section class="quick-info">
+
+      <div class="quick-card">
+
+          <i class="bi bi-calendar-check"></i>
 
           <div>
-            <h2>Summer Run Schedule</h2>
 
-            <p>Weekly running schedule.</p>
+              <small>Starts</small>
+
+              <strong>
+                {{event.start_date | date:'MMM dd, yyyy'}}
+              </strong>
+
           </div>
-        </div>
 
-        <div class="summer-grid">
-          @for (date of subEventDates; track date) {
-            <div class="summer-card">
-              <div class="summer-icon">
-                <i class="bi bi-calendar-week-fill"></i>
-              </div>
-
-              <div>
-                <strong>
-                  {{ date | date: 'EEEE' }}
-                </strong>
-
-                <span>
-                  {{ date | date: 'MMMM dd, yyyy' }}
-                </span>
-              </div>
-            </div>
-          }
-        </div>
       </div>
-    }
-    @if (!talentEvent) {
-      <div class="content-section">
-        <div class="section-heading">
+
+      <div class="quick-card">
+
+          <i class="bi bi-stopwatch"></i>
+
+          <div>
+
+              <small>Registration Ends</small>
+
+              <strong>
+                  {{event.registration_close_date | date:'MMM dd, yyyy'}}
+              </strong>
+
+          </div>
+
+      </div>
+
+      <div class="quick-card">
+
+          <i class="bi bi-geo-alt-fill"></i>
+
+          <div>
+
+              <small>Locations</small>
+
+              <strong>
+                {{locations.length}}
+              </strong>
+
+          </div>
+
+      </div>
+
+      <div class="quick-card">
+
           <i class="bi bi-trophy-fill"></i>
 
           <div>
-            <h2>Awards</h2>
 
-            <p>Recognition for consistent participation.</p>
+              <small>Competition</small>
+
+              <strong>
+
+                @if(event.summer_run){
+                  Summer Run
+                } @else{
+                  Talent Event
+                }
+
+              </strong>
+
           </div>
+
+      </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       MAIN GRID
+  ========================================== -->
+
+  <section class="main-grid">
+
+
+
+      <!-- =====================================
+           EVENT DETAILS
+      ====================================== -->
+
+      <div class="card">
+
+          <div class="card-title">
+
+              <i class="bi bi-award-fill"></i>
+
+              <div>
+
+                  <h3>Event Overview</h3>
+
+                  <span>General Information</span>
+
+              </div>
+
+          </div>
+
+
+          <div class="detail-row">
+
+              <label>Name</label>
+
+              <span>{{event.name}}</span>
+
+          </div>
+
+
+
+          <div class="detail-column">
+
+              <label>Description</label>
+
+              <div
+                  class="html-content"
+                  [innerHTML]="sanitizer.bypassSecurityTrustHtml(event.event_description)">
+              </div>
+
+          </div>
+
+
+          @if(!talentEvent){
+
+          <div class="alert-card">
+
+              <h5>
+
+                  <i class="bi bi-exclamation-circle-fill"></i>
+
+                  Important Notes
+
+              </h5>
+
+              <ul>
+
+                  <li>One parent must participate with the child.</li>
+
+                  <li>Level 1 Trophy for all 6 week runners.</li>
+
+                  <li>Level 2 Trophy for all 5 week runners.</li>
+
+                  <li>Level 3 Trophy for all 4 week runners.</li>
+
+                  <li>Participation medals for below 4 weeks.</li>
+
+                  <li>
+                      Kids must be present during the award ceremony.
+                  </li>
+
+              </ul>
+
+          </div>
+
+          }
+
+      </div>
+
+
+
+
+
+      <!-- =====================================
+           SCHEDULE
+      ====================================== -->
+
+      <div class="card">
+
+          <div class="card-title">
+
+              <i class="bi bi-calendar-week-fill"></i>
+
+              <div>
+
+                  <h3>Schedule</h3>
+
+                  <span>Dates & Time</span>
+
+              </div>
+
+          </div>
+
+
+          <div class="detail-row">
+
+              <label>Event Start</label>
+
+              <span>
+
+                  {{event.start_date | date:'EEEE, MMM dd yyyy'}}
+
+              </span>
+
+          </div>
+
+
+          <div class="detail-row">
+
+              <label>Award Ceremony</label>
+
+              <span>
+
+                  {{event.award_ceremony_time | date:'EEEE, MMM dd yyyy hh:mm a'}}
+
+              </span>
+
+          </div>
+
+
+          <div class="detail-row">
+
+              <label>Registration Close</label>
+
+              <span class="danger">
+
+                  {{event.registration_close_date | date:'EEEE, MMM dd yyyy'}}
+
+              </span>
+
+          </div>
+
+
+          @if(event.summer_run){
+
+          <div class="detail-row">
+
+              <label>Run Time</label>
+
+              <span>
+
+                  {{event.run_time}}
+
+              </span>
+
+          </div>
+
+          }
+
+      </div>
+
+
+
+
+
+      <!-- =====================================
+           LOCATION
+      ====================================== -->
+
+      <div class="card">
+
+          <div class="card-title">
+
+              <i class="bi bi-geo-alt-fill"></i>
+
+              <div>
+
+                  <h3>Locations</h3>
+
+                  <span>Venue Information</span>
+
+              </div>
+
+          </div>
+
+
+          <div class="location-list">
+
+              @for(location of locations; track location.name){
+
+              <a
+
+                  class="location-item"
+
+                  target="_blank"
+
+                  [href]="'https://maps.google.com/?q='+location.address">
+
+                  <div class="location-left">
+
+                      <i class="bi bi-geo-fill"></i>
+
+                      <div>
+
+                          <strong>
+
+                              {{location.name}}
+
+                          </strong>
+
+                          <small>
+
+                              {{location.address}}
+
+                          </small>
+
+                      </div>
+
+                  </div>
+
+                  <i class="bi bi-box-arrow-up-right"></i>
+
+              </a>
+
+              }
+
+          </div>
+
+      </div>
+
+
+
+  </section>
+
+
+
+
+  <!-- =========================================
+       COMPETITION
+  ========================================== -->
+
+  @if(!event.summer_run){
+
+  <section class="card competition-section">
+
+      <div class="card-title">
+
+          <i class="bi bi-trophy-fill"></i>
+
+          <div>
+
+              <h3>Competition Information</h3>
+
+              <span>Dates • Grades • Categories</span>
+
+          </div>
+
+      </div>
+
+
+
+      @if(!event.is_multiDate){
+
+      <div class="timeline">
+
+          @for(comp of competitionInfo; track comp.comp_date){
+
+          <div class="timeline-item">
+
+              <div class="timeline-dot"></div>
+
+              <div class="timeline-content">
+
+                  <div class="timeline-date">
+
+                      {{comp.comp_date | date:'EEEE, MMM dd yyyy'}}
+
+                  </div>
+
+                  <div
+
+                      class="html-content"
+
+                      [innerHTML]="sanitizer.bypassSecurityTrustHtml(comp.competititionList)">
+
+                  </div>
+
+              </div>
+
+          </div>
+
+          }
+
+      </div>
+
+      }
+
+
+      @if(event.is_multiDate){
+
+      <div class="timeline">
+
+          @for(comp of competitionInfo; track comp){
+
+          <div class="timeline-item">
+
+              <div class="timeline-dot"></div>
+
+              <div
+
+                  class="timeline-content html-content"
+
+                  [innerHTML]="sanitizer.bypassSecurityTrustHtml(comp)">
+
+              </div>
+
+          </div>
+
+          }
+
+      </div>
+
+      }
+
+  </section>
+
+  }
+
+  }
+
+</div>
+@if(event){
+
+<!-- =========================================
+     SUMMER RUN SCHEDULE
+========================================== -->
+
+@if(event.summer_run){
+
+<section class="card section-card">
+
+    <div class="card-title">
+
+        <i class="bi bi-stopwatch-fill"></i>
+
+        <div>
+
+            <h3>Summer Run Schedule</h3>
+
+            <span>Weekly Run Dates</span>
+
         </div>
 
-        <div class="award-grid">
-          <div class="award-card gold">
+    </div>
+
+    <div class="schedule-grid">
+
+        @for(date of subEventDates; track date){
+
+        <div class="schedule-card">
+
+            <div class="schedule-icon">
+
+                <i class="bi bi-calendar-week-fill"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+
+                    {{date | date:'EEEE'}}
+
+                </strong>
+
+                <small>
+
+                    {{date | date:'MMMM dd, yyyy'}}
+
+                </small>
+
+            </div>
+
+        </div>
+
+        }
+
+    </div>
+
+</section>
+
+}
+
+<!-- =========================================
+     AGENDA
+========================================== -->
+
+<section class="card section-card">
+
+    <div class="card-title">
+
+        <i class="bi bi-journal-richtext"></i>
+
+        <div>
+
+            <h3>Event Agenda</h3>
+
+            <span>Activities & Schedule</span>
+
+        </div>
+
+    </div>
+
+    <div
+
+        class="html-content agenda"
+
+        [innerHTML]="sanitizer.bypassSecurityTrustHtml(event.description)">
+
+    </div>
+
+</section>
+
+<!-- =========================================
+     SUMMER RUN CONTENT
+========================================== -->
+
+@if(event.summer_run){
+
+<div class="three-column-grid">
+
+    <!-- Weekly Themes -->
+
+    <div class="card feature-card">
+
+        <div class="card-title">
+
+            <i class="bi bi-stars"></i>
+
+            <div>
+
+                <h3>Weekly Themes</h3>
+
+                <span>Healthy Habits</span>
+
+            </div>
+
+        </div>
+
+        <ul class="theme-list">
+
+            <li>
+
+                <strong>Week 1</strong>
+
+                Exercise, Sleep & Relax
+
+            </li>
+
+            <li>
+
+                <strong>Week 2</strong>
+
+                Eating Vegetables
+
+            </li>
+
+            <li>
+
+                <strong>Week 3</strong>
+
+                Benefits of Fruits
+
+            </li>
+
+            <li>
+
+                <strong>Week 4</strong>
+
+                Healthy Breakfast
+
+            </li>
+
+            <li>
+
+                <strong>Week 5</strong>
+
+                Drink Water
+
+            </li>
+
+            <li>
+
+                <strong>Week 6</strong>
+
+                Respect Everyone
+
+            </li>
+
+            <li>
+
+                <strong>Week 7</strong>
+
+                Laugh & Fun
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Ground Rules -->
+
+    <div class="card feature-card">
+
+        <div class="card-title">
+
+            <i class="bi bi-heart-fill"></i>
+
+            <div>
+
+                <h3>Ground Rules</h3>
+
+                <span>CHERRIES</span>
+
+            </div>
+
+        </div>
+
+        <ul class="rules-list">
+
+            <li><strong>C</strong> Commit every week</li>
+
+            <li><strong>H</strong> Help Others</li>
+
+            <li><strong>E</strong> Early Rise</li>
+
+            <li><strong>R</strong> Respect Everyone</li>
+
+            <li><strong>R</strong> Run Together</li>
+
+            <li><strong>I</strong> Implement Rules</li>
+
+            <li><strong>E</strong> Eat Healthy</li>
+
+            <li><strong>S</strong> Show Up On Time</li>
+
+        </ul>
+
+    </div>
+
+    <!-- Tips -->
+
+    <div class="card feature-card">
+
+        <div class="card-title">
+
+            <i class="bi bi-lightbulb-fill"></i>
+
+            <div>
+
+                <h3>Participation Tips</h3>
+
+                <span>Before You Run</span>
+
+            </div>
+
+        </div>
+
+        <ul class="tips-list">
+
+            <li>Wear comfortable shoes.</li>
+
+            <li>Arrive 15 minutes early.</li>
+
+            <li>Carry a water bottle.</li>
+
+            <li>Parents should accompany children.</li>
+
+            <li>Follow volunteer instructions.</li>
+
+            <li>Enjoy the event.</li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+}
+
+<!-- =========================================
+     AWARDS
+========================================== -->
+
+@if(!talentEvent){
+
+<section class="card section-card">
+
+    <div class="card-title">
+
+        <i class="bi bi-trophy-fill"></i>
+
+        <div>
+
+            <h3>Awards</h3>
+
+            <span>Recognition</span>
+
+        </div>
+
+    </div>
+
+    <div class="awards-grid">
+
+        <div class="award gold">
+
             <i class="bi bi-award-fill"></i>
 
-            <h4>Level 1 Trophy</h4>
+            <h4>Level 1</h4>
 
-            <p>All 6 Week Runners</p>
-          </div>
+            <p>6 Week Runners</p>
 
-          <div class="award-card silver">
+        </div>
+
+        <div class="award silver">
+
             <i class="bi bi-award-fill"></i>
 
-            <h4>Level 2 Trophy</h4>
+            <h4>Level 2</h4>
 
-            <p>All 5 Week Runners</p>
-          </div>
+            <p>5 Week Runners</p>
 
-          <div class="award-card bronze">
+        </div>
+
+        <div class="award bronze">
+
             <i class="bi bi-award-fill"></i>
 
-            <h4>Level 3 Trophy</h4>
+            <h4>Level 3</h4>
 
-            <p>All 4 Week Runners</p>
-          </div>
+            <p>4 Week Runners</p>
 
-          <div class="award-card">
+        </div>
+
+        <div class="award">
+
             <i class="bi bi-star-fill"></i>
 
-            <h4>Participation Medal</h4>
+            <h4>Participation</h4>
 
             <p>Below 4 Weeks</p>
-          </div>
+
         </div>
 
-        <div class="important-note">
-          <i class="bi bi-exclamation-circle-fill"></i>
+    </div>
 
-          <span>
-            Kids must be present during the award ceremony to receive medals or trophies.
-          </span>
-        </div>
-      </div>
-    }
-    <!-- =====================================================
-     AGENDA
-====================================================== -->
+    <div class="notice">
 
-    @if (event) {
-      <div class="content-section">
-        <div class="section-heading">
-          <i class="bi bi-journal-richtext"></i>
+        <i class="bi bi-exclamation-circle-fill"></i>
 
-          <div>
-            <h2>Event Agenda</h2>
+        Kids must be present during the award ceremony to receive medals and trophies.
 
-            <p>Activities planned for this event.</p>
-          </div>
-        </div>
+    </div>
 
-        <div class="agenda-card">
-          <div
-            class="agenda-content"
-            [innerHTML]="sanitizer.bypassSecurityTrustHtml(event.description)"
-          ></div>
-        </div>
-      </div>
-    }
+</section>
 
-    <!-- =====================================================
-     WEEKLY THEMES
-====================================================== -->
+}
 
-    @if (event?.summer_run) {
-      <div class="content-section">
-        <div class="section-heading">
-          <i class="bi bi-stars"></i>
+<!-- =========================================
+     CTA
+========================================== -->
 
-          <div>
-            <h2>Weekly Themes</h2>
+@if(!isRegistrationClosed){
 
-            <p>Healthy habits discussed every week.</p>
-          </div>
-        </div>
+<section class="bottom-cta">
 
-        <div class="theme-grid">
-          <div class="theme-card">
-            <span class="week">Week 1</span>
+    <div>
 
-            <h5>Exercise, Sleep & Relax</h5>
+        <h2>
 
-            <p>Learn the importance of staying active and sleeping well.</p>
-          </div>
+            Ready to Participate?
 
-          <div class="theme-card">
-            <span class="week">Week 2</span>
+        </h2>
 
-            <h5>Vegetables</h5>
+        <p>
 
-            <p>Benefits of eating healthy vegetables every day.</p>
-          </div>
+            Complete your registration today.
 
-          <div class="theme-card">
-            <span class="week">Week 3</span>
+        </p>
 
-            <h5>Fruits</h5>
+    </div>
 
-            <p>Understand why fruits are essential for growth.</p>
-          </div>
+    <button
 
-          <div class="theme-card">
-            <span class="week">Week 4</span>
+        class="primary-btn"
 
-            <h5>Healthy Breakfast</h5>
+        (click)="register()">
 
-            <p>Never skip breakfast and start the day right.</p>
-          </div>
+        <i class="bi bi-person-plus-fill"></i>
 
-          <div class="theme-card">
-            <span class="week">Week 5</span>
+        Register Now
 
-            <h5>Drink Water</h5>
+    </button>
 
-            <p>Hydration keeps the body healthy and energetic.</p>
-          </div>
+</section>
 
-          <div class="theme-card">
-            <span class="week">Week 6</span>
+}
 
-            <h5>Respect Everyone</h5>
+}
 
-            <p>Anti-bullying, kindness and respect.</p>
-          </div>
+<!-- =========================================
+     EMPTY
+========================================== -->
 
-          <div class="theme-card">
-            <span class="week">Week 7</span>
+@if(!event){
 
-            <h5>Laugh & Fun</h5>
+<section class="empty-state">
 
-            <p>Enjoy every moment while staying healthy.</p>
-          </div>
-        </div>
-      </div>
-    }
+    <i class="bi bi-calendar-x-fill"></i>
 
-    <!-- =====================================================
-     GROUND RULES
-====================================================== -->
+    <h2>
 
-    @if (event?.summer_run) {
-      <div class="content-section">
-        <div class="section-heading">
-          <i class="bi bi-heart-fill"></i>
+        No Upcoming Events
 
-          <div>
-            <h2>Ground Rules (CHERRIES)</h2>
+    </h2>
 
-            <p>Every participant is encouraged to follow these values.</p>
-          </div>
-        </div>
+    <p>
 
-        <div class="rules-grid">
-          <div class="rule-card">
-            <span>C</span>
+        There are currently no active events available.
 
-            <h5>Commit</h5>
+    </p>
 
-            <p>Commit to run every week.</p>
-          </div>
+</section>
 
-          <div class="rule-card">
-            <span>H</span>
-
-            <h5>Help</h5>
-
-            <p>Help others and support your community.</p>
-          </div>
-
-          <div class="rule-card">
-            <span>E</span>
-
-            <h5>Early Rise</h5>
-
-            <p>Wake up early and stay active.</p>
-          </div>
-
-          <div class="rule-card">
-            <span>R</span>
-
-            <h5>Respect</h5>
-
-            <p>Respect everyone around you.</p>
-          </div>
-
-          <div class="rule-card">
-            <span>R</span>
-
-            <h5>Run Together</h5>
-
-            <p>Run as a team and motivate others.</p>
-          </div>
-
-          <div class="rule-card">
-            <span>I</span>
-
-            <h5>Implement</h5>
-
-            <p>Follow the proper running path.</p>
-          </div>
-
-          <div class="rule-card">
-            <span>E</span>
-
-            <h5>Eat Healthy</h5>
-
-            <p>Eat nutritious food and sleep early.</p>
-          </div>
-
-          <div class="rule-card">
-            <span>S</span>
-
-            <h5>Show Up</h5>
-
-            <p>Be punctual and participate every week.</p>
-          </div>
-        </div>
-      </div>
-    }
-
-    <!-- =====================================================
-     REGISTER CTA
-====================================================== -->
-
-    @if (event && !isRegistrationClosed) {
-      <div class="bottom-register">
-        <div>
-          <h2>Ready to Participate?</h2>
-
-          <p>Complete your registration now and reserve your place in the event.</p>
-        </div>
-
-        <button class="register-btn large" type="button" (click)="register()">
-          <i class="bi bi-person-plus-fill"></i>
-
-          Register Now
-        </button>
-      </div>
-    }
-
-    <!-- =====================================================
-     EMPTY STATE
-====================================================== -->
-
-    @if (!event) {
-      <div class="empty-event">
-        <div class="empty-icon">
-          <i class="bi bi-calendar-x-fill"></i>
-        </div>
-
-        <h2>No Upcoming Events</h2>
-
-        <p>There are currently no active events available for registration.</p>
-      </div>
-    }
-  </div>
-</div>
+}
