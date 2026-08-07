@@ -1,0 +1,27 @@
+@if (upcomingEvents.length > 0) {
+  <section class="event-ticker">
+    <div class="ticker-label">
+      <mat-icon>campaign</mat-icon>
+      <span>Upcoming Events</span>
+    </div>
+
+    <div class="ticker-wrapper">
+      <div class="ticker-track">
+        @for (event of upcomingEvents; track event.id) {
+          <a class="ticker-item" [routerLink]="['/event', event.id]">
+            <mat-icon>event</mat-icon>
+            <span>{{ event.name }}</span>
+          </a>
+        }
+
+        <!-- Duplicate for seamless scrolling -->
+        @for (event of upcomingEvents; track event.id + '-duplicate') {
+          <a class="ticker-item" [routerLink]="['/event', event.id]">
+            <mat-icon>event</mat-icon>
+            <span>{{ event.name }}</span>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+}

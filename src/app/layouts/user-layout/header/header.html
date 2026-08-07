@@ -58,6 +58,11 @@
           Admin
         </button>
 
+        <button mat-button routerLink="/admin" (click)="closeMenu()">
+          <mat-icon>admin_panel_settings</mat-icon>
+          Admin
+        </button>
+
         <button mat-button routerLink="/profile" (click)="closeMenu()">
           <mat-icon>person</mat-icon>
           My Profile
@@ -104,7 +109,7 @@
       </button>
     }
 
-    @if (isLoggedIn() ) {
+    @if (isLoggedIn()) {
       <button mat-button class="user-profile-btn" [matMenuTriggerFor]="profileMenu">
         <mat-icon>account_circle</mat-icon>
 
@@ -122,6 +127,11 @@
           <span>Admin</span>
         </button>
 
+        <button mat-menu-item routerLink="/admin">
+          <mat-icon>admin_panel_settings</mat-icon>
+          <span>Scoring</span>
+        </button>
+
         <button mat-menu-item routerLink="/profile">
           <mat-icon>person</mat-icon>
           <span>My Profile</span>
@@ -132,7 +142,7 @@
           <span>My Events</span>
         </button>
 
-        <button mat-menu-item routerLink="/current-event-info">
+        <button mat-menu-item routerLink="/events">
           <mat-icon>campaign</mat-icon>
           <span>Current Event Info</span>
         </button>

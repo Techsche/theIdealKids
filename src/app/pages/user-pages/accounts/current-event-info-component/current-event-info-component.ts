@@ -61,8 +61,8 @@ export class CurrentEventInfoComponent {
 
           this.buildSummerRunInfo();
 
-          this.isRegistrationClosed =
-            new Date(event.registration_close_date).getTime() < Date.now();
+          // this.isRegistrationClosed =
+            // new Date(event.registration_close_date).getTime() < Date.now();
 
           this.loading.set(false);
         },

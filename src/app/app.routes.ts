@@ -52,9 +52,8 @@ export const routes: Routes = [
       { path: 'child/add', component: ChildFormComponent, canActivate: [authGuard] },
       { path: 'child/edit/:id', component: ChildFormComponent, canActivate: [authGuard] },
       {
-        path: 'current-event-info',
+        path: 'event/:eventId',
         component: CurrentEventInfoComponent,
-        canActivate: [authGuard],
       },
       { path: 'change-password', component: ChangePasswordComponent, canActivate: [authGuard] },
 

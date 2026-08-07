@@ -31,10 +31,7 @@
                 <th>Event</th>
 
                 <th>Date</th>
-
-                <th>Location</th>
-
-                <th>Status</th>
+                <th>Registration Last Date</th>
 
                 <th width="150">Action</th>
               </tr>
@@ -45,34 +42,20 @@
                 @for (event of upcomingEvents; track event) {
                   <tr>
                     <td>
-                      <strong>{{ event.title }}</strong>
+                      <strong>{{ event.name }}</strong>
                     </td>
 
                     <td>
-                      {{ event.date }}
+                      {{ event.start_date | date: 'dd-MMM-yyyy' }}
                     </td>
 
                     <td>
-                      {{ event.location }}
+                      {{ event.registration_close_date | date: 'dd-MMM-yyyy' }}
                     </td>
 
+                    
                     <td>
-                      <span
-                        class="badge rounded-pill"
-                        [ngClass]="{
-                          'bg-success': event.status == 'Open',
-
-                          'bg-warning text-dark': event.status == 'Coming Soon',
-
-                          'bg-danger': event.status == 'Closed',
-                        }"
-                      >
-                        {{ event.status }}
-                      </span>
-                    </td>
-
-                    <td>
-                      <button class="btn btn-primary btn-sm">View</button>
+                      <button class="btn btn-primary btn-sm">Register Now</button>
                     </td>
                   </tr>
                 }

@@ -18,10 +18,4 @@ export interface YearEvents {
   events: EventItem[];
 }
 
-export interface UpcomingEvent {
-  title: string;
-  date: string;
-  location: string;
-  status: 'Open' | 'Coming Soon' | 'Closed';
-  registrationUrl?: string;
-}
+

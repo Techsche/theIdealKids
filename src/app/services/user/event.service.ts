@@ -5,7 +5,7 @@ import { environment } from '../../../environment/environment.prod';
 import { EventDetails } from '../../core/models/user/event-details.model';
 import { RegisteredEvent, StudentInfo } from '../../core/models/user/registered-event.model';
 import { Attendance } from '../../core/models/user/attendance.model';
-
+import { UpcomingEvents } from '../../core/models/user/upcoming-events.models';
 @Injectable({
   providedIn: 'root',
 })
@@ -70,7 +70,7 @@ export class EventService {
   /**
    * Get Upcoming Event
    */
-  getUpcomingEvent(): Observable<EventDetails> {
-    return this.http.get<EventDetails>(`${this.apiUrl}api/event/upcoming`);
+  getUpcomingEvent(): Observable<UpcomingEvents[]> {
+    return this.http.get<UpcomingEvents[]>(`${this.apiUrl}api/upcoming/event`);
   }
 }
