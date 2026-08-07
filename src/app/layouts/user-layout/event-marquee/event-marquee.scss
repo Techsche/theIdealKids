@@ -1,76 +1,96 @@
-.event-ticker {
+.ticker {
+  background: #fff;
+  border-top: 3px solid #1976d2;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.ticker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.title {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: linear-gradient(90deg, #0f4c81, #1976d2);
-  color: #fff;
-  height: 52px;
-  overflow: hidden;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  gap: 0.5rem;
+  font-weight: 700;
+  color: #1976d2;
 
-  .ticker-label {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-width: 220px;
-    height: 100%;
-    padding: 0 1.25rem;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
-    font-weight: 600;
-    white-space: nowrap;
-
-    mat-icon {
-      font-size: 22px;
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  .ticker-wrapper {
-    flex: 1;
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-  }
-
-  .ticker-track {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-    width: max-content;
-    height: 100%;
-    animation: ticker-scroll 30s linear infinite;
-  }
-
-  &:hover .ticker-track {
-    animation-play-state: paused;
-  }
-
-  .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: #fff;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: 0.25s ease;
-
-    mat-icon {
-      font-size: 18px;
-      width: 18px;
-      height: 18px;
-      color: #ffd54f;
-    }
-
-    &:hover {
-      color: #ffd54f;
-      transform: translateY(-1px);
-    }
+  mat-icon {
+    color: #ff9800;
   }
 }
 
-@keyframes ticker-scroll {
+.view-all-btn {
+  border-radius: 20px;
+}
+
+.ticker-wrapper {
+  overflow: hidden;
+}
+
+.ticker-track {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: max-content;
+  padding: 0.75rem 1rem;
+  animation: tickerScroll 35s linear infinite;
+}
+
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  white-space: nowrap;
+}
+
+.event-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #333;
+
+  &:hover {
+    color: #1976d2;
+  }
+
+  mat-icon {
+    color: #1976d2;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.event-name {
+  font-weight: 600;
+}
+
+.event-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.divider {
+  color: #bbb;
+}
+
+.register-btn {
+  border-radius: 20px;
+  padding-inline: 1rem;
+  white-space: nowrap;
+}
+
+@keyframes tickerScroll {
   from {
     transform: translateX(0);
   }
@@ -80,36 +100,62 @@
   }
 }
 
+/* Tablet */
+
 @media (max-width: 768px) {
-  .event-ticker {
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
+  .ticker-header {
+    padding: 0.75rem;
+  }
 
-    .ticker-label {
-      min-width: auto;
-      justify-content: center;
-      padding: 0.75rem 1rem;
-    }
+  .view-all-btn {
+    font-size: 12px;
+    min-width: auto;
+    padding-inline: 0.75rem;
+  }
 
-    .ticker-wrapper {
-      height: 44px;
-    }
+  .ticker-track {
+    gap: 1.5rem;
+    animation-duration: 28s;
+  }
 
-    .ticker-track {
-      animation-duration: 20s;
-      gap: 1.5rem;
-      padding-inline: 1rem;
-    }
+  .ticker-item {
+    gap: 0.75rem;
+  }
 
-    .ticker-item {
-      font-size: 0.9rem;
-    }
+  .event-name {
+    font-size: 0.9rem;
+  }
+
+  .event-date {
+    font-size: 0.8rem;
+  }
+
+  .register-btn {
+    font-size: 12px;
+    height: 34px;
+    padding-inline: 0.8rem;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* Mobile */
+
+@media (max-width: 768px) {
   .ticker-track {
     animation: none;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 0.5rem;
+
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ticker-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ticker-item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
   }
 }

@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../../services/user/auth.service';
 import { MatDividerModule } from '@angular/material/divider';
+import { EventMarquee } from '../event-marquee/event-marquee';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatMenuModule,
     MatDividerModule,
     RouterModule,
+    EventMarquee,
   ],
   templateUrl: './header.html',
   styleUrl: './header.scss',

@@ -38,8 +38,8 @@
             </thead>
 
             <tbody>
-              @if (upcomingEvents.length) {
-                @for (event of upcomingEvents; track event) {
+              @if (upcomingEvents().length) {
+                @for (event of upcomingEvents(); track event) {
                   <tr>
                     <td>
                       <strong>{{ event.name }}</strong>
@@ -55,7 +55,7 @@
 
                     
                     <td>
-                      <button class="btn btn-primary btn-sm">Register Now</button>
+                      <button class="btn btn-primary btn-sm" (click)="register(event, $event)">Register Now</button>
                     </td>
                   </tr>
                 }

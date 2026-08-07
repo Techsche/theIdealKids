@@ -1,27 +1,104 @@
-@if (upcomingEvents.length > 0) {
-  <section class="event-ticker">
-    <div class="ticker-label">
+@if (upcomingEvents().length > 0) {
+
+<div class="ticker">
+
+  <div class="ticker-header">
+    <div class="title">
       <mat-icon>campaign</mat-icon>
       <span>Upcoming Events</span>
     </div>
 
-    <div class="ticker-wrapper">
-      <div class="ticker-track">
-        @for (event of upcomingEvents; track event.id) {
-          <a class="ticker-item" [routerLink]="['/event', event.id]">
-            <mat-icon>event</mat-icon>
-            <span>{{ event.name }}</span>
-          </a>
-        }
+    <a
+      mat-stroked-button
+      color="primary"
+      routerLink="/events"
+      class="view-all-btn">
+      View All
+    </a>
+  </div>
 
-        <!-- Duplicate for seamless scrolling -->
-        @for (event of upcomingEvents; track event.id + '-duplicate') {
-          <a class="ticker-item" [routerLink]="['/event', event.id]">
-            <mat-icon>event</mat-icon>
-            <span>{{ event.name }}</span>
-          </a>
-        }
+  <div class="ticker-wrapper">
+
+    <div class="ticker-track">
+
+      @for (event of upcomingEvents(); track event.id) {
+
+      <div class="ticker-item">
+
+        <a
+          class="event-link"
+          [routerLink]="['/event', event.id]">
+
+          <mat-icon>event</mat-icon>
+
+          <span class="event-name">
+            {{ event.name }}
+          </span>
+
+          <span class="divider">|</span>
+
+          <span class="event-date">
+            {{ event.start_date | date:'dd MMM yyyy' }}
+          </span>
+
+        </a>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="register-btn"
+          (click)="register(event, $event)">
+
+          Register Now
+
+        </button>
+
       </div>
+
+      }
+
+      <!-- Duplicate -->
+
+      @for (event of upcomingEvents(); track event.id + '-copy') {
+
+      <div class="ticker-item">
+
+        <a
+          class="event-link"
+          [routerLink]="['/event', event.id]">
+
+          <mat-icon>event</mat-icon>
+
+          <span class="event-name">
+            {{ event.name }}
+          </span>
+
+          <span class="divider">|</span>
+
+          <span class="event-date">
+            {{ event.start_date | date:'dd MMM yyyy' }}
+          </span>
+
+        </a>
+
+        <button
+          mat-flat-button
+          color="primary"
+          class="register-btn"
+          (click)="register(event, $event)">
+
+          Register Now
+
+        </button>
+
+      </div>
+
+      }
+
     </div>
-  </section>
+
+  </div>
+
+</div>
+
 }

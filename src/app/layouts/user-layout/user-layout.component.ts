@@ -4,17 +4,15 @@ import { TopHeader } from './top-header/top-header';
 import { Header } from './header/header';
 import { Footer } from './footer/footer';
 import { ColorStrip } from './color-strip/color-strip';
-import { EventMarquee } from './event-marquee/event-marquee';
 
 @Component({
   selector: 'app-user-layout',
   standalone: true,
-  imports: [RouterOutlet, TopHeader, Header, Footer, ColorStrip, EventMarquee],
+  imports: [RouterOutlet, TopHeader, Header, Footer, ColorStrip],
   template: `
     <!-- Header -->
     <app-top-header></app-top-header>
     <app-header></app-header>
-    <app-event-marquee></app-event-marquee>
     <app-color-strip></app-color-strip>
 
     <router-outlet></router-outlet>

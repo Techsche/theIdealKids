@@ -1,56 +1,83 @@
-import { Component, OnInit, inject, ViewEncapsulation } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { RouterModule } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 import { EventService } from '../../../../../../services/user/event.service';
 import { UpcomingEvents } from '../../../../../../core/models/user/upcoming-events.models';
 
 @Component({
   selector: 'app-event-table',
   standalone: true,
-  imports: [MatTableModule, MatCardModule, DatePipe, MatIconModule],
+  imports: [
+    MatTableModule,
+    MatCardModule,
+    MatIconModule,
+    DatePipe,
+    RouterModule,
+  ],
   templateUrl: './event-table.html',
   styleUrl: './event-table.scss',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventTable implements OnInit {
-  displayedColumns: string[] = ['name', 'date', 'link'];
-  isLoading = true;
-  events: UpcomingEvents[] = [];
-  dataSource: any[] = [];
+
+  displayedColumns = ['name', 'date', 'link'];
+
+  readonly isLoading = signal(true);
+
+  readonly events = signal<UpcomingEvents[]>([]);
 
   private eventService = inject(EventService);
+  private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.getEvents();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadUpcomingEvents();
+    }
   }
 
-  getEvents() {
-    this.isLoading = true;
-    this.eventService.getUpcomingEvent().subscribe({
-      next: (data) => {
-        this.isLoading = false;
-        this.events = data;
-        this.prepareDataSource();
-      },
-      error: (error) => {
-        console.error('Error fetching events:', error);
-        this.isLoading = false;
-      },
-    });
-  }
+  private loadUpcomingEvents(): void {
 
-  prepareDataSource() {
-    this.dataSource = this.events
-      .filter((event) => event.is_published)
-      .map((event) => {
-        return {
-          name: event.name,
-          date: new Date(event.start_date).toLocaleDateString(),
-          link: `/event/${event.id}`,
-        };
+    this.eventService
+      .getUpcomingEvent()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+
+        next: (events) => {
+
+          this.events.set(
+            events.filter(event => event.is_published)
+          );
+
+          this.isLoading.set(false);
+
+        },
+
+        error: err => {
+
+          console.error(err);
+
+          this.isLoading.set(false);
+
+        }
+
       });
-    this.isLoading = false;
+
   }
+
 }
