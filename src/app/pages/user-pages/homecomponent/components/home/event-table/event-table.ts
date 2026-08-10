@@ -21,20 +21,13 @@ import { UpcomingEvents } from '../../../../../../core/models/user/upcoming-even
 @Component({
   selector: 'app-event-table',
   standalone: true,
-  imports: [
-    MatTableModule,
-    MatCardModule,
-    MatIconModule,
-    DatePipe,
-    RouterModule,
-  ],
+  imports: [MatTableModule, MatCardModule, MatIconModule, DatePipe, RouterModule],
   templateUrl: './event-table.html',
   styleUrl: './event-table.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventTable implements OnInit {
-
   displayedColumns = ['name', 'date', 'link'];
 
   readonly isLoading = signal(true);
@@ -52,32 +45,18 @@ export class EventTable implements OnInit {
   }
 
   private loadUpcomingEvents(): void {
-
     this.eventService
       .getUpcomingEvent()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-
         next: (events) => {
-
-          this.events.set(
-            events.filter(event => event.is_published)
-          );
-
+          this.events.set(events.filter((event) => event.is_published));
           this.isLoading.set(false);
-
         },
 
-        error: err => {
-
-          console.error(err);
-
+        error: (err) => {
           this.isLoading.set(false);
-
-        }
-
+        },
       });
-
   }
-
 }

@@ -64,7 +64,13 @@ export interface EventCompetition {
 export interface Competition {
   id: string;
 
+  created_at?: string;
+
+  updated_at?: string;
+
   name: string;
+
+  message?: string;
 
   short_description: string;
 
@@ -74,7 +80,11 @@ export interface Competition {
 
   user_id: string;
 
+  user_name?: string;
+
   user?: UserInfo | null;
+
+  success?: boolean;
 }
 export interface CompetitionCriteria {
   name: string;

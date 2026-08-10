@@ -58,6 +58,7 @@
       }
 
       <!-- Duplicate -->
+        @if (upcomingEvents().length > 2) {
 
       @for (event of upcomingEvents(); track event.id + '-copy') {
 
@@ -93,7 +94,7 @@
 
       </div>
 
-      }
+      }}
 
     </div>
 

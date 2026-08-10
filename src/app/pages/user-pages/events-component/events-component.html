@@ -38,7 +38,15 @@
             </thead>
 
             <tbody>
-              @if (upcomingEvents().length) {
+              @if (loading()) {
+                <tr>
+                  <td colspan="4" class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </td>
+                </tr>
+              } @else if (upcomingEvents().length) {
                 @for (event of upcomingEvents(); track event) {
                   <tr>
                     <td>
@@ -53,9 +61,10 @@
                       {{ event.registration_close_date | date: 'dd-MMM-yyyy' }}
                     </td>
 
-                    
                     <td>
-                      <button class="btn btn-primary btn-sm" (click)="register(event, $event)">Register Now</button>
+                      <button class="btn btn-primary btn-sm" (click)="register(event, $event)">
+                        Register Now
+                      </button>
                     </td>
                   </tr>
                 }
@@ -87,102 +96,109 @@
           Past Events
         </h2>
       </div>
+      @if (loading()) {
+        <div class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      } @else {
+        <div class="accordion custom-accordion" id="pastEventsAccordion">
+          @for (year of pastEvents; track year.year; let i = $index) {
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  [class.collapsed]="!isExpanded(year.year)"
+                  type="button"
+                  (click)="toggleAccordion(year.year)"
+                >
+                  <span class="year-badge">
+                    {{ year.year }}
+                  </span>
 
-      <div class="accordion custom-accordion" id="pastEventsAccordion">
-        @for (year of pastEvents; track year.year; let i = $index) {
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button"
-                [class.collapsed]="!isExpanded(year.year)"
-                type="button"
-                (click)="toggleAccordion(year.year)"
+                  <span class="ms-3"> {{ year.events.length }} Events </span>
+                </button>
+              </h2>
+
+              <div
+                [id]="'collapse' + year.year"
+                class="accordion-collapse"
+                [class.show]="isExpanded(year.year)"
+                [style.display]="isExpanded(year.year) ? 'block' : 'none'"
+                data-bs-parent="#pastEventsAccordion"
               >
-                <span class="year-badge">
-                  {{ year.year }}
-                </span>
+                <div class="accordion-body">
+                  <div class="row g-4">
+                    @for (event of year.events; track event) {
+                      <div class="col-lg-6">
+                        <div class="event-card">
+                          <div class="event-icon">
+                            <i
+                              class="bi"
+                              [ngClass]="{
+                                'bi-person-running': event.type == 'run',
 
-                <span class="ms-3"> {{ year.events.length }} Events </span>
-              </button>
-            </h2>
+                                'bi-palette-fill': event.type == 'talent',
 
-            <div
-              [id]="'collapse' + year.year"
-              class="accordion-collapse"
-              [class.show]="isExpanded(year.year)"
-              [style.display]="isExpanded(year.year) ? 'block' : 'none'"
-              data-bs-parent="#pastEventsAccordion"
-            >
-              <div class="accordion-body">
-                <div class="row g-4">
-                  @for (event of year.events; track event) {
-                    <div class="col-lg-6">
-                      <div class="event-card">
-                        <div class="event-icon">
-                          <i
-                            class="bi"
-                            [ngClass]="{
-                              'bi-person-running': event.type == 'run',
+                                'bi-mic-fill': event.type == 'speech',
 
-                              'bi-palette-fill': event.type == 'talent',
-
-                              'bi-mic-fill': event.type == 'speech',
-
-                              'bi-calendar-event': event.type == 'general',
-                            }"
-                          >
-                          </i>
-                        </div>
-
-                        <div class="event-body">
-                          <h4>
-                            {{ event.title }}
-                          </h4>
-
-                          <div class="event-date">
-                            {{ event.date }}
+                                'bi-calendar-event': event.type == 'general',
+                              }"
+                            >
+                            </i>
                           </div>
 
-                          @if (event.description) {
-                            <p>
-                              {{ event.description }}
-                            </p>
-                          }
+                          <div class="event-body">
+                            <h4>
+                              {{ event.title }}
+                            </h4>
 
-                          @if (event.weeks?.length) {
-                            <div class="weekly-runs">
-                              <h6>Weekly Run Pictures</h6>
-
-                              <ul>
-                                @for (week of event.weeks; track week) {
-                                  <li>{{ week.title }} - {{ week.location }}</li>
-                                }
-                              </ul>
+                            <div class="event-date">
+                              {{ event.date }}
                             </div>
+
+                            @if (event.description) {
+                              <p>
+                                {{ event.description }}
+                              </p>
+                            }
+
+                            @if (event.weeks?.length) {
+                              <div class="weekly-runs">
+                                <h6>Weekly Run Pictures</h6>
+
+                                <ul>
+                                  @for (week of event.weeks; track week) {
+                                    <li>{{ week.title }} - {{ week.location }}</li>
+                                  }
+                                </ul>
+                              </div>
+                            }
+                          </div>
+
+                          @if (event.pictureUrl) {
+                            <a
+                              [href]="event.pictureUrl"
+                              target="_blank"
+                              rel="noopener"
+                              class="btn btn-outline-primary"
+                            >
+                              <i class="bi bi-images me-2"></i>
+
+                              Pictures
+                            </a>
                           }
                         </div>
-
-                        @if (event.pictureUrl) {
-                          <a
-                            [href]="event.pictureUrl"
-                            target="_blank"
-                            rel="noopener"
-                            class="btn btn-outline-primary"
-                          >
-                            <i class="bi bi-images me-2"></i>
-
-                            Pictures
-                          </a>
-                        }
                       </div>
-                    </div>
-                  }
+                    }
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        }
-      </div>
+          }
+        </div>
+      }
     </div>
   </section>
 </div>

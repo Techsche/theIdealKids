@@ -17,8 +17,8 @@ export class CompetitionService {
   //   insertCompetition(competition: Competition) {
   //     return this.post(this.apiUrl + RestAPI.CREATE_COMPETITION, competition);
   //   }
-  getCompetitions(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}'/api/competitions`);
+  getCompetitions(): Observable<Competition[]> {
+    return this.http.get<Competition[]>(`${this.apiUrl}api/competitions`);
   }
 
   //   getCompetition(id: string) {

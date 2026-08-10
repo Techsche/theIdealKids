@@ -27,17 +27,18 @@ export class EventsComponent implements OnInit {
   readonly upcomingEvents = signal<UpcomingEvents[]>([]);
   expandedYear: number | null = this.pastEvents[0]?.year;
 
+  loading = signal(true);
+
   private eventService = inject(EventService);
   private platformId = inject(PLATFORM_ID);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
 
   ngOnInit(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
+    if (isPlatformBrowser(this.platformId)) {
+      this.getAllUpcomingEvents();
     }
 
-    this.getAllUpcomingEvents();
   }
 
   getAllUpcomingEvents() {
@@ -46,10 +47,13 @@ export class EventsComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (events) => {
+          this.loading.set(false);
           this.upcomingEvents.set(events);
         },
 
-        error: () => {},
+        error: () => {
+          this.loading.set(false);
+        },
       });
   }
 
