@@ -1,0 +1,65 @@
+@if (isLoading()) {
+  <!-- Loading State -->
+  <section class="event-loading">
+    <div class="loading-card">
+      <div class="loading-spinner"></div>
+
+      <h3>Loading event details...</h3>
+
+      <p>Please wait while we prepare the registration form.</p>
+    </div>
+  </section>
+} @else if (event) {
+  <app-registration-layout
+    [event]="event"
+    [steps]="steps"
+    [activeIndex]="activeIndex"
+    [canContinue]="canContinue"
+    (nextClicked)="nextStep()"
+    (backClicked)="previousStep()"
+  >
+    @switch (activeIndex) {
+      @case (0) {
+        <app-kids (validationChanged)="onKidsValidationChanged($event)" [event]="event"> </app-kids>
+      }
+
+      @case (1) {
+        <app-volunteer></app-volunteer>
+      }
+
+      @case (2) {
+        <app-waiver></app-waiver>
+      }
+
+      @case (3) {
+        <app-donation></app-donation>
+      }
+
+      @case (4) {
+        <app-confirmation></app-confirmation>
+      }
+    }
+  </app-registration-layout>
+} @else {
+  <!-- No Event -->
+  <section class="event-empty">
+    <div class="empty-card">
+      <div class="empty-icon">
+        <span class="material-icons"> event_busy </span>
+      </div>
+
+      <h2>Event Details Not Found</h2>
+
+      <p>
+        We couldn't find the event you're trying to register for. Please try again or return to the
+        events page.
+      </p>
+
+      <button type="button" class="return-btn" routerLink="/events">
+        <span class="material-icons"> arrow_back </span>
+
+        Back to Events
+      </button>
+    </div>
+  </section>
+}

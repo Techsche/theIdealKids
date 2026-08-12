@@ -1,0 +1,67 @@
+<header class="admin-header">
+
+  <div class="header-left">
+
+    <!-- MENU -->
+
+    <button
+      type="button"
+      class="header-icon-btn menu-btn"
+      aria-label="Toggle menu"
+      (click)="toggleMenu()"
+    >
+      <span class="material-icons">
+        menu
+      </span>
+    </button>
+
+
+    <!-- BRAND -->
+
+    <div class="header-brand">
+      <span class="brand-title">
+        Admin Panel
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- RIGHT SIDE -->
+
+  <div class="header-right">
+
+    <!-- FULLSCREEN -->
+
+    <button
+      type="button"
+      class="header-icon-btn"
+      aria-label="Fullscreen"
+      title="Fullscreen"
+      (click)="toggleFullscreen()"
+    >
+      <span class="material-icons">
+        fullscreen
+      </span>
+    </button>
+
+
+    <!-- LOGOUT -->
+
+    <button
+      type="button"
+      class="logout-btn"
+      (click)="logout()"
+    >
+      <span class="material-icons">
+        logout
+      </span>
+
+      <span class="logout-text">
+        Logout
+      </span>
+    </button>
+
+  </div>
+
+</header>

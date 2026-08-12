@@ -49,7 +49,7 @@ export class EventService {
   }
 
   /**
-   * Get Student
+   * Get all user kids/Student
    */
   getStudent(studentId: string): Observable<StudentInfo> {
     return this.http.get<StudentInfo>(`${this.apiUrl}/api/session/getstudent/${studentId}`);
@@ -77,7 +77,24 @@ export class EventService {
   /**
    * Get Event By Id
    */
-  getUpcomingEventById(id:string): Observable<EventDetails> {
+  getUpcomingEventById(id: string): Observable<EventDetails> {
     return this.http.get<EventDetails>(`${this.apiUrl}api/event/${id}`);
+  }
+
+  /**
+   * Get all user registed kids for a particular event
+   */
+  getUserRegistedKids(event_id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}api/session/register/event/${event_id}`);
+  }
+
+  getStudentswithRegCompetitions(event_id: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}/api/session/students/registered/competitions/${event_id}`,
+    );
+  }
+
+  getAllEventRooms(event_id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/eventRooms/${event_id}`);
   }
 }

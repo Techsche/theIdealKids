@@ -8,6 +8,7 @@ import { UserService } from '../../../../services/user/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../../../../services/user/auth.service';
+import { ILocation } from '../../../../core/models/user/location.model';
 
 @Component({
   selector: 'app-current-event-info-component',
@@ -28,13 +29,13 @@ export class CurrentEventInfoComponent {
 
   loading = signal(false);
 
-  event: any | null = null;
+  event = signal<any | null>(null);
 
   competitionInfo: any[] = [];
 
   multiDateCompetitions: any[] = [];
 
-  locations: any[] = [];
+  locations: ILocation[] = [];
 
   subEventDates: any[] = [];
 
@@ -45,18 +46,15 @@ export class CurrentEventInfoComponent {
   isMultiDate: boolean = false;
 
   ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData(): void {
-    this.loading.set(true);
-
     const eventId = this.route.snapshot.paramMap.get('eventId');
 
-    if (!eventId) {
-      this.loading.set(false);
-      return;
+    if (eventId) {
+      this.loadData(eventId);
     }
+  }
+
+  loadData(eventId: string): void {
+    this.loading.set(true);
 
     forkJoin({
       event: this.eventService.getUpcomingEventById(eventId),
@@ -65,42 +63,44 @@ export class CurrentEventInfoComponent {
     })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: ({ event, competitions, locations }) => {
-          this.event = event;
+        next: (response) => {
+          this.event.set(response.event);
 
-          this.talentEvent = !event.summer_run;
+          this.talentEvent = !this.event().summer_run;
 
-          this.locations = this.filterLocations(locations);
+          this.locations = this.filterLocations(response.locations);
 
-          this.buildCompetitionInfo(competitions);
+          this.buildCompetitionInfo(response.competitions);
 
           this.buildSummerRunInfo();
 
           this.isRegistrationClosed =
-            new Date(event.registration_close_date).getTime() < Date.now();
+            new Date(this.event().registration_close_date).getTime() < Date.now();
 
           this.loading.set(false);
         },
-        error: () => {
+
+        error: (error) => {
           this.loading.set(false);
         },
       });
   }
 
-  private filterLocations(locations: any[]): any[] {
-    if (!this.event) {
+  private filterLocations(locations: ILocation[]): any[] {
+    if (!this.event()) {
       return [];
     }
 
-    if (this.event.summer_run) {
+    if (this.event().summer_run) {
       return locations.filter(
-        (location) => location.country === this.event?.country_code && location.type === 'Run type',
+        (location) =>
+          location.country === this.event()?.country_code && location.type === 'Run type',
       );
     }
 
     return locations.filter(
       (location) =>
-        location.country === this.event?.country_code && location.type === 'Talent event type',
+        location.country === this.event()?.country_code && location.type === 'Talent event type',
     );
   }
 
@@ -109,19 +109,19 @@ export class CurrentEventInfoComponent {
     this.multiDateCompetitions = [];
     this.isMultiDate = false;
 
-    if (!this.event || this.event.summer_run || !this.event.eventCompetitions?.length) {
+    if (!this.event() || this.event().summer_run || !this.event().eventCompetitions?.length) {
       return;
     }
 
     // Check whether the event has multi-date competitions
-    this.isMultiDate = this.event.is_multiDate;
+    this.isMultiDate = this.event().is_multiDate;
 
     // =========================================================
     // MULTI-DATE COMPETITION
     // =========================================================
 
     if (this.isMultiDate) {
-      this.event.eventCompetitions.forEach((eventCompetition: any) => {
+      this.event().eventCompetitions.forEach((eventCompetition: any) => {
         if (!eventCompetition.selected) {
           return;
         }
@@ -151,7 +151,7 @@ export class CurrentEventInfoComponent {
 
     const grouped = new Map<number, any[]>();
 
-    this.event.eventCompetitions.forEach((eventCompetition: any) => {
+    this.event().eventCompetitions.forEach((eventCompetition: any) => {
       if (!eventCompetition.selected) {
         return;
       }
@@ -186,14 +186,14 @@ export class CurrentEventInfoComponent {
   }
 
   private buildSummerRunInfo(): void {
-    if (!this.event?.summer_run) {
+    if (!this.event()?.summer_run) {
       this.subEventDates = [];
       return;
     }
 
     this.subEventDates =
-      this.event.subEvents
-        ?.map((item: any) => item.event_date)
+      this.event()
+        .subEvents?.map((item: any) => item.event_date)
         .filter((date: any, index: number, dates: any[]) => dates.indexOf(date) === index)
         .sort((n1: number, n2: number) => n1 - n2) ?? [];
   }
@@ -206,13 +206,13 @@ export class CurrentEventInfoComponent {
     if (!this.authService.isLoggedIn()) {
       this.router.navigate(['/login'], {
         queryParams: {
-          returnUrl: `/register-event/${this.event.id}`,
+          returnUrl: `/register-event/${this.event().id}`,
         },
       });
 
       return;
     }
 
-    this.router.navigate(['/register-event', this.event.id]);
+    this.router.navigate(['/register-event', this.event().id]);
   }
 }

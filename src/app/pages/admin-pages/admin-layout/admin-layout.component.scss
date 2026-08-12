@@ -1,0 +1,126 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.admin-layout {
+  --primary-color: #ff0f78;
+  --primary-dark: #e60068;
+
+  --sidebar-bg: #1f2c32;
+  --sidebar-dark: #19252b;
+  --sidebar-hover: #2b3b42;
+  --sidebar-active: #31444c;
+
+  --page-bg: #f4f6f9;
+  --border-color: #e5e9ee;
+
+  --header-height: 64px;
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 76px;
+
+  min-height: 100vh;
+  background: var(--page-bg);
+}
+
+/* =========================================================
+   MAIN AREA
+========================================================= */
+
+.admin-main {
+  min-height: 100vh;
+  margin-left: var(--sidebar-width);
+
+  display: flex;
+  flex-direction: column;
+
+  transition: margin-left 0.25s ease;
+}
+
+/* =========================================================
+   COLLAPSED SIDEBAR
+========================================================= */
+
+.admin-layout.sidebar-collapsed {
+  .admin-main {
+    margin-left: var(--sidebar-collapsed-width);
+  }
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.admin-content {
+  flex: 1;
+  min-width: 0;
+
+  padding: 28px;
+  background: var(--page-bg);
+}
+
+.admin-content-inner {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   MOBILE OVERLAY
+========================================================= */
+
+.sidebar-overlay {
+  display: none;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+  .admin-main,
+  .admin-layout.sidebar-collapsed .admin-main {
+    margin-left: 0;
+  }
+
+  .admin-content {
+    padding: 24px 20px;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: block;
+
+    background: rgba(15, 23, 42, 0.45);
+
+    z-index: 1040;
+
+    animation: fadeIn 0.2s ease;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+  .admin-content {
+    padding: 18px 14px;
+  }
+}
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

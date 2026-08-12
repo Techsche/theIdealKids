@@ -1,0 +1,432 @@
+<section class="profile-section">
+  <div class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <span class="section-tag">My Account</span>
+
+      <h2>Student Profile</h2>
+
+      <p>Manage your student and parent information.</p>
+    </div>
+
+    @if (!loading()) {
+      <form [formGroup]="volunteerprofileForm" (ngSubmit)="onSubmit()">
+        <div class="profile-card">
+          <!-- =========================================
+               STUDENT DETAILS
+          ========================================== -->
+
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="section-icon">
+                <i class="bi bi-person-vcard"></i>
+              </div>
+
+              <div>
+                <h4>Student Details</h4>
+                <p>Basic student information</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <!-- Name -->
+              <div class="form-field">
+                <label>
+                  Name
+                  <span class="required">*</span>
+                </label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-person"></i>
+                  </span>
+
+                  <input type="text" formControlName="name" placeholder="Last Name, First Name" />
+                </div>
+
+                @if ((submitted || f['name'].touched) && f['name'].errors) {
+                  @if (f['name'].errors['required']) {
+                    <small class="error-text"> Name is required. </small>
+                  }
+
+                  @if (f['name'].errors['minlength']) {
+                    <small class="error-text"> Name must be at least 3 characters. </small>
+                  }
+                }
+              </div>
+
+              <!-- Email -->
+              <div class="form-field">
+                <label>
+                  Email Address
+                  <span class="required">*</span>
+                </label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+
+                  <input type="email" formControlName="email" readonly class="readonly" />
+                </div>
+
+                @if ((submitted || f['email'].touched) && f['email'].errors) {
+                  @if (f['email'].errors['required']) {
+                    <small class="error-text"> Email is required. </small>
+                  }
+
+                  @if (f['email'].errors['email']) {
+                    <small class="error-text"> Please enter a valid email address. </small>
+                  }
+                }
+              </div>
+
+              <!-- School Name -->
+              <div class="form-field">
+                <label>
+                  School Name
+                  <span class="required">*</span>
+                </label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-building"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    formControlName="school_name"
+                    placeholder="Enter school name"
+                  />
+                </div>
+
+                @if (
+                  (submitted || f['school_name'].touched) && f['school_name'].errors?.['required']
+                ) {
+                  <small class="error-text"> School name is required. </small>
+                }
+              </div>
+
+              <!-- School City -->
+              <div class="form-field">
+                <label>
+                  School City
+                  <span class="required">*</span>
+                </label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-geo-alt"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    formControlName="school_city"
+                    placeholder="Enter school city"
+                  />
+                </div>
+
+                @if (
+                  (submitted || f['school_city'].touched) && f['school_city'].errors?.['required']
+                ) {
+                  <small class="error-text"> School city is required. </small>
+                }
+              </div>
+
+              <!-- Grade -->
+              <div class="form-field">
+                <label>
+                  Grade
+                  <span class="required">*</span>
+                </label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-mortarboard"></i>
+                  </span>
+
+                  <select formControlName="grade">
+                    <option value="">Select Grade</option>
+
+                    <option value="Grade 9">Grade 9</option>
+
+                    <option value="Grade 10">Grade 10</option>
+
+                    <option value="Grade 11">Grade 11</option>
+
+                    <option value="Grade 12">Grade 12</option>
+                  </select>
+                </div>
+
+                @if ((submitted || f['grade'].touched) && f['grade'].errors?.['required']) {
+                  <small class="error-text"> Please select a grade. </small>
+                }
+              </div>
+
+              <!-- Student Mobile -->
+              <div class="form-field">
+                <label>
+                  Mobile Number
+                  <span class="required">*</span>
+                </label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-telephone"></i>
+                  </span>
+
+                  <input
+                    type="tel"
+                    maxlength="15"
+                    formControlName="mobileNo"
+                    placeholder="Mobile number with country code"
+                  />
+                </div>
+
+                @if ((submitted || f['mobileNo'].touched) && f['mobileNo'].errors) {
+                  @if (f['mobileNo'].errors['required']) {
+                    <small class="error-text"> Mobile number is required. </small>
+                  }
+
+                  @if (f['mobileNo'].errors['invalidMobile']) {
+                    <small class="error-text">
+                      Mobile number should contain only digits (10 - 15 digits).
+                    </small>
+                  }
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================
+               PARENT DETAILS
+          ========================================== -->
+
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="section-icon">
+                <i class="bi bi-people"></i>
+              </div>
+
+              <div>
+                <h4>Parent Details</h4>
+                <p>Parent or guardian contact information</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <!-- Mom Name -->
+              <div class="form-field">
+                <label>Mom Name</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-person"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    formControlName="mom_name"
+                    placeholder="Last Name, First Name"
+                  />
+                </div>
+
+                @if ((submitted || f['mom_name'].touched) && f['mom_name'].errors) {
+                  @if (f['mom_name'].errors['minlength']) {
+                    <small class="error-text"> Name must be at least 3 characters. </small>
+                  }
+                }
+              </div>
+
+              <!-- Dad Name -->
+              <div class="form-field">
+                <label>Dad Name</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-person"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    formControlName="dad_name"
+                    placeholder="Last Name, First Name"
+                  />
+                </div>
+
+                @if ((submitted || f['dad_name'].touched) && f['dad_name'].errors) {
+                  @if (f['dad_name'].errors['minlength']) {
+                    <small class="error-text"> Name must be at least 3 characters. </small>
+                  }
+                }
+              </div>
+
+              <!-- Mom Email -->
+              <div class="form-field">
+                <label>Mom Email</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+
+                  <input type="email" formControlName="mom_email" placeholder="Mom email address" />
+                </div>
+
+                @if ((submitted || f['mom_email'].touched) && f['mom_email'].errors?.['email']) {
+                  <small class="error-text"> Please enter a valid email address. </small>
+                }
+              </div>
+
+              <!-- Dad Email -->
+              <div class="form-field">
+                <label>Dad Email</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+
+                  <input type="email" formControlName="dad_email" placeholder="Dad email address" />
+                </div>
+
+                @if ((submitted || f['dad_email'].touched) && f['dad_email'].errors?.['email']) {
+                  <small class="error-text"> Please enter a valid email address. </small>
+                }
+              </div>
+
+              <!-- Mom Mobile -->
+              <div class="form-field">
+                <label>Mom Mobile Number</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-telephone"></i>
+                  </span>
+
+                  <input
+                    type="tel"
+                    maxlength="15"
+                    formControlName="mom_mobile_number"
+                    placeholder="Mobile number with country code"
+                  />
+                </div>
+
+                @if (
+                  (submitted || f['mom_mobile_number'].touched) && f['mom_mobile_number'].errors
+                ) {
+                  @if (f['mom_mobile_number'].errors['invalidMobile']) {
+                    <small class="error-text">
+                      Mobile number should contain only digits (10 - 15 digits).
+                    </small>
+                  }
+                }
+              </div>
+
+              <!-- Dad Mobile -->
+              <div class="form-field">
+                <label>Dad Mobile Number</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-telephone"></i>
+                  </span>
+
+                  <input
+                    type="tel"
+                    maxlength="15"
+                    formControlName="dad_mobile_number"
+                    placeholder="Mobile number with country code"
+                  />
+                </div>
+
+                @if (
+                  (submitted || f['dad_mobile_number'].touched) && f['dad_mobile_number'].errors
+                ) {
+                  @if (f['dad_mobile_number'].errors['invalidMobile']) {
+                    <small class="error-text">
+                      Mobile number should contain only digits (10 - 15 digits).
+                    </small>
+                  }
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================
+               COACH DETAILS
+          ========================================== -->
+
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="section-icon">
+                <i class="bi bi-mic"></i>
+              </div>
+
+              <div>
+                <h4>Speech / Debate Coach</h4>
+                <p>Optional coach information</p>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <!-- Coach Name -->
+              <div class="form-field">
+                <label>Coach Name</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-person-badge"></i>
+                  </span>
+
+                  <input type="text" formControlName="coach_name" placeholder="Coach name" />
+                </div>
+              </div>
+
+              <!-- Coach Email -->
+              <div class="form-field">
+                <label>Coach Email</label>
+
+                <div class="field-input">
+                  <span class="field-icon">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+
+                  <input type="email" formControlName="coach_email" placeholder="Coach email" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================
+               ACTIONS
+          ========================================== -->
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn" (click)="cancel()">
+              <i class="bi bi-arrow-left"></i>
+              Cancel
+            </button>
+
+            <button type="submit" class="primary-btn">
+              @if (!saving()) {
+                <i class="bi bi-check-circle"></i>
+                Update Profile
+              } @else {
+                <span class="spinner"></span>
+                Updating...
+              }
+            </button>
+          </div>
+        </div>
+      </form>
+    } @else {
+      <!-- Loading -->
+      <div class="loading-card">
+        <div class="spinner"></div>
+
+        <p>Loading Profile...</p>
+      </div>
+    }
+  </div>
+</section>

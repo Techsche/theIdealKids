@@ -1,0 +1,60 @@
+<section class="registration-progress">
+  <div class="progress-container">
+    <!-- ================================= -->
+    <!-- DESKTOP -->
+    <!-- ================================= -->
+
+    <div class="desktop-stepper">
+      @for (step of steps; track step; let i = $index) {
+        <div
+          class="step-item"
+          [class.active]="activeIndex === i"
+          [class.completed]="activeIndex > i"
+          [class.upcoming]="activeIndex < i"
+        >
+          <div class="step-content">
+            <div class="step-circle">
+              @if (activeIndex > i) {
+                <span class="material-icons"> check </span>
+              } @else {
+                <span>
+                  {{ i + 1 }}
+                </span>
+              }
+            </div>
+
+            <span class="step-label">
+              {{ step }}
+            </span>
+          </div>
+
+          @if (i < steps.length - 1) {
+            <div class="step-line" [class.completed-line]="activeIndex > i"></div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- ================================= -->
+    <!-- MOBILE -->
+    <!-- ================================= -->
+
+    <div class="mobile-stepper">
+      <div class="mobile-step-info">
+        <div>
+          <span class="mobile-step-count"> Step {{ activeIndex + 1 }} of {{ steps.length }} </span>
+
+          <strong>
+            {{ steps[activeIndex] }}
+          </strong>
+        </div>
+
+        <span class="mobile-percentage"> {{ progressPercentage }}% </span>
+      </div>
+
+      <div class="mobile-progress-bar">
+        <span [style.width.%]="progressPercentage"> </span>
+      </div>
+    </div>
+  </div>
+</section>

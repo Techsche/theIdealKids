@@ -1,0 +1,448 @@
+<section class="kids-step">
+  <!-- ========================================================= -->
+  <!-- PAGE INTRO -->
+  <!-- ========================================================= -->
+
+  <div class="step-header">
+    <div class="step-heading">
+      <div class="step-icon">
+        <span class="material-icons">child_care</span>
+      </div>
+
+      <div>
+        <span class="section-eyebrow">STEP 1</span>
+
+        <h2>Kids Registration</h2>
+
+        <p>Select the children you want to register for this event.</p>
+      </div>
+    </div>
+
+    <!-- ADD / EDIT CHILDREN -->
+    <a class="add-child-btn" [routerLink]="['/children']">
+      <span class="material-icons">person_add</span>
+
+      <span>Add / Edit Children</span>
+    </a>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- ERROR MESSAGE -->
+  <!-- ========================================================= -->
+
+  <!-- @if (errorMsg) {
+    <div class="page-alert error-alert">
+      <span class="material-icons"> error_outline </span>
+
+      <span>
+        {{ errorMsg }}
+      </span>
+    </div>
+  } -->
+
+  <!-- ========================================================= -->
+  <!-- SUMMER RUN LOCATION -->
+  <!-- ========================================================= -->
+
+  @if (event?.summer_run) {
+    <section class="registration-card location-card">
+      <div class="card-header">
+        <div>
+          <span class="card-eyebrow">EVENT LOCATION</span>
+
+          <h3>Choose Location</h3>
+
+          <p>Select the location where your child will attend the event.</p>
+        </div>
+
+        <span class="material-icons card-header-icon"> location_on </span>
+      </div>
+
+      <div class="field-wrapper">
+        <label for="location">
+          Location
+          <span class="required">*</span>
+        </label>
+
+        <div class="select-wrapper">
+          <select
+            id="location"
+            class="form-control"
+            [(ngModel)]="selectedLocation"
+            (ngModelChange)="updateSelectedLocation($event)"
+            required
+          >
+            <option value="-1">-- SELECT LOCATION --</option>
+
+            @for (location of locationList; track location.id) {
+              <option [value]="location.id">
+                {{ location.name }}
+              </option>
+            }
+          </select>
+
+          <span class="material-icons"> expand_more </span>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ========================================================= -->
+  <!-- SUMMER RUN CHILD SELECTION -->
+  <!-- ========================================================= -->
+
+  @if (event?.summer_run) {
+    <section class="registration-card children-card">
+      <div class="card-header">
+        <div>
+          <span class="card-eyebrow">CHILDREN</span>
+
+          <h3>Select Children</h3>
+
+          <p>Select the children you want to register for this event.</p>
+        </div>
+
+        <span class="material-icons card-header-icon"> groups </span>
+      </div>
+
+      @if (loading()) {
+        <div class="loading-state">
+          <img src="assets/idealkids/img/loader.svg" alt="Loading" />
+
+          <span>Loading children...</span>
+        </div>
+      }
+
+      @if (!loading() && currentUserKids?.length) {
+        <div class="children-list">
+          @for (student of currentUserKids; track student.id) {
+            <label
+              class="child-selection"
+              [class.selected]="student.isRegisted && !student.isRegistrationCompleted"
+              [class.disabled]="student.isRegistrationCompleted"
+            >
+              <div class="child-checkbox">
+                <input
+                  type="checkbox"
+                  [value]="student.id"
+                  [checked]="student.isRegisted"
+                  [disabled]="student.isRegistrationCompleted"
+                  (change)="updateSelectedStudents($event)"
+                />
+
+                <span class="custom-checkbox">
+                  <span class="material-icons"> check </span>
+                </span>
+              </div>
+
+              <div class="child-information">
+                <div class="child-name">
+                  {{ student.first_name }}
+                  {{ student.last_name }}
+                </div>
+
+                @if (student.grade_info?.name) {
+                  <div class="child-grade">
+                    {{ student.grade_info.name }}
+                  </div>
+                }
+              </div>
+
+              <div class="child-status">
+                @if (student.isRegistrationCompleted) {
+                  <span class="status-badge registered">
+                    <span class="material-icons">check_circle</span>
+                    Registered
+                  </span>
+                } @else if (student.isRegisted) {
+                  <span class="status-badge pending"> Registration pending </span>
+                }
+              </div>
+            </label>
+          }
+        </div>
+      }
+
+      @if (!loading() && (!currentUserKids || currentUserKids.length === 0)) {
+        <div class="empty-state">
+          <div class="empty-icon">
+            <span class="material-icons"> child_care </span>
+          </div>
+
+          <h4>No kids registered yet</h4>
+
+          <p>Please add your child information before continuing.</p>
+
+          <a [routerLink]="['/children']" class="secondary-action">
+            <span class="material-icons">person_add</span>
+            Add / Edit Child
+          </a>
+        </div>
+      }
+    </section>
+  }
+
+  <!-- ========================================================= -->
+  <!-- NORMAL EVENT - COMPETITION REGISTRATION -->
+  <!-- ========================================================= -->
+
+  @if (event && !event.summer_run) {
+    <section class="registration-card competition-card">
+      <div class="card-header">
+        <div>
+          <span class="card-eyebrow">COMPETITION REGISTRATION</span>
+
+          <h3>Register Children</h3>
+
+          <p>Select competitions and available time slots for each child.</p>
+        </div>
+
+        <span class="material-icons card-header-icon"> emoji_events </span>
+      </div>
+
+      <!-- MOBILE STUDENT CARDS -->
+      <div class="mobile-student-list">
+        @for (student of currentUserKids; track student.id) {
+          <article class="student-mobile-card">
+            <div class="student-mobile-header">
+              <div>
+                <strong>
+                  {{ student.first_name }}
+                  {{ student.last_name }}
+                </strong>
+
+                <span>
+                  {{ student.grade_info?.name }}
+                </span>
+              </div>
+
+              @if (student.hasAllCompetitionsRegistered) {
+                <span class="status-badge registered"> Registered </span>
+              }
+            </div>
+
+            <div class="mobile-competition-info">
+              <div>
+                <small>Selected</small>
+
+                <span>
+                  {{
+                    student.pendingCompetitionList !== null
+                      ? student.pendingCompetitionList
+                      : 'None'
+                  }}
+                </span>
+              </div>
+
+              <div>
+                <small>Registered</small>
+
+                <span>
+                  {{ student.competitionList !== null ? student.competitionList : 'None' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="student-mobile-action">
+              @if (!student.hasAllCompetitionsRegistered) {
+                <button
+                  type="button"
+                  class="competition-action-btn"
+                  (click)="showStudentDetails(student.id)"
+                >
+                  <span class="material-icons">
+                    {{
+                      student.isRegisted && student.ispendingCompetiton ? 'edit' : 'event_available'
+                    }}
+                  </span>
+
+                  {{
+                    student.isRegisted && student.ispendingCompetiton
+                      ? 'Edit Competition'
+                      : 'Select Competition'
+                  }}
+                </button>
+              } @else {
+                <button
+                  type="button"
+                  class="competition-action-btn"
+                  (click)="updateAndShowStudentDetails(student.id)"
+                >
+                  <span class="material-icons"> update </span>
+
+                  Update Slots
+                </button>
+              }
+            </div>
+          </article>
+        }
+      </div>
+
+      <!-- DESKTOP TABLE -->
+
+      <div class="competition-table-wrapper">
+        <table class="competition-table">
+          <thead>
+            <tr>
+              <th>Child</th>
+              <th>Grade</th>
+              <th>Action</th>
+              <th>Selected Competitions</th>
+              <th>Registered Competitions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (student of currentUserKids; track student.id) {
+              <tr>
+                <td>
+                  <div class="table-child">
+                    <div class="table-child-avatar">
+                      {{ student.first_name?.charAt(0) }}
+                    </div>
+
+                    <span>
+                      {{ student.first_name }}
+                      {{ student.last_name }}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  {{ student.grade_info?.name }}
+                </td>
+
+                <td>
+                  @if (!student.hasAllCompetitionsRegistered) {
+                    <button
+                      type="button"
+                      class="competition-action-btn"
+                      (click)="showStudentDetails(student.id)"
+                    >
+                      <span class="material-icons">
+                        {{
+                          student.isRegisted && student.ispendingCompetiton
+                            ? 'edit'
+                            : 'event_available'
+                        }}
+                      </span>
+
+                      {{
+                        student.isRegisted && student.ispendingCompetiton
+                          ? 'Edit Competition'
+                          : 'Select Competition'
+                      }}
+                    </button>
+                  } @else {
+                    <button
+                      type="button"
+                      class="competition-action-btn"
+                      (click)="updateAndShowStudentDetails(student.id)"
+                    >
+                      <span class="material-icons"> update </span>
+
+                      Update Slots
+                    </button>
+                  }
+                </td>
+
+                <td>
+                  <span class="competition-text">
+                    {{
+                      student.pendingCompetitionList !== null
+                        ? student.pendingCompetitionList
+                        : 'None'
+                    }}
+                  </span>
+                </td>
+
+                <td>
+                  <span class="competition-text">
+                    {{ student.competitionList !== null ? student.competitionList : 'None' }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      @if (loading()) {
+        <div class="loading-state">
+          <img src="assets/idealkids/img/loader.svg" alt="Loading" />
+
+          <span>Loading registration details...</span>
+        </div>
+      }
+
+      @if (currentUserKids && currentUserKids.length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">
+            <span class="material-icons"> child_care </span>
+          </div>
+
+          <h4>No kids registered yet</h4>
+
+          <p>Please add your kid(s) information before continuing.</p>
+
+          <a class="secondary-action" [routerLink]="['/session/add-edit-kids']">
+            <span class="material-icons"> person_add </span>
+
+            Add Child
+          </a>
+        </div>
+      }
+    </section>
+
+    <!-- ======================================================= -->
+    <!-- COMPETITION REFERENCE -->
+    <!-- ======================================================= -->
+
+    <section class="registration-card reference-card">
+      <div class="card-header">
+        <div>
+          <span class="card-eyebrow">REFERENCE</span>
+
+          <h3>Competition Reference</h3>
+
+          <p>Review the available competitions and their eligible grade levels.</p>
+        </div>
+
+        <span class="material-icons card-header-icon"> menu_book </span>
+      </div>
+
+      <div class="reference-table-wrapper">
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>Competition</th>
+              <th>Grade Level</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (competition of eventCompetitions; track competition.competition?.id) {
+              <tr>
+                <td>
+                  <strong>
+                    {{ competition.competition?.name }}
+                  </strong>
+
+                  @if (competition.competition?.short_description) {
+                    <span>
+                      {{ competition.competition.short_description }}
+                    </span>
+                  }
+                </td>
+
+                <td>
+                  {{ competition.competition?.gradeList }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+</section>

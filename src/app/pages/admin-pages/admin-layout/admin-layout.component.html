@@ -1,0 +1,44 @@
+<div
+  class="admin-layout"
+  [class.sidebar-collapsed]="sidebarCollapsed"
+  [class.mobile-sidebar-open]="mobileSidebarOpen"
+>
+  <!-- SIDEBAR -->
+
+  <app-admin-sidebar
+    [collapsed]="sidebarCollapsed"
+    [mobileOpen]="mobileSidebarOpen"
+    [userRole]="userRole"
+    (menuItemClicked)="closeMobileSidebar()"
+  ></app-admin-sidebar>
+
+  <!-- MOBILE OVERLAY -->
+
+  @if (mobileSidebarOpen) {
+    <div class="sidebar-overlay" (click)="closeMobileSidebar()"></div>
+  }
+
+  <!-- MAIN AREA -->
+
+  <div class="admin-main">
+    <!-- HEADER -->
+
+    <app-admin-header
+      [sidebarCollapsed]="sidebarCollapsed"
+      (menuToggle)="toggleSidebar()"
+      (logoutClicked)="onLogout()"
+    ></app-admin-header>
+
+    <!-- CONTENT -->
+
+    <main class="admin-content">
+      <div class="admin-content-inner">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+
+    <app-admin-footer></app-admin-footer>
+  </div>
+</div>

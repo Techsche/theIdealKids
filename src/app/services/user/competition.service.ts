@@ -21,9 +21,28 @@ export class CompetitionService {
     return this.http.get<Competition[]>(`${this.apiUrl}api/competitions`);
   }
 
-  //   getCompetition(id: string) {
-  //     return this.get(this.baseUrl + RestAPI.GET_COMPETITION + '/' + id);
-  //   }
+  getEventCompetitions(event_id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}api/session/event/competitions/${event_id}`);
+  }
+
+  getRegPendingCompetitionsByUser(event_id: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}api/session/register/pending/competitions/${event_id}`,
+    );
+  }
+
+  getRegCompetitionsforStudent(event_id: string, student_id: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}api/session/register/competition/${event_id}/${student_id}`,
+    );
+  }
+
+  getRegPendingCompetitionsBystudent(event_id: string, student_id: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}api/session/register/pending/competition/student/${event_id}/${student_id}`,
+    );
+  }
+
   //   updateCompetition(competition: Competition) {
   //     return this.put(this.baseUrl + RestAPI.UPDATE_COMPETITION + '/' + competition.id, competition);
   //   }

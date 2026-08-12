@@ -1,0 +1,71 @@
+.competition-modal-content {
+  padding: 4px 0;
+}
+
+.competition-item {
+  padding: 14px 0;
+
+  border-bottom: 1px solid #edf1f5;
+}
+
+.competition-item:last-child {
+  border-bottom: 0;
+}
+
+.competition-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.competition-name {
+  flex: 1;
+
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.slot-select {
+  width: 300px;
+  height: 40px;
+
+  padding: 0 10px;
+
+  border: 1px solid #d9e0e8;
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  font-size: 13px;
+}
+
+.total-section {
+  margin-top: 18px;
+  padding-top: 15px;
+
+  border-top: 1px solid #e5eaf0;
+
+  text-align: right;
+}
+
+.total-label {
+  color: #dc2626;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+@media (max-width: 576px) {
+  .competition-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .slot-select {
+    width: 100%;
+  }
+
+  .total-section {
+    text-align: left;
+  }
+}

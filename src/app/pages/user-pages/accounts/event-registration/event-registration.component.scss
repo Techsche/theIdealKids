@@ -1,0 +1,385 @@
+/* =========================================================
+   EVENT REGISTRATION PARENT
+   Loading / Empty States
+   ========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   LOADING / EMPTY STATE WRAPPER
+   ========================================================= */
+
+.event-loading,
+.event-empty {
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px 24px;
+
+  background: #f7f9fc;
+}
+
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.loading-card,
+.empty-card {
+  width: 100%;
+  max-width: 520px;
+
+  padding: 48px 36px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e7ebf0;
+  border-radius: 18px;
+
+  box-shadow:
+    0 4px 12px rgba(15, 23, 42, 0.04),
+    0 12px 35px rgba(15, 23, 42, 0.06);
+}
+
+/* =========================================================
+   LOADING STATE
+   ========================================================= */
+
+.loading-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Spinner */
+
+.loading-spinner {
+  width: 46px;
+  height: 46px;
+
+  margin-bottom: 24px;
+
+  border: 4px solid #e8edf3;
+  border-top-color: #1976d2;
+
+  border-radius: 50%;
+
+  animation: event-spinner 0.8s linear infinite;
+}
+
+/* Loading title */
+
+.loading-card h3 {
+  margin: 0 0 10px;
+
+  font-size: 21px;
+  line-height: 1.35;
+  font-weight: 650;
+
+  color: #1f2937;
+}
+
+/* Loading description */
+
+.loading-card p {
+  max-width: 400px;
+
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  color: #6b7280;
+}
+
+/* =========================================================
+   EMPTY / EVENT NOT FOUND
+   ========================================================= */
+
+.empty-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Empty icon container */
+
+.empty-icon {
+  width: 68px;
+  height: 68px;
+
+  margin-bottom: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1f5f9;
+}
+
+/* Empty icon */
+
+.empty-icon .material-icons {
+  font-size: 34px;
+
+  color: #64748b;
+}
+
+/* Empty title */
+
+.empty-card h2 {
+  margin: 0 0 12px;
+
+  font-size: 25px;
+  line-height: 1.3;
+  font-weight: 650;
+
+  color: #1f2937;
+}
+
+/* Empty description */
+
+.empty-card p {
+  max-width: 430px;
+
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: #6b7280;
+}
+
+/* =========================================================
+   BACK TO EVENTS BUTTON
+   ========================================================= */
+
+.return-btn {
+  min-height: 46px;
+
+  margin-top: 30px;
+  padding: 0 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #1976d2;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.return-btn .material-icons {
+  font-size: 19px;
+}
+
+.return-btn:hover {
+  background: #1565c0;
+
+  box-shadow: 0 5px 14px rgba(25, 118, 210, 0.22);
+
+  transform: translateY(-1px);
+}
+
+.return-btn:active {
+  transform: translateY(0);
+
+  box-shadow: none;
+}
+
+.return-btn:focus-visible {
+  outline: 3px solid rgba(25, 118, 210, 0.25);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   LOADING ANIMATION
+   ========================================================= */
+
+@keyframes event-spinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .event-loading,
+  .event-empty {
+    min-height: 65vh;
+
+    padding: 40px 20px;
+  }
+
+  .loading-card,
+  .empty-card {
+    max-width: 480px;
+
+    padding: 42px 28px;
+
+    border-radius: 16px;
+  }
+
+  .loading-card h3 {
+    font-size: 20px;
+  }
+
+  .empty-card h2 {
+    font-size: 23px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .event-loading,
+  .event-empty {
+    min-height: 60vh;
+
+    padding: 28px 16px;
+  }
+
+  .loading-card,
+  .empty-card {
+    width: 100%;
+
+    padding: 34px 20px;
+
+    border-radius: 14px;
+  }
+
+  /* Loading */
+
+  .loading-spinner {
+    width: 42px;
+    height: 42px;
+
+    margin-bottom: 20px;
+
+    border-width: 3px;
+  }
+
+  .loading-card h3 {
+    margin-bottom: 8px;
+
+    font-size: 18px;
+  }
+
+  .loading-card p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Empty */
+
+  .empty-icon {
+    width: 60px;
+    height: 60px;
+
+    margin-bottom: 18px;
+  }
+
+  .empty-icon .material-icons {
+    font-size: 30px;
+  }
+
+  .empty-card h2 {
+    margin-bottom: 10px;
+
+    font-size: 21px;
+  }
+
+  .empty-card p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  /* Button */
+
+  .return-btn {
+    width: 100%;
+
+    min-height: 44px;
+
+    margin-top: 24px;
+
+    padding: 0 18px;
+
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .event-loading,
+  .event-empty {
+    padding: 22px 12px;
+  }
+
+  .loading-card,
+  .empty-card {
+    padding: 30px 16px;
+  }
+
+  .loading-card h3 {
+    font-size: 17px;
+  }
+
+  .empty-card h2 {
+    font-size: 19px;
+  }
+
+  .loading-card p,
+  .empty-card p {
+    font-size: 12.5px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+
+  .return-btn {
+    transition: none;
+  }
+}

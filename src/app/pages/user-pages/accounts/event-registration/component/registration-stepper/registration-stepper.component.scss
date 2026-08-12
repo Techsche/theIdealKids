@@ -1,0 +1,187 @@
+.registration-progress {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e8edf3;
+}
+
+.progress-container {
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+/* ============================= */
+/* DESKTOP */
+/* ============================= */
+
+.desktop-stepper {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.step-item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+.step-content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 90px;
+  margin: 0 auto;
+}
+
+.step-circle {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 2px solid #d8dee8;
+
+  background: #ffffff;
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: all 0.25s ease;
+}
+
+.step-label {
+  margin-top: 8px;
+
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Active */
+
+.step-item.active .step-circle {
+  border-color: #1976d2;
+  background: #1976d2;
+  color: #ffffff;
+  box-shadow: 0 0 0 5px rgba(25, 118, 210, 0.1);
+}
+
+.step-item.active .step-label {
+  color: #1976d2;
+}
+
+/* Completed */
+
+.step-item.completed .step-circle {
+  border-color: #16a34a;
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.step-item.completed .step-label {
+  color: #16a34a;
+}
+
+/* Line */
+
+.step-line {
+  position: absolute;
+  top: 18px;
+  left: calc(50% + 20px);
+  right: calc(-50% + 20px);
+
+  height: 2px;
+  background: #e2e8f0;
+
+  z-index: 1;
+}
+
+.step-line.completed-line {
+  background: #16a34a;
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+.mobile-stepper {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .progress-container {
+    width: calc(100% - 28px);
+    padding: 18px 0;
+  }
+
+  .desktop-stepper {
+    display: none;
+  }
+
+  .mobile-stepper {
+    display: block;
+  }
+
+  .mobile-step-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+  }
+
+  .mobile-step-count {
+    display: block;
+    margin-bottom: 3px;
+
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .mobile-step-info strong {
+    display: block;
+
+    color: #172033;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .mobile-percentage {
+    color: #1976d2;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .mobile-progress-bar {
+    width: 100%;
+    height: 5px;
+    margin-top: 12px;
+
+    overflow: hidden;
+    border-radius: 10px;
+
+    background: #e8edf3;
+  }
+
+  .mobile-progress-bar span {
+    display: block;
+    height: 100%;
+
+    border-radius: inherit;
+    background: #1976d2;
+
+    transition: width 0.3s ease;
+  }
+}

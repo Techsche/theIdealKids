@@ -24,9 +24,9 @@ export class VolunteerService {
   //   /**
   //    * Get volunteer by id
   //    */
-  //   getById(id: string): Observable<ApiResponse<Volunteer>> {
-  //     return this.http.get<ApiResponse<Volunteer>>(`${this.apiUrl}/${id}`);
-  //   }
+  getById(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}api/session/highschool/volunteer`);
+  }
 
   //   /**
   //    * Get volunteer by page url
@@ -71,9 +71,12 @@ export class VolunteerService {
   //   /**
   //    * Update Volunteer
   //    */
-  //   update(id: string, payload: Volunteer): Observable<ApiResponse<Volunteer>> {
-  //     return this.http.put<ApiResponse<Volunteer>>(`${this.apiUrl}/${id}`, payload);
-  //   }
+  updateVolunteer(id: string, payload: HighSchoolVolunteerRequest): Observable<ApiResponse<null>> {
+    return this.http.put<ApiResponse<null>>(
+      `${this.apiUrl}api/user/high/school/volunteer/update/${id}`,
+      payload,
+    );
+  }
 
   //   /**
   //    * Delete Volunteer

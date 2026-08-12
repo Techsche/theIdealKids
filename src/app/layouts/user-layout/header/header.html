@@ -52,37 +52,49 @@
             <h4>{{ userName() }}</h4>
           </div>
         </div>
+        @if (isShowAdmin) {
+          <button mat-button routerLink="/admin" (click)="closeMenu()">
+            <mat-icon>admin_panel_settings</mat-icon>
+            Admin
+          </button>
+        }
+        @if (isShowScoring) {
+          <button mat-button routerLink="/scoring" (click)="closeMenu()">
+            <mat-icon>admin_panel_settings</mat-icon>
+            Scoring
+          </button>
+        }
+        @if (!isHighSchooolVolunteer) {
+          <button mat-button routerLink="/profile" (click)="closeMenu()">
+            <mat-icon>person</mat-icon>
+            My Profile
+          </button>
+        }
+        @if (isHighSchooolVolunteer) {
+          <button mat-button routerLink="/high-school-volunteer-profile" (click)="closeMenu()">
+            <mat-icon>person</mat-icon>
+            My Profile
+          </button>
+        }
 
-        <button mat-button routerLink="/admin" (click)="closeMenu()">
-          <mat-icon>admin_panel_settings</mat-icon>
-          Admin
-        </button>
-
-        <button mat-button routerLink="/admin" (click)="closeMenu()">
-          <mat-icon>admin_panel_settings</mat-icon>
-          Admin
-        </button>
-
-        <button mat-button routerLink="/profile" (click)="closeMenu()">
-          <mat-icon>person</mat-icon>
-          My Profile
-        </button>
-
-        <button mat-button routerLink="/my-events" (click)="closeMenu()">
-          <mat-icon>event</mat-icon>
-          My Events
-        </button>
+        @if (!isHighSchooolVolunteer) {
+          <button mat-button routerLink="/my-events" (click)="closeMenu()">
+            <mat-icon>event</mat-icon>
+            My Events
+          </button>
+        }
 
         <button mat-button routerLink="/current-event-info" (click)="closeMenu()">
           <mat-icon>campaign</mat-icon>
           Current Event Info
         </button>
 
-        <button mat-button routerLink="/children" (click)="closeMenu()">
-          <mat-icon>groups</mat-icon>
-          Add / Edit Child
-        </button>
-
+        @if (!isHighSchooolVolunteer) {
+          <button mat-button routerLink="/children" (click)="closeMenu()">
+            <mat-icon>groups</mat-icon>
+            Add / Edit Child
+          </button>
+        }
         <button mat-button routerLink="/change-password" (click)="closeMenu()">
           <mat-icon>lock_reset</mat-icon>
           Change Password
@@ -122,35 +134,48 @@
       </button>
 
       <mat-menu #profileMenu="matMenu">
-        <button mat-menu-item routerLink="/admin">
-          <mat-icon>admin_panel_settings</mat-icon>
-          <span>Admin</span>
-        </button>
-
-        <button mat-menu-item routerLink="/admin">
-          <mat-icon>admin_panel_settings</mat-icon>
-          <span>Scoring</span>
-        </button>
-
-        <button mat-menu-item routerLink="/profile">
-          <mat-icon>person</mat-icon>
-          <span>My Profile</span>
-        </button>
-
-        <button mat-menu-item routerLink="/my-events">
-          <mat-icon>event</mat-icon>
-          <span>My Events</span>
-        </button>
+        @if (isShowAdmin) {
+          <button mat-menu-item routerLink="/admin">
+            <mat-icon>admin_panel_settings</mat-icon>
+            <span>Admin</span>
+          </button>
+        }
+        @if (isShowScoring) {
+          <button mat-menu-item routerLink="/admin">
+            <mat-icon>admin_panel_settings</mat-icon>
+            <span>Scoring</span>
+          </button>
+        }
+        @if (!isHighSchooolVolunteer) {
+          <button mat-menu-item routerLink="/profile">
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+          </button>
+        }
+        @if (isHighSchooolVolunteer) {
+          <button mat-menu-item routerLink="/high-school-volunteer-profile">
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+          </button>
+        }
+        @if (!isHighSchooolVolunteer) {
+          <button mat-menu-item routerLink="/my-events">
+            <mat-icon>event</mat-icon>
+            <span>My Events</span>
+          </button>
+        }
 
         <button mat-menu-item routerLink="/events">
           <mat-icon>campaign</mat-icon>
           <span>Current Event Info</span>
         </button>
 
-        <button mat-menu-item routerLink="/children">
-          <mat-icon>groups</mat-icon>
-          <span>Add / Edit Child</span>
-        </button>
+        @if (!isHighSchooolVolunteer) {
+          <button mat-menu-item routerLink="/children">
+            <mat-icon>groups</mat-icon>
+            <span>Add / Edit Child</span>
+          </button>
+        }
 
         <button mat-menu-item routerLink="/change-password">
           <mat-icon>lock_reset</mat-icon>
@@ -168,4 +193,7 @@
   </div>
 </mat-toolbar>
 
-<app-event-marquee></app-event-marquee>
+
+@if (!isLoggedIn()) {
+  <app-event-marquee></app-event-marquee>
+}

@@ -1,0 +1,173 @@
+:host {
+  display: block;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-header {
+  position: sticky;
+  top: 0;
+
+  z-index: 1000;
+
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  background: #ff0f78;
+
+  color: #ffffff;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================================================
+   LEFT
+========================================================= */
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-title {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+
+/* =========================================================
+   RIGHT
+========================================================= */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* =========================================================
+   ICON BUTTON
+========================================================= */
+
+.header-icon-btn {
+  width: 40px;
+  height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.header-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.header-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.header-icon-btn .material-icons {
+  font-size: 25px;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-btn {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 10px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.logout-btn .material-icons {
+  font-size: 21px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+  .admin-header {
+    height: 58px;
+    padding: 0 12px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+  }
+
+  .header-icon-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .logout-text {
+    display: none;
+  }
+
+  .logout-btn {
+    width: 38px;
+    padding: 0;
+  }
+
+  .logout-btn .material-icons {
+    font-size: 21px;
+  }
+}

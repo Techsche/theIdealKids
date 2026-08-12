@@ -1,0 +1,1161 @@
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+/* =========================================================
+   MAIN STEP
+   ========================================================= */
+
+.kids-step {
+  width: 100%;
+  max-width: 100%;
+  color: #172033;
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.step-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.step-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  background: #eaf3ff;
+  color: #1976d2;
+}
+
+.step-icon .material-icons {
+  font-size: 23px;
+}
+
+.section-eyebrow {
+  display: block;
+  margin-bottom: 4px;
+
+  color: #1976d2;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.step-heading h2 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.step-heading p {
+  margin: 6px 0 0;
+
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   ADD / EDIT CHILDREN BUTTON
+   ========================================================= */
+
+.add-child-btn {
+  min-height: 42px;
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 0 17px;
+
+  border: 1px solid #1976d2;
+  border-radius: 8px;
+
+  background: #1976d2;
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.add-child-btn .material-icons {
+  font-size: 18px;
+}
+
+.add-child-btn:hover {
+  background: #1565c0;
+  border-color: #1565c0;
+  color: #fff;
+
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.18);
+  text-decoration: none;
+}
+
+.add-child-btn:active {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   COMMON REGISTRATION CARD
+   ========================================================= */
+
+.registration-card {
+  width: 100%;
+  margin-bottom: 22px;
+  padding: 22px;
+
+  border: 1px solid #e4e9f0;
+  border-radius: 12px;
+
+  background: #fff;
+
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.card-eyebrow {
+  display: block;
+  margin-bottom: 4px;
+
+  color: #1976d2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-header h3 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.card-header p {
+  margin: 5px 0 0;
+
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.card-header-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+  background: #f1f6fc;
+
+  color: #1976d2;
+  font-size: 20px;
+}
+
+/* =========================================================
+   LOCATION
+   ========================================================= */
+
+.field-wrapper {
+  width: 100%;
+  max-width: 500px;
+}
+
+.field-wrapper label {
+  display: block;
+  margin-bottom: 7px;
+
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper .form-control {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 42px 0 13px;
+
+  border: 1px solid #d9e1ea;
+  border-radius: 8px;
+
+  background: #fff;
+  color: #334155;
+
+  font-size: 14px;
+
+  outline: none;
+  appearance: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.select-wrapper .form-control:focus {
+  border-color: #1976d2;
+
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.select-wrapper .material-icons {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+
+  transform: translateY(-50%);
+
+  color: #64748b;
+  font-size: 20px;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CHILDREN LIST
+   ========================================================= */
+
+.children-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.child-selection {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 66px;
+  width: 100%;
+
+  padding: 13px 15px;
+
+  border: 1px solid #e3e8ef;
+  border-radius: 9px;
+
+  background: #fff;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.child-selection:hover {
+  border-color: #c7d2df;
+  background: #fbfdff;
+}
+
+.child-selection.selected {
+  border-color: #90bff0;
+  background: #f7fbff;
+}
+
+.child-selection.disabled {
+  background: #f8fafc;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+
+.child-checkbox {
+  position: relative;
+
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+
+  margin-right: 12px;
+}
+
+.child-checkbox input {
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+
+  margin: 0;
+
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.custom-checkbox {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid #cbd5e1;
+  border-radius: 6px;
+
+  background: #fff;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.custom-checkbox .material-icons {
+  display: none;
+  color: #fff;
+  font-size: 16px;
+}
+
+.child-checkbox input:checked + .custom-checkbox {
+  border-color: #1976d2;
+  background: #1976d2;
+}
+
+.child-checkbox input:checked + .custom-checkbox .material-icons {
+  display: block;
+}
+
+.child-checkbox input:disabled {
+  cursor: not-allowed;
+}
+
+.child-selection.disabled .custom-checkbox {
+  border-color: #cbd5e1;
+  background: #e2e8f0;
+}
+
+/* =========================================================
+   CHILD INFORMATION
+   ========================================================= */
+
+.child-information {
+  min-width: 0;
+  flex: 1;
+}
+
+.child-name {
+  color: #172033;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.child-grade {
+  margin-top: 3px;
+
+  color: #64748b;
+  font-size: 12px;
+}
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.child-status {
+  flex: 0 0 auto;
+  margin-left: 12px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  min-height: 27px;
+  padding: 0 9px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge .material-icons {
+  font-size: 14px;
+}
+
+.status-badge.registered {
+  background: #ecfdf3;
+  color: #15803d;
+}
+
+.status-badge.pending {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-state {
+  min-height: 130px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  color: #64748b;
+  font-size: 13px;
+}
+
+.loading-state img {
+  width: 34px;
+  height: 34px;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+  padding: 35px 20px;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 52px;
+  height: 52px;
+
+  margin: 0 auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #f1f5f9;
+}
+
+.empty-icon .material-icons {
+  color: #94a3b8;
+  font-size: 27px;
+}
+
+.empty-state h4 {
+  margin: 0 0 6px;
+
+  color: #334155;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  margin: 0 auto 16px;
+
+  max-width: 420px;
+
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-height: 38px;
+  padding: 0 14px;
+
+  border: 1px solid #d5e3f3;
+  border-radius: 8px;
+
+  background: #f7fbff;
+  color: #1976d2;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.secondary-action .material-icons {
+  font-size: 17px;
+}
+
+.secondary-action:hover {
+  background: #edf6ff;
+  color: #1565c0;
+  text-decoration: none;
+}
+
+/* =========================================================
+   MOBILE COMPETITION CARDS
+   ========================================================= */
+
+/*
+ * Your HTML contains both:
+ *
+ * .mobile-student-list
+ * .competition-table-wrapper
+ *
+ * Mobile cards are shown on small screens.
+ * Desktop table is shown on larger screens.
+ */
+
+.mobile-student-list {
+  display: none;
+}
+
+.student-mobile-card {
+  margin-bottom: 10px;
+  padding: 15px;
+
+  border: 1px solid #e3e8ef;
+  border-radius: 9px;
+
+  background: #fff;
+}
+
+.student-mobile-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.student-mobile-header strong {
+  display: block;
+
+  color: #172033;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.student-mobile-header span:not(.status-badge) {
+  display: block;
+  margin-top: 3px;
+
+  color: #64748b;
+  font-size: 12px;
+}
+
+.mobile-competition-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+.mobile-competition-info > div {
+  min-width: 0;
+  padding: 10px;
+
+  border-radius: 7px;
+  background: #f8fafc;
+}
+
+.mobile-competition-info small {
+  display: block;
+  margin-bottom: 4px;
+
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.mobile-competition-info span {
+  display: block;
+
+  color: #334155;
+  font-size: 12px;
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+.student-mobile-action {
+  margin-top: 13px;
+}
+
+/* =========================================================
+   COMPETITION TABLE
+   ========================================================= */
+
+.competition-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 9px;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.competition-table {
+  width: 100%;
+  min-width: 720px;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  background: #fff;
+}
+
+.competition-table th {
+  padding: 12px 14px;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  background: #f8fafc;
+
+  color: #475569;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: left;
+  white-space: nowrap;
+}
+
+.competition-table td {
+  padding: 13px 14px;
+
+  border-bottom: 1px solid #edf1f5;
+
+  color: #334155;
+
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.competition-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.competition-table tbody tr:hover {
+  background: #fbfdff;
+}
+
+/* =========================================================
+   TABLE CHILD
+   ========================================================= */
+
+.table-child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.table-child-avatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #eaf3ff;
+
+  color: #1976d2;
+
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.competition-text {
+  display: inline-block;
+
+  max-width: 180px;
+
+  color: #475569;
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   COMPETITION ACTION BUTTON
+   ========================================================= */
+
+.competition-action-btn {
+  min-height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  padding: 0 11px;
+
+  border: 1px solid #1976d2;
+  border-radius: 7px;
+
+  background: #1976d2;
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.competition-action-btn .material-icons {
+  font-size: 15px;
+}
+
+.competition-action-btn:hover {
+  background: #1565c0;
+  border-color: #1565c0;
+
+  box-shadow: 0 3px 8px rgba(25, 118, 210, 0.18);
+}
+
+.competition-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   REFERENCE TABLE
+   ========================================================= */
+
+.reference-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+
+  border: 1px solid #e5eaf0;
+  border-radius: 9px;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.reference-table {
+  width: 100%;
+  min-width: 500px;
+
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.reference-table th {
+  padding: 11px 14px;
+
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+
+  color: #475569;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: left;
+}
+
+.reference-table td {
+  padding: 12px 14px;
+
+  border-bottom: 1px solid #edf1f5;
+
+  color: #475569;
+
+  font-size: 12px;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.reference-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.reference-table td:first-child {
+  width: 55%;
+}
+
+.reference-table td strong {
+  display: inline;
+  color: #334155;
+  font-weight: 600;
+}
+
+.reference-table td span {
+  color: #64748b;
+}
+
+/* =========================================================
+   ERROR / ALERT
+   ========================================================= */
+
+.page-alert {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 18px;
+  padding: 11px 13px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.error-alert {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.error-alert .material-icons {
+  font-size: 19px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .step-header {
+    align-items: flex-start;
+  }
+
+  .registration-card {
+    padding: 20px;
+  }
+
+  .competition-table {
+    min-width: 680px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .step-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step-heading {
+    width: 100%;
+  }
+
+  .add-child-btn {
+    width: 100%;
+  }
+
+  .step-heading h2 {
+    font-size: 21px;
+  }
+
+  .step-heading p {
+    font-size: 13px;
+  }
+
+  .registration-card {
+    margin-bottom: 16px;
+    padding: 17px;
+    border-radius: 10px;
+  }
+
+  .card-header {
+    margin-bottom: 17px;
+  }
+
+  .card-header h3 {
+    font-size: 16px;
+  }
+
+  .card-header p {
+    font-size: 12px;
+  }
+
+  .card-header-icon {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    font-size: 18px;
+  }
+
+  /*
+   * Competition:
+   * Hide desktop table.
+   * Show mobile cards.
+   */
+
+  .competition-card .mobile-student-list {
+    display: block;
+  }
+
+  .competition-card .competition-table-wrapper {
+    display: none;
+  }
+
+  .child-selection {
+    padding: 12px;
+  }
+
+  .child-status {
+    margin-left: 8px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 0 7px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .step-header {
+    margin-bottom: 18px;
+  }
+
+  .step-heading {
+    gap: 10px;
+  }
+
+  .step-icon {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+  }
+
+  .step-icon .material-icons {
+    font-size: 20px;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+  }
+
+  .step-heading h2 {
+    font-size: 19px;
+  }
+
+  .step-heading p {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+
+  .registration-card {
+    padding: 14px;
+    border-radius: 9px;
+  }
+
+  .card-header {
+    gap: 10px;
+  }
+
+  .card-header-icon {
+    display: none;
+  }
+
+  .card-header h3 {
+    font-size: 15px;
+  }
+
+  .card-header p {
+    font-size: 12px;
+  }
+
+  .field-wrapper {
+    max-width: 100%;
+  }
+
+  .location-select,
+  .select-wrapper .form-control {
+    height: 43px;
+  }
+
+  /* Child list */
+
+  .child-selection {
+    align-items: flex-start;
+    min-height: 62px;
+    padding: 11px;
+  }
+
+  .child-checkbox {
+    margin-top: 1px;
+  }
+
+  .child-name {
+    font-size: 13px;
+  }
+
+  .child-grade {
+    font-size: 11px;
+  }
+
+  .child-status {
+    align-self: center;
+  }
+
+  /*
+   * Keep status readable but compact.
+   */
+
+  .status-badge.pending {
+    max-width: 115px;
+
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  /* Mobile competition card */
+
+  .student-mobile-card {
+    padding: 13px;
+  }
+
+  .student-mobile-header strong {
+    font-size: 13px;
+  }
+
+  .mobile-competition-info {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .mobile-competition-info > div {
+    padding: 9px;
+  }
+
+  .competition-action-btn {
+    width: 100%;
+    min-height: 38px;
+  }
+
+  /* Reference */
+
+  .reference-table {
+    min-width: 460px;
+  }
+
+  .reference-table th,
+  .reference-table td {
+    padding: 10px;
+  }
+
+  /* Empty */
+
+  .empty-state {
+    padding: 28px 12px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 380px) {
+  .step-heading h2 {
+    font-size: 18px;
+  }
+
+  .registration-card {
+    padding: 12px;
+  }
+
+  .child-selection {
+    padding: 10px;
+  }
+
+  .child-status {
+    display: none;
+  }
+
+  /*
+   * On very small screens the child information gets
+   * the available width instead of being squeezed by
+   * the status badge.
+   */
+
+  .mobile-competition-info {
+    grid-template-columns: 1fr;
+  }
+}
