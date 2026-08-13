@@ -38,7 +38,7 @@ export class MyEventsComponent implements OnInit {
       next: (response) => {
         this.loading.set(false);
         if (response) {
-          this.events = response ?? [];
+          this.events = response.reverse() ?? [];
 
           this.filteredEvents = [...this.events];
         } else {

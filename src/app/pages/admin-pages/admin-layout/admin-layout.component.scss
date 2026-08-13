@@ -4,16 +4,21 @@
 }
 
 .admin-layout {
-  --primary-color: #ff0f78;
-  --primary-dark: #e60068;
+  --primary-color: #1976d2;
+  --primary-dark: #1565c0;
+  --primary-light: #e3f2fd;
+  --primary-soft: #f5f9fd;
 
-  --sidebar-bg: #1f2c32;
-  --sidebar-dark: #19252b;
-  --sidebar-hover: #2b3b42;
-  --sidebar-active: #31444c;
+  --sidebar-bg: #ffffff;
+  --sidebar-hover: #f5f9fd;
+  --sidebar-active: #e3f2fd;
 
-  --page-bg: #f4f6f9;
-  --border-color: #e5e9ee;
+  --page-bg: #f5f7fa;
+  --border-color: #e5eaf0;
+
+  --text-primary: #172033;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
 
   --header-height: 64px;
   --sidebar-width: 260px;
@@ -56,12 +61,14 @@
   min-width: 0;
 
   padding: 28px;
+
   background: var(--page-bg);
 }
 
 .admin-content-inner {
   width: 100%;
   max-width: 1600px;
+
   margin: 0 auto;
 }
 
@@ -93,7 +100,7 @@
 
     display: block;
 
-    background: rgba(15, 23, 42, 0.45);
+    background: rgba(15, 23, 42, 0.35);
 
     z-index: 1040;
 

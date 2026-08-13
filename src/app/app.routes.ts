@@ -26,8 +26,10 @@ import { CompetitionComponent } from './pages/user-pages/accounts/my-events-comp
 import { HighSchoolVolunteerProfile } from './pages/user-pages/accounts/high-school-volunteer-profile/high-school-volunteer-profile';
 import { EventRegistrationComponent } from './pages/user-pages/accounts/event-registration/event-registration.component';
 
-import { Home } from './pages/admin-pages/home/home';
 import { AdminLayoutComponent } from './pages/admin-pages/admin-layout/admin-layout.component';
+import { Dashboard } from './pages/admin-pages/components/dashboard/dashboard';
+import { Banners } from './pages/admin-pages/components/banners/banners';
+import { CreateBanner } from './pages/admin-pages/components/banners/create-banner/create-banner';
 
 export const routes: Routes = [
   // =========================================================
@@ -176,7 +178,15 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: Home,
+        component: Dashboard,
+      },
+       {
+        path: 'banners',
+        component: Banners,
+      },
+      {
+        path: 'create-banner',
+        component: CreateBanner,
       },
 
       // Later you can add:

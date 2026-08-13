@@ -1,0 +1,279 @@
+<section class="banner-page">
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow"> CONTENT MANAGEMENT </span>
+
+      <h1>Add Banner</h1>
+
+      <p>Create a new banner for the website.</p>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       FORM
+  ========================================================== -->
+
+  <form class="banner-form" [formGroup]="bannerForm" (ngSubmit)="createBanner()" novalidate>
+    <!-- =======================================================
+         BASIC INFORMATION
+    ======================================================== -->
+
+    <section class="form-card">
+      <div class="card-header">
+        <div>
+          <span class="card-eyebrow"> BANNER INFORMATION </span>
+
+          <h2>Basic Details</h2>
+
+          <p>Enter the text and redirect information for the banner.</p>
+        </div>
+
+        <span class="material-icons card-header-icon"> edit_note </span>
+      </div>
+
+      <div class="form-grid">
+        <!-- =================================================
+             REDIRECT URL
+        ================================================== -->
+
+        <div class="form-field">
+          <label for="redirectUrl">
+            Redirect URL
+
+            <span class="required"> * </span>
+          </label>
+
+          <input
+            id="redirectUrl"
+            type="url"
+            formControlName="redirectUrl"
+            class="form-control"
+            placeholder="https://example.com"
+            autocomplete="url"
+          />
+
+          @if ((submitted || f['redirectUrl'].touched) && f['redirectUrl'].errors) {
+            <div class="field-error">
+              @if (f['redirectUrl'].errors['required']) {
+                <span> Redirect URL is required. </span>
+              }
+
+              @if (f['redirectUrl'].errors['pattern']) {
+                <span> Please enter a valid URL starting with http:// or https://. </span>
+              }
+            </div>
+          }
+
+          <small class="field-help">
+            URL where users will be redirected when they click the banner.
+          </small>
+        </div>
+
+        <!-- =================================================
+             BANNER TEXT
+        ================================================== -->
+
+        <div class="form-field">
+          <label for="bannerText">
+            Banner Text
+
+            <!-- <span class="required"> * </span> -->
+          </label>
+
+          <input
+            id="bannerText"
+            type="text"
+            formControlName="bannerText"
+            class="form-control"
+            placeholder="Enter banner text"
+            maxlength="150"
+          />
+
+          <small class="field-help"> Short text displayed on the banner. </small>
+        </div>
+
+        <!-- =================================================
+             DESCRIPTION
+        ================================================== -->
+
+        <div class="form-field full-width">
+          <label for="bannerDescription"> Banner Description </label>
+
+          <textarea
+            id="bannerDescription"
+            formControlName="bannerDescription"
+            class="form-control textarea"
+            rows="4"
+            maxlength="500"
+            placeholder="Enter banner description..."
+          ></textarea>
+
+          <small class="field-help"> Optional description for the banner. </small>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         IMAGE SECTION
+    ======================================================== -->
+
+    <section class="form-card">
+      <div class="card-header">
+        <div>
+          <span class="card-eyebrow"> BANNER MEDIA </span>
+
+          <h2>Banner Images</h2>
+
+          <p>Upload one or more images for this banner.</p>
+        </div>
+
+        <span class="material-icons card-header-icon"> image </span>
+      </div>
+
+      <div class="image-upload-section">
+        <!-- =================================================
+             IMAGE LABEL
+        ================================================== -->
+
+        <label class="upload-label">
+          Banner Images
+
+          <span class="required"> * </span>
+        </label>
+
+        <p class="upload-help">
+          JPG, PNG or WebP images. Minimum dimensions:
+          {{ minWidth }} × {{ minHeight }}px.
+        </p>
+
+        <!-- =================================================
+             UPLOAD BOX
+        ================================================== -->
+
+        <label for="bannerImages" class="upload-box">
+          <input
+            id="bannerImages"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+            hidden
+            (change)="onImageSelected($event)"
+          />
+
+          <span class="material-icons upload-icon"> cloud_upload </span>
+
+          <strong> Click to upload images </strong>
+
+          <span class="upload-text"> Select JPG, PNG or WebP images </span>
+        </label>
+
+        <!-- =================================================
+             IMAGE ERROR
+        ================================================== -->
+
+        @if (imageError) {
+          <div class="image-error">
+            <span class="material-icons"> error_outline </span>
+
+            <span>
+              {{ imageError }}
+            </span>
+          </div>
+        }
+
+        <!-- =================================================
+             SELECTED IMAGES
+        ================================================== -->
+
+        @if (selectedImages.length > 0) {
+          <div class="selected-images">
+            <div class="selected-images-header">
+              <div>
+                <h3>Selected Images</h3>
+
+                <span>
+                  {{ selectedImages.length }}
+                  image{{ selectedImages.length === 1 ? '' : 's' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="image-grid">
+              @for (image of selectedImages; track image.id) {
+                <div class="selected-image">
+                  <!-- IMAGE -->
+
+                  <div class="image-preview">
+                    <img [src]="image.preview" [alt]="image.file.name" />
+
+                    <button
+                      type="button"
+                      class="remove-image"
+                      title="Remove image"
+                      aria-label="Remove image"
+                      (click)="removeImage(image.id)"
+                    >
+                      <span class="material-icons"> close </span>
+                    </button>
+                  </div>
+
+                  <!-- FILE DETAILS -->
+
+                  <div class="image-info">
+                    <span class="image-name" [title]="image.file.name">
+                      {{ image.file.name }}
+                    </span>
+
+                    <span class="image-meta">
+                      {{ image.file.type }}
+                    </span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <!-- =======================================================
+         ACTIONS
+    ======================================================== -->
+
+    <div class="form-actions">
+      <!-- CANCEL -->
+
+      <button type="button" class="cancel-btn" [disabled]="loading" (click)="cancel()">
+        <span class="material-icons"> close </span>
+
+        Cancel
+      </button>
+
+      <!-- RESET -->
+
+      <button type="button" class="reset-btn" [disabled]="loading" (click)="resetForm()">
+        <span class="material-icons"> refresh </span>
+
+        Reset
+      </button>
+
+      <!-- CREATE -->
+
+      <button type="submit" class="create-btn" [disabled]="loading">
+        @if (loading) {
+          <span class="button-spinner"></span>
+
+          <span> Creating... </span>
+        } @else {
+          <span class="material-icons"> add </span>
+
+          <span> Create Banner </span>
+        }
+      </button>
+    </div>
+  </form>
+</section>

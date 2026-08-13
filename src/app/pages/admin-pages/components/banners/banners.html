@@ -1,0 +1,242 @@
+<section class="banner-page">
+  <!-- =====================================================
+       PAGE HEADER
+  ====================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow"> CONTENT MANAGEMENT </span>
+
+      <h1>Banners</h1>
+
+      <p>Manage the banners displayed across the website.</p>
+    </div>
+
+    <button type="button" class="add-banner-btn" routerLink="/admin/create-banner">
+      <span class="material-icons"> add </span>
+
+      <span> Add Banner </span>
+    </button>
+  </div>
+
+  <!-- =====================================================
+       SEARCH
+  ====================================================== -->
+
+  <div class="filter-card">
+    <div class="search-wrapper">
+      <span class="material-icons search-icon"> search </span>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search banners..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+
+      @if (searchText) {
+        <button
+          type="button"
+          class="clear-search-btn"
+          aria-label="Clear search"
+          (click)="searchText = ''; onSearch()"
+        >
+          <span class="material-icons"> close </span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- =====================================================
+       BANNER LIST CARD
+  ====================================================== -->
+
+  <section class="banner-card">
+    <!-- =================================================
+         LOADING
+    ================================================== -->
+
+    @if (loading()) {
+      <div class="loading-state">
+        <img src="assets/idealkids/img/loader.svg" alt="Loading" class="loader-image" />
+
+        <span> Loading banners... </span>
+      </div>
+    }
+
+    <!-- =================================================
+         DESKTOP TABLE + MOBILE LIST
+    ================================================== -->
+
+    @if (!loading()) {
+      <!-- =================================================
+           DESKTOP TABLE
+      ================================================== -->
+
+      <div class="banner-table-wrapper">
+        <table class="banner-table">
+          <thead>
+            <tr>
+              <th class="image-column">Image</th>
+
+              <th class="text-column">Text</th>
+
+              <th class="show-column">Show</th>
+
+              <th class="action-column">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (banner of filteredBanners; track banner.id) {
+              <tr>
+                <!-- IMAGE -->
+
+                <td>
+                  <div class="banner-image">
+                    @if (banner.imagePath) {
+                      <img [src]="apiUrl + banner.imagePath" [alt]="banner.text || 'Banner'" />
+                    } @else {
+                      <div class="no-image">
+                        <span class="material-icons"> image </span>
+                      </div>
+                    }
+                  </div>
+                </td>
+
+                <!-- TEXT -->
+
+                <td>
+                  <div class="banner-text" [title]="banner.text || ''">
+                    {{ banner.text || '—' }}
+                  </div>
+                </td>
+
+                <!-- SHOW -->
+
+                <td>
+                  <button
+                    type="button"
+                    class="status-toggle"
+                    [class.active]="banner.is_enable"
+                    [attr.aria-label]="banner.is_enable ? 'True' : 'False'"
+                    (click)="toggleBanner(banner)"
+                  >
+                    <span class="toggle-track">
+                      <span class="toggle-thumb"></span>
+                    </span>
+
+                    <span class="status-label">
+                      {{ banner.is_enable ? 'True' : 'False' }}
+                    </span>
+                  </button>
+                </td>
+
+                <!-- ACTION -->
+
+                <td>
+                  <button
+                    type="button"
+                    class="delete-btn"
+                    title="Delete banner"
+                    (click)="deleteBanner(banner)"
+                  >
+                    <span class="material-icons"> delete_outline </span>
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- =================================================
+           MOBILE LIST
+      ================================================== -->
+
+      <div class="mobile-banner-list">
+        @for (banner of filteredBanners; track banner.id) {
+          <article class="mobile-banner-card">
+            <!-- TOP -->
+
+            <div class="mobile-banner-top">
+              <div class="banner-image mobile-image">
+                @if (banner.imagePath) {
+                  <img [src]="apiUrl + banner.imagePath" [alt]="banner.text || 'Banner'" />
+                } @else {
+                  <div class="no-image">
+                    <span class="material-icons"> image </span>
+                  </div>
+                }
+              </div>
+
+              <div class="mobile-banner-content">
+                <span class="mobile-content-label"> Banner Text </span>
+
+                <h3 class="mobile-banner-text" [title]="banner.text || ''">
+                  {{ banner.text || '—' }}
+                </h3>
+              </div>
+            </div>
+
+            <!-- FOOTER -->
+
+            <div class="mobile-banner-footer">
+              <button
+                type="button"
+                class="status-toggle"
+                [class.active]="banner.is_enable"
+                [attr.aria-label]="banner.is_enable ? 'True' : 'False'"
+                (click)="toggleBanner(banner)"
+              >
+                <span class="toggle-track">
+                  <span class="toggle-thumb"></span>
+                </span>
+
+                <span class="status-label">
+                  {{ banner.is_enable ? 'True' : 'False' }}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                class="delete-btn"
+                title="Delete banner"
+                (click)="deleteBanner(banner)"
+              >
+                <span class="material-icons"> delete_outline </span>
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+
+      <!-- =================================================
+           EMPTY STATE
+      ================================================== -->
+
+      @if (filteredBanners.length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">
+            <span class="material-icons"> image_not_supported </span>
+          </div>
+
+          <h3>No banners found</h3>
+
+          @if (searchText) {
+            <p>No banners match your search.</p>
+          } @else {
+            <p>No banners have been added yet.</p>
+
+            <button type="button" class="empty-add-btn" routerLink="/admin/create-banner">
+              <span class="material-icons"> add </span>
+
+              Add Banner
+            </button>
+          }
+        </div>
+      }
+    }
+  </section>
+</section>

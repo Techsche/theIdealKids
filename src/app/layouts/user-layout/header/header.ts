@@ -63,7 +63,10 @@ export class Header implements OnInit {
 
           this.isHighSchooolVolunteer = authorities.includes('ROLE_HIGH_SCHOOL_VOlUNTEER');
         },
-        error: (err) => {},
+        error: (err) => {
+          this.authService.logout();
+          this.router.navigate(['/login']);
+        },
       });
   }
 

@@ -2,15 +2,13 @@
   display: block;
 }
 
-
 .admin-footer {
   background: #ffffff;
 
-  border-top: 1px solid #e5e9ee;
+  border-top: 1px solid #e5eaf0;
 
   padding: 15px 28px;
 }
-
 
 .footer-inner {
   width: 100%;
@@ -25,7 +23,6 @@
   gap: 15px;
 }
 
-
 .footer-inner p {
   margin: 0;
 
@@ -34,13 +31,11 @@
   font-size: 12px;
 }
 
-
 .footer-inner strong {
   color: #334155;
 
   font-weight: 600;
 }
-
 
 .footer-inner span {
   color: #94a3b8;
@@ -48,13 +43,11 @@
   font-size: 12px;
 }
 
-
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 576px) {
-
   .admin-footer {
     padding: 14px;
   }

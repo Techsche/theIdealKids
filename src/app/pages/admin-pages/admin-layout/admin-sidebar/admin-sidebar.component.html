@@ -1,27 +1,11 @@
-<aside
-  class="admin-sidebar"
-  [class.collapsed]="collapsed"
-  [class.mobile-open]="mobileOpen"
->
-
-
+<aside class="admin-sidebar" [class.collapsed]="collapsed" [class.mobile-open]="mobileOpen">
   <!-- =====================================================
        LOGO AREA
   ====================================================== -->
 
   <div class="sidebar-logo">
-
-    <a
-      routerLink="/admin/dashboard"
-      class="logo-link"
-      (click)="closeMenu()"
-    >
-
-      <img
-        src="assets/images/logo.png"
-        alt="The Ideal Kids"
-        class="logo-image"
-      />
+    <a routerLink="/admin" class="logo-link" (click)="closeMenu()">
+      <img src="assets/images/logo.png" alt="The Ideal Kids" class="logo-image" />
 
       @if (!collapsed) {
         <div class="logo-text">
@@ -29,26 +13,21 @@
           <span>Administration</span>
         </div>
       }
-
     </a>
-
   </div>
-
 
   <!-- =====================================================
        MENU
   ====================================================== -->
 
   <nav class="sidebar-navigation">
-
     <div class="menu-list">
-
       @for (item of visibleMenuItems; track item.label) {
-
-        <!-- NORMAL MENU ITEM -->
+        <!-- =================================================
+             NORMAL MENU ITEM
+        ================================================= -->
 
         @if (!item.children?.length) {
-
           <a
             class="menu-item"
             [routerLink]="item.route"
@@ -57,7 +36,6 @@
             [title]="collapsed ? item.label : ''"
             (click)="closeMenu()"
           >
-
             <span class="menu-icon material-icons">
               {{ item.icon }}
             </span>
@@ -67,121 +45,94 @@
                 {{ item.label }}
               </span>
 
-              <span class="menu-arrow material-icons">
-                chevron_right
-              </span>
+              <span class="menu-arrow material-icons"> chevron_right </span>
             }
-
           </a>
-
         }
 
-
-        <!-- MENU WITH CHILDREN -->
+        <!-- =================================================
+             MENU WITH CHILDREN
+        ================================================= -->
 
         @if (item.children?.length) {
-
           <div class="menu-group">
+            <!-- IMPORTANT:
+                 This is a BUTTON, NOT an anchor.
+                 Therefore clicking it will NOT navigate.
+            -->
 
             <button
               type="button"
               class="menu-item menu-parent"
               [class.expanded]="expandedMenu === item.label"
-              (click)="toggleSubMenu(item)"
+              [attr.aria-expanded]="expandedMenu === item.label"
               [title]="collapsed ? item.label : ''"
+              (click)="toggleSubMenu(item)"
             >
-
               <span class="menu-icon material-icons">
                 {{ item.icon }}
               </span>
 
               @if (!collapsed) {
-
                 <span class="menu-label">
                   {{ item.label }}
                 </span>
 
+                <!-- ARROW -->
+
                 <span class="menu-arrow material-icons">
-                  {{
-                    expandedMenu === item.label
-                      ? 'expand_more'
-                      : 'chevron_right'
-                  }}
+                  {{ expandedMenu === item.label ? 'expand_more' : 'chevron_right' }}
                 </span>
-
               }
-
             </button>
 
+            <!-- =================================================
+                 SUBMENU
+            ================================================= -->
 
             @if (!collapsed && expandedMenu === item.label) {
-
               <div class="submenu">
-
-                @for (
-                  child of item.children;
-                  track child.label
-                ) {
-
+                @for (child of item.children; track child.label) {
                   <a
                     class="submenu-item"
                     [routerLink]="child.route"
                     routerLinkActive="active"
                     (click)="closeMenu()"
                   >
-
                     <span class="submenu-dot"></span>
 
-                    <span>
+                    <span class="submenu-label">
                       {{ child.label }}
                     </span>
-
                   </a>
-
                 }
-
               </div>
-
             }
-
           </div>
-
         }
-
       }
-
     </div>
-
   </nav>
-
 
   <!-- =====================================================
        SIDEBAR FOOTER
   ====================================================== -->
 
   @if (!collapsed) {
-
     <div class="sidebar-footer">
-
       <div class="admin-profile">
-
         <div class="profile-avatar">
-          <span class="material-icons">
-            admin_panel_settings
-          </span>
+          <span class="material-icons"> admin_panel_settings </span>
         </div>
 
         <div class="profile-info">
-          <strong>Administrator</strong>
+          <strong> Administrator </strong>
+
           <span>
             {{ userRole | titlecase }}
           </span>
         </div>
-
       </div>
-
     </div>
-
   }
-
 </aside>
