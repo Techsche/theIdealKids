@@ -1,6 +1,9 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HomeBannerService } from '../../../../services/user/home-banner.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ToastrAlertService } from '../../../../services/common/toastr.services';
 
 interface SelectedImage {
   id: number;
@@ -19,6 +22,8 @@ export class CreateBanner implements OnInit {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
+  private bannerService = inject(HomeBannerService);
+  private toastr = inject(ToastrAlertService);
   // =========================================================
   // FORM
   // =========================================================
@@ -29,7 +34,7 @@ export class CreateBanner implements OnInit {
   // LOADING
   // =========================================================
 
-  loading = false;
+  loading = signal(false);
 
   // =========================================================
   // SUBMITTED
@@ -227,7 +232,6 @@ export class CreateBanner implements OnInit {
 
     if (this.selectedImages.length === 0) {
       this.imageError = 'Please select at least one banner image.';
-
       return;
     }
 
@@ -235,7 +239,7 @@ export class CreateBanner implements OnInit {
     // START LOADING
     // ---------------------------------------------------------
 
-    this.loading = true;
+    this.loading.set(true);
 
     // ---------------------------------------------------------
     // FORM DATA
@@ -263,32 +267,22 @@ export class CreateBanner implements OnInit {
     //
     // Replace this with your actual service:
     //
-    // this.bannerService.createBanner(formData)
-    //   .pipe(takeUntilDestroyed(this.destroyRef))
-    //   .subscribe({
-    //
-    //     next: () => {
-    //
-    //       this.loading = false;
-    //
-    //       this.router.navigate([
-    //         '/admin/homepage/banner'
-    //       ]);
-    //
-    //     },
-    //
-    //     error: (error) => {
-    //
-    //       this.loading = false;
-    //
-    //       console.error(
-    //         'Banner creation failed',
-    //         error
-    //       );
-    //
-    //     }
-    //
-    //   });
+    this.bannerService
+      .addBanner(formData)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.loading.set(false);
+
+          this.router.navigate(['/admin/banners']);
+        },
+
+        error: () => {
+          this.loading.set(false);
+
+          this.toastr.error('something went wrong!');
+        },
+      });
     // =========================================================
 
     /*
@@ -302,7 +296,7 @@ export class CreateBanner implements OnInit {
 
     console.log('FormData:', formData);
 
-    this.loading = false;
+    this.loading.set(false);
   }
 
   // =========================================================
@@ -332,7 +326,7 @@ export class CreateBanner implements OnInit {
 
     this.submitted = false;
 
-    this.loading = false;
+    this.loading.set(false);
   }
 
   // =========================================================

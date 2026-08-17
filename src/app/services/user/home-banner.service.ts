@@ -36,4 +36,8 @@ export class HomeBannerService {
   deleteBanner(bannerId: string) {
     return this.http.delete(`${this.apiUrl}api/admin/session/home-banner/delete/${bannerId}`);
   }
+
+  addBanner(formData: FormData) {
+    return this.http.post(`${this.apiUrl}api/admin/session/home-banner/create`, formData);
+  }
 }

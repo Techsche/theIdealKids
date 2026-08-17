@@ -1,13 +1,13 @@
 import { Component, DestroyRef, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
-import { HomeBannerService } from '../../../../services/user/home-banner.service';
-import { IBanner } from '../../../../core/models/user/home-banner.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { environment } from '../../../../../environment/environment.prod';
 import { isPlatformBrowser } from '@angular/common';
-import { ToastrAlertService } from '../../../../services/common/toastr.services';
-import { AlertService } from '../../../../services/common/alert.service';
+import { HomeBannerService } from '../../../services/user/home-banner.service';
+import { ToastrAlertService } from '../../../services/common/toastr.services';
+import { AlertService } from '../../../services/common/alert.service';
+import { environment } from '../../../../environment/environment.prod';
+import { IBanner } from '../../../core/models/user/home-banner.model';
 
 @Component({
   selector: 'app-banners',

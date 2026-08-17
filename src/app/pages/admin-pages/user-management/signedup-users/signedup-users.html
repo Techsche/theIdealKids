@@ -1,0 +1,409 @@
+<section class="users-page">
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow"> USER MANAGEMENT </span>
+
+      <h1>Signed Up Users</h1>
+
+      <p>Manage users who have registered on the website.</p>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       FILTER + ACTIONS
+  ========================================================== -->
+
+  <div class="filter-card">
+    <!-- SEARCH -->
+
+    <div class="search-wrapper">
+      <span class="material-icons search-icon"> search </span>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search users..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+    </div>
+
+    <!-- LOCATION -->
+
+    <div class="location-wrapper">
+      <label for="location"> Location </label>
+
+      <select
+        id="location"
+        class="location-select"
+        [(ngModel)]="selectedLocation"
+        (ngModelChange)="onLocationChange()"
+      >
+        <option value="">All Locations</option>
+
+        @for (location of locations; track location.id) {
+          <option [value]="location.id">
+            {{ location.name }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <!-- =======================================================
+         ACTION BUTTONS
+    ======================================================== -->
+
+    <div class="data-actions">
+      <!-- EXPORT ALL -->
+
+      <button
+        type="button"
+        class="data-action-btn export-btn"
+        [disabled]="loading() || filteredUsers.length === 0"
+        (click)="exportAllData()"
+      >
+        <span class="material-icons"> download </span>
+
+        <span> Export All Data </span>
+      </button>
+
+      <!-- PRINT ALL -->
+
+      <button
+        type="button"
+        class="data-action-btn print-btn"
+        [disabled]="loading() || filteredUsers.length === 0"
+        (click)="printAllData()"
+      >
+        <span class="material-icons"> print </span>
+
+        <span> Print All Data </span>
+      </button>
+
+      <!-- EXPORT SELECTED -->
+
+      <button
+        type="button"
+        class="data-action-btn selected-export-btn"
+        [disabled]="loading() || selectedUserIds().length === 0"
+        (click)="exportSelectedData()"
+      >
+        <span class="material-icons"> file_download </span>
+
+        <span> Export Selected </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       SELECTED COUNT
+  ========================================================== -->
+
+  @if (selectedUserIds().length > 0) {
+    <div class="selected-count">
+      <span class="material-icons"> check_circle </span>
+
+      {{ selectedUserIds().length }}
+      selected
+    </div>
+  }
+
+  <!-- =========================================================
+       USERS CARD
+  ========================================================== -->
+
+  <section class="users-card">
+    <!-- =======================================================
+         CARD HEADER
+    ======================================================== -->
+
+    <div class="users-card-header">
+      <div class="users-card-title">
+        <span class="card-eyebrow"> REGISTERED USERS </span>
+
+        <h2>User List</h2>
+
+        <p>View and manage all signed up users.</p>
+      </div>
+
+      <!-- TOTAL USERS -->
+
+      <div class="total-users">
+        <span class="total-users-label"> Total Users </span>
+
+        <strong>
+          {{ totalUsers }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- =======================================================
+         LOADING
+    ======================================================== -->
+
+    @if (loading()) {
+      <div class="loading-state">
+        <span class="loading-spinner"></span>
+
+        <span> Loading users... </span>
+      </div>
+    }
+
+    <!-- =======================================================
+         TABLE
+    ======================================================== -->
+
+    @if (!loading() && filteredUsers.length > 0) {
+      <div class="users-table-wrapper">
+        <table class="users-table">
+          <!-- =================================================
+               TABLE HEAD
+          ================================================== -->
+
+          <thead>
+            <tr>
+              <!-- SELECT -->
+
+              <th class="checkbox-column">
+                <input
+                  type="checkbox"
+                  [checked]="isAllSelected()"
+                  [indeterminate]="isSomeSelected()"
+                  (change)="toggleSelectAll($event)"
+                  aria-label="Select all users"
+                />
+              </th>
+
+              <!-- NAME -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('name')">
+                  <span> Name </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('name') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- EMAIL -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('email')">
+                  <span> Email </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('email') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- SECONDARY NAME -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('secondaryName')">
+                  <span> Secondary Name </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('secondaryName') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- SECONDARY EMAIL -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('secondaryEmail')">
+                  <span> Secondary Email </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('secondaryEmail') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- MOBILE -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('mobile')">
+                  <span> Mob No </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('mobile') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ROLE -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('role')">
+                  <span> User Role </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('role') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- CREATED -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('createdAt')">
+                  <span> Account Created </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('createdAt') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- LAST LOGIN -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('lastLogin')">
+                  <span> Last Logged In </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('lastLogin') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ACTION -->
+
+              <th class="action-column">Actions</th>
+            </tr>
+          </thead>
+
+          <!-- =================================================
+               TABLE BODY
+          ================================================== -->
+
+          <tbody>
+            @for (user of filteredUsers; track user.id) {
+              <tr>
+                <!-- SELECT -->
+
+                <td class="checkbox-column">
+                  <input
+                    type="checkbox"
+                    [checked]="selectedUserIds().includes(user.id)"
+                    (change)="toggleUserSelection(user)"
+                    [attr.aria-label]="'Select ' + (user.name || 'user')"
+                  />
+                </td>
+
+                <!-- NAME -->
+
+                <td class="name-cell">
+                  <strong>
+                    {{ user.name || '—' }}
+                  </strong>
+                </td>
+
+                <!-- EMAIL -->
+
+                <td>
+                  {{ user.email || '—' }}
+                </td>
+
+                <!-- SECONDARY NAME -->
+
+                <td>
+                  {{ user.secondary_name || '—' }}
+                </td>
+
+                <!-- SECONDARY EMAIL -->
+
+                <td>
+                  {{ user.secondary_email || '—' }}
+                </td>
+
+                <!-- MOBILE -->
+
+                <td>
+                  {{ user.mobile || '—' }}
+                </td>
+
+                <!-- ROLE -->
+
+                <td>
+                  <span class="role-badge">
+                    {{ user.role || 'User' }}
+                  </span>
+                </td>
+
+                <!-- CREATED -->
+
+                <td>
+                  {{ user.created_at | date: 'dd/MM/yyyy' }}
+                </td>
+
+                <!-- LAST LOGIN -->
+
+                <td>
+                  @if (user.last_login) {
+                    {{ user.last_login | date: 'dd/MM/yyyy' }}
+                  } @else {
+                    <span class="not-available"> Never </span>
+                  }
+                </td>
+
+                <!-- ACTIONS -->
+
+                <td class="action-column">
+                  <div class="action-buttons">
+                    <button
+                      type="button"
+                      class="edit-btn"
+                      title="Edit User"
+                      aria-label="Edit User"
+                      (click)="editUser(user)"
+                    >
+                      <span class="material-icons"> edit </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="delete-btn"
+                      title="Delete User"
+                      aria-label="Delete User"
+                      (click)="deleteUser(user)"
+                    >
+                      <span class="material-icons"> delete_outline </span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- =======================================================
+         EMPTY STATE
+    ======================================================== -->
+
+    @if (!loading() && filteredUsers.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">
+          <span class="material-icons"> person_search </span>
+        </div>
+
+        <h3>No users found</h3>
+
+        @if (searchText || selectedLocation) {
+          <p>No users match your current search or location filter.</p>
+        } @else {
+          <p>No signed up users are available.</p>
+        }
+      </div>
+    }
+  </section>
+</section>

@@ -1,0 +1,806 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.grades-page {
+  width: 100%;
+  min-width: 0;
+}
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 24px;
+}
+
+.page-heading {
+  min-width: 0;
+}
+
+.page-eyebrow,
+.card-eyebrow {
+  display: inline-block;
+
+  margin-bottom: 7px;
+
+  color: #1976d2;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.page-heading h1 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.page-heading p {
+  margin: 8px 0 0;
+
+  color: #64748b;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   ADD GRADE BUTTON
+========================================================= */
+
+.add-grade-btn {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 16px;
+
+  border: 1px solid #1976d2;
+  border-radius: 8px;
+
+  background: #1976d2;
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.add-grade-btn:hover {
+  background: #1565c0;
+
+  box-shadow: 0 4px 10px rgba(25, 118, 210, 0.18);
+
+  transform: translateY(-1px);
+}
+
+.add-grade-btn .material-icons {
+  font-size: 19px;
+}
+
+/* =========================================================
+   FILTER CARD
+========================================================= */
+
+.filter-card {
+  width: 100%;
+
+  padding: 18px;
+
+  margin-bottom: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #94a3b8;
+
+  font-size: 20px;
+
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 14px 0 44px;
+
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #172033;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-input:focus {
+  border-color: #1976d2;
+
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+/* =========================================================
+   GRADES CARD
+========================================================= */
+
+.grades-card {
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  box-shadow: 0 3px 14px rgba(15, 23, 42, 0.05);
+}
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.grades-card-header {
+  min-height: 88px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 18px 20px;
+
+  border-bottom: 1px solid #e8edf2;
+}
+
+.grades-card-title {
+  min-width: 0;
+}
+
+.grades-card-title .card-eyebrow {
+  margin-bottom: 4px;
+
+  font-size: 10px;
+}
+
+.grades-card-title h2 {
+  margin: 0;
+
+  color: #172033;
+
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.grades-card-title p {
+  margin: 4px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   TOTAL GRADES
+========================================================= */
+
+.total-grades {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 2px;
+}
+
+.total-grades-label {
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.total-grades strong {
+  color: #1976d2;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-state {
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+
+  display: block;
+
+  border: 3px solid #dbeafe;
+
+  border-top-color: #1976d2;
+
+  border-radius: 50%;
+
+  animation: grade-spin 0.75s linear infinite;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.loading-content strong {
+  color: #334155;
+
+  font-size: 13px;
+}
+
+.loading-content span {
+  color: #94a3b8;
+
+  font-size: 12px;
+}
+
+@keyframes grade-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.grades-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.grades-table {
+  width: 100%;
+
+  min-width: 600px;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  color: #334155;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.grades-table thead {
+  background: #f8fafc;
+}
+
+.grades-table th {
+  height: 52px;
+
+  padding: 8px 16px;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  color: #475569;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: left;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.grades-table td {
+  height: 58px;
+
+  padding: 9px 16px;
+
+  border-bottom: 1px solid #edf1f5;
+
+  vertical-align: middle;
+}
+
+.grades-table tbody tr {
+  transition: background 0.15s ease;
+}
+
+.grades-table tbody tr:hover {
+  background: #f8fbff;
+}
+
+.grades-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* =========================================================
+   SORT BUTTON
+========================================================= */
+
+.sort-btn {
+  min-height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 7px;
+
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #475569;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.sort-btn:hover {
+  background: #eaf3ff;
+
+  border-color: #d5e7fb;
+
+  color: #1565c0;
+}
+
+.sort-btn .material-icons {
+  font-size: 17px;
+
+  color: #94a3b8;
+}
+
+.sort-btn:hover .material-icons {
+  color: #1976d2;
+}
+
+/* =========================================================
+   NAME
+========================================================= */
+
+.name-cell strong {
+  color: #172033;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   ACTION COLUMN
+========================================================= */
+
+.action-column {
+  width: 110px;
+
+  min-width: 110px;
+
+  text-align: center !important;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+}
+
+/* =========================================================
+   EDIT / DELETE BUTTONS
+========================================================= */
+
+.edit-btn,
+.delete-btn {
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: translateY(-1px);
+}
+
+.edit-btn .material-icons,
+.delete-btn .material-icons {
+  font-size: 18px;
+}
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+.edit-btn {
+  border: 1px solid #dbeafe;
+
+  background: #eff6ff;
+
+  color: #1976d2;
+}
+
+.edit-btn:hover {
+  background: #dbeafe;
+
+  border-color: #bfdbfe;
+
+  color: #1565c0;
+}
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+.delete-btn {
+  border: 1px solid #fee2e2;
+
+  background: #fff5f5;
+
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #fee2e2;
+
+  border-color: #fecaca;
+
+  color: #b91c1c;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+
+  text-align: center;
+}
+
+.empty-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 14px;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  color: #1976d2;
+}
+
+.empty-icon .material-icons {
+  font-size: 28px;
+}
+
+.empty-state h3 {
+  margin: 0;
+
+  color: #334155;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  max-width: 400px;
+
+  margin: 7px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+/* =========================================================
+   EMPTY ADD BUTTON
+========================================================= */
+
+.empty-add-btn {
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 18px;
+
+  padding: 0 14px;
+
+  border: 1px solid #1976d2;
+
+  border-radius: 7px;
+
+  background: #1976d2;
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.empty-add-btn:hover {
+  background: #1565c0;
+
+  transform: translateY(-1px);
+}
+
+.empty-add-btn .material-icons {
+  font-size: 17px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .add-grade-btn {
+    width: auto;
+  }
+
+  .grades-card-header {
+    padding: 17px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+  .page-header {
+    gap: 16px;
+
+    margin-bottom: 18px;
+  }
+
+  .page-heading h1 {
+    font-size: 25px;
+  }
+
+  .page-heading p {
+    font-size: 13px;
+  }
+
+  /* ADD BUTTON */
+
+  .add-grade-btn {
+    width: 100%;
+  }
+
+  /* FILTER */
+
+  .filter-card {
+    padding: 14px;
+
+    margin-bottom: 14px;
+
+    border-radius: 10px;
+  }
+
+  /* CARD */
+
+  .grades-card {
+    border-radius: 10px;
+  }
+
+  .grades-card-header {
+    min-height: auto;
+
+    align-items: flex-start;
+
+    padding: 15px;
+
+    gap: 12px;
+  }
+
+  .grades-card-title h2 {
+    font-size: 17px;
+  }
+
+  .grades-card-title p {
+    font-size: 11px;
+  }
+
+  .total-grades strong {
+    font-size: 19px;
+  }
+
+  /* TABLE */
+
+  .grades-table {
+    min-width: 500px;
+  }
+
+  .grades-table th {
+    padding: 8px 12px;
+  }
+
+  .grades-table td {
+    padding: 9px 12px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .grades-card-header {
+    flex-direction: column;
+  }
+
+  .total-grades {
+    width: 100%;
+
+    align-items: flex-start;
+
+    flex-direction: row;
+
+    gap: 7px;
+  }
+}

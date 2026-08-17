@@ -1,0 +1,350 @@
+<section class="locations-page">
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow"> LOCATION MANAGEMENT </span>
+
+      <h1>Locations</h1>
+
+      <p>Manage locations available across the website.</p>
+    </div>
+
+    <!-- ADD LOCATION -->
+
+    <button
+      type="button"
+      class="add-location-btn"
+      routerLink="/admin/location/add-location"
+    >
+      <span class="material-icons"> add </span>
+
+      <span> Add Location </span>
+    </button>
+  </div>
+
+  <!-- =========================================================
+       SEARCH
+  ========================================================== -->
+
+  <div class="filter-card">
+    <div class="search-wrapper">
+      <span class="material-icons search-icon"> search </span>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search locations..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+    </div>
+  </div>
+
+  <!-- =========================================================
+       LOCATIONS CARD
+  ========================================================== -->
+
+  <section class="locations-card">
+
+    <!-- =======================================================
+         CARD HEADER
+    ======================================================== -->
+
+    <div class="locations-card-header">
+      <div class="locations-card-title">
+        <span class="card-eyebrow"> LOCATION MANAGEMENT </span>
+
+        <h2>Location List</h2>
+
+        <p>View and manage all registered locations.</p>
+      </div>
+
+      <!-- TOTAL LOCATIONS -->
+
+      <div class="total-locations">
+        <span class="total-locations-label">
+          Total Locations
+        </span>
+
+        <strong>
+          {{ totalLocations }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- =======================================================
+         LOADING
+    ======================================================== -->
+
+    @if (loading()) {
+      <div class="loading-state">
+        <span class="loading-spinner"></span>
+
+        <div class="loading-content">
+          <strong>Loading locations...</strong>
+
+          <span>
+            Please wait while we fetch the location data.
+          </span>
+        </div>
+      </div>
+    }
+
+    <!-- =======================================================
+         TABLE
+    ======================================================== -->
+
+    @if (!loading() && filteredLocations.length > 0) {
+      <div class="locations-table-wrapper">
+
+        <table class="locations-table">
+
+          <!-- =================================================
+               TABLE HEAD
+          ================================================== -->
+
+          <thead>
+            <tr>
+
+              <!-- NAME -->
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('name')"
+                >
+                  <span>Name</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('name') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ADDRESS -->
+
+              <th class="address-column">
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('address')"
+                >
+                  <span>Address</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('address') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- COUNTRY -->
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('country')"
+                >
+                  <span>Country</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('country') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- LOCATION TYPE -->
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('locationType')"
+                >
+                  <span>Location Type</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('locationType') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- USERNAME -->
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('username')"
+                >
+                  <span>Username</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('username') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ACTION -->
+
+              <th class="action-column">
+                Actions
+              </th>
+
+            </tr>
+          </thead>
+
+          <!-- =================================================
+               TABLE BODY
+          ================================================== -->
+
+          <tbody>
+
+            @for (location of filteredLocations; track location.id) {
+
+              <tr>
+
+                <!-- NAME -->
+
+                <td class="name-cell">
+                  <strong>
+                    {{ location.name || '—' }}
+                  </strong>
+                </td>
+
+                <!-- ADDRESS -->
+
+                <td class="address-cell">
+                  <span>
+                    {{ location.address || '—' }}
+                  </span>
+                </td>
+
+                <!-- COUNTRY -->
+
+                <td>
+                  <span class="country-text">
+                    {{ location.country || '—' }}
+                  </span>
+                </td>
+
+                <!-- LOCATION TYPE -->
+
+                <td>
+                  <span class="location-type-badge">
+                    <!-- {{ location?.location_type || location.locationType || '—' }} -->
+                  </span>
+                </td>
+
+                <!-- USERNAME -->
+
+                <td>
+                  <span class="username-text">
+                    <!-- {{ location.username || '—' }} -->
+                  </span>
+                </td>
+
+                <!-- ACTIONS -->
+
+                <td class="action-column">
+
+                  <div class="action-buttons">
+
+                    <!-- EDIT -->
+
+                    <button
+                      type="button"
+                      class="edit-btn"
+                      title="Edit Location"
+                      aria-label="Edit Location"
+                      (click)="editLocation(location)"
+                    >
+                      <span class="material-icons">
+                        edit
+                      </span>
+                    </button>
+
+                    <!-- DELETE -->
+
+                    <button
+                      type="button"
+                      class="delete-btn"
+                      title="Delete Location"
+                      aria-label="Delete Location"
+                      (click)="deleteLocation(location)"
+                    >
+                      <span class="material-icons">
+                        delete_outline
+                      </span>
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+    }
+
+    <!-- =======================================================
+         EMPTY STATE
+    ======================================================== -->
+
+    @if (!loading() && filteredLocations.length === 0) {
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          <span class="material-icons">
+            location_on
+          </span>
+        </div>
+
+        <h3>
+          No locations found
+        </h3>
+
+        @if (searchText) {
+
+          <p>
+            No locations match your search.
+          </p>
+
+        } @else {
+
+          <p>
+            No locations have been added yet.
+          </p>
+
+          <button
+            type="button"
+            class="empty-add-btn"
+            routerLink="/admin/location-management/add-location"
+          >
+            <span class="material-icons">
+              add
+            </span>
+
+            Add Location
+          </button>
+
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+</section>

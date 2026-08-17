@@ -1,0 +1,434 @@
+<section class="users-page">
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow"> USER MANAGEMENT </span>
+
+      <h1>High School Volunteers</h1>
+
+      <p>Manage registered high school volunteers.</p>
+    </div>
+
+    <!-- SEND EMAIL -->
+
+    <button
+      type="button"
+      class="send-email-btn"
+      (click)="sendEmailToVolunteers()"
+      [disabled]="loading()"
+    >
+      <span class="material-icons"> email </span>
+
+      <span> Send Email to High School Volunteers </span>
+    </button>
+  </div>
+
+  <!-- =========================================================
+       FILTER / ACTION BAR
+  ========================================================== -->
+
+  <div class="filter-card">
+    <!-- SEARCH -->
+
+    <div class="search-wrapper">
+      <span class="material-icons search-icon"> search </span>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search volunteers..."
+        [ngModel]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+    </div>
+
+    <!-- ACTION BUTTONS -->
+
+    <div class="data-actions">
+      <!-- EXPORT ALL -->
+
+      <button
+        type="button"
+        class="data-action-btn export-btn"
+        (click)="exportAllData()"
+        [disabled]="loading() || totalVolunteers === 0"
+      >
+        <span class="material-icons"> download </span>
+
+        <span> Export All Data </span>
+      </button>
+
+      <!-- PRINT -->
+
+      <button
+        type="button"
+        class="data-action-btn print-btn"
+        (click)="printAllData()"
+        [disabled]="loading() || totalVolunteers === 0"
+      >
+        <span class="material-icons"> print </span>
+
+        <span> Print All Data </span>
+      </button>
+
+      <!-- EXPORT SELECTED -->
+
+      <button
+        type="button"
+        class="data-action-btn selected-export-btn"
+        (click)="exportSelectedData()"
+        [disabled]="loading() || selectedVolunteerIds().length === 0"
+      >
+        <span class="material-icons"> file_download </span>
+
+        <span> Export Selected </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       VOLUNTEERS CARD
+  ========================================================== -->
+
+  <section class="users-card">
+    <!-- =======================================================
+         CARD HEADER
+    ======================================================== -->
+
+    <div class="users-card-header">
+      <div>
+        <span class="card-eyebrow"> HIGH SCHOOL VOLUNTEERS </span>
+
+        <h2>Volunteer List</h2>
+
+        <p>View and manage registered high school volunteers.</p>
+      </div>
+
+      <!-- TOTAL -->
+
+      <div class="total-users">
+        <span class="total-users-label"> Total Volunteers </span>
+
+        <strong>
+          {{ totalVolunteers }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- =======================================================
+         LOADING STATE
+    ======================================================== -->
+
+    @if (loading()) {
+      <div class="loading-state">
+        <div class="loading-spinner"></div>
+
+        <div class="loading-content">
+          <strong> Loading volunteers... </strong>
+
+          <span> Please wait while we fetch the volunteer data. </span>
+        </div>
+      </div>
+    }
+
+    <!-- =======================================================
+         TABLE
+    ======================================================== -->
+
+    @if (!loading() && filteredVolunteers.length > 0) {
+      <div class="users-table-wrapper">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <!-- SELECT -->
+
+              <th class="checkbox-column">
+                <input
+                  type="checkbox"
+                  [checked]="isAllSelected()"
+                  [indeterminate]="isSomeSelected()"
+                  (change)="toggleSelectAll($event)"
+                />
+              </th>
+
+              <!-- NAME -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('name')">
+                  <span> Name </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('name') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- EMAIL -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('email')">
+                  <span> Email </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('email') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- MOBILE -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('mobile')">
+                  <span> Mobile No </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('mobile') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- PARENTS NAME -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('parentName')">
+                  <span> Parents Name </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('parentName') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- PARENTS EMAIL -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('parentEmail')">
+                  <span> Parents Email </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('parentEmail') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- PARENTS MOBILE -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('parentMobile')">
+                  <span> Parents Mobile </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('parentMobile') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ROLE -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('role')">
+                  <span> User Role </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('role') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- CATEGORIES -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('volunteerCategories')">
+                  <span> Volunteer Categories </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('volunteerCategories') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- EXPERTISE -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('areaOfExpertise')">
+                  <span> Area of Expertise </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('areaOfExpertise') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ACTION -->
+
+              <th class="action-column">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (volunteer of filteredVolunteers; track volunteer.id) {
+              <tr>
+                <!-- SELECT -->
+
+                <td>
+                  <input
+                    type="checkbox"
+                    [checked]="selectedVolunteerIds().includes(volunteer.id)"
+                    (change)="toggleVolunteerSelection(volunteer)"
+                  />
+                </td>
+
+                <!-- NAME -->
+
+                <td>
+                  <strong>
+                    {{ volunteer.name || '—' }}
+                  </strong>
+                </td>
+
+                <!-- EMAIL -->
+
+                <td>
+                  {{ volunteer.email || '—' }}
+                </td>
+
+                <!-- MOBILE -->
+
+                <td>
+                  {{ volunteer.mobile || '—' }}
+                </td>
+
+                <!-- PARENTS NAME -->
+
+                <td>
+                  <div class="multi-value">
+                    <span>
+                      {{ volunteer.parent_name_1 || '—' }}
+                    </span>
+
+                    @if (volunteer.parent_name_2) {
+                      <span>
+                        {{ volunteer.parent_name_2 }}
+                      </span>
+                    }
+                  </div>
+                </td>
+
+                <!-- PARENTS EMAIL -->
+
+                <td>
+                  <div class="multi-value">
+                    <span>
+                      {{ volunteer.parent_email_1 || '—' }}
+                    </span>
+
+                    @if (volunteer.parent_email_2) {
+                      <span>
+                        {{ volunteer.parent_email_2 }}
+                      </span>
+                    }
+                  </div>
+                </td>
+
+                <!-- PARENTS MOBILE -->
+
+                <td>
+                  <div class="multi-value">
+                    <span>
+                      {{ volunteer.parent_mobile_1 || '—' }}
+                    </span>
+
+                    @if (volunteer.parent_mobile_2) {
+                      <span>
+                        {{ volunteer.parent_mobile_2 }}
+                      </span>
+                    }
+                  </div>
+                </td>
+
+                <!-- ROLE -->
+
+                <td>
+                  <span class="role-badge">
+                    {{ volunteer.role || '—' }}
+                  </span>
+                </td>
+
+                <!-- CATEGORIES -->
+
+                <td>
+                  <div class="category-list">
+                    @if (volunteer.volunteer_categories?.length) {
+                      @for (category of volunteer.volunteer_categories; track $index) {
+                        <span class="category-badge">
+                          {{ category.name || category.category || category }}
+                        </span>
+                      }
+                    } @else {
+                      <span class="no-value"> — </span>
+                    }
+                  </div>
+                </td>
+
+                <!-- EXPERTISE -->
+
+                <td>
+                  <span class="expertise-text">
+                    {{ volunteer.area_of_expertise || '—' }}
+                  </span>
+                </td>
+
+                <!-- ACTIONS -->
+
+                <td>
+                  <div class="action-buttons">
+                    <button
+                      type="button"
+                      class="edit-btn"
+                      title="Edit Volunteer"
+                      (click)="editVolunteer(volunteer)"
+                    >
+                      <span class="material-icons"> edit </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="delete-btn"
+                      title="Delete Volunteer"
+                      (click)="deleteVolunteer(volunteer)"
+                    >
+                      <span class="material-icons"> delete_outline </span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- =======================================================
+         EMPTY STATE
+    ======================================================== -->
+
+    @if (!loading() && filteredVolunteers.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">
+          <span class="material-icons"> groups </span>
+        </div>
+
+        <h3>No High School Volunteers Found</h3>
+
+        @if (searchText) {
+          <p>No volunteers match your search.</p>
+        } @else {
+          <p>No High School Volunteers have registered yet.</p>
+        }
+      </div>
+    }
+  </section>
+</section>

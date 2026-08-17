@@ -1,0 +1,195 @@
+<section class="grades-page">
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow">ACADEMIC MANAGEMENT</span>
+
+      <h1>Grades</h1>
+
+      <p>Manage the grades available on the website.</p>
+    </div>
+
+    <!-- ADD GRADE -->
+
+    <button type="button" class="add-grade-btn" routerLink="/admin/grade/add-grade">
+      <span class="material-icons">add</span>
+
+      <span>Add Grade</span>
+    </button>
+  </div>
+
+  <!-- =========================================================
+       SEARCH
+  ========================================================== -->
+
+  <div class="filter-card">
+    <div class="search-wrapper">
+      <span class="material-icons search-icon">search</span>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search grades..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+    </div>
+  </div>
+
+  <!-- =========================================================
+       GRADES CARD
+  ========================================================== -->
+
+  <section class="grades-card">
+    <!-- =======================================================
+         CARD HEADER
+    ======================================================== -->
+
+    <div class="grades-card-header">
+      <div class="grades-card-title">
+        <span class="card-eyebrow"> ACADEMIC MANAGEMENT </span>
+
+        <h2>Grade List</h2>
+
+        <p>View and manage all available grades.</p>
+      </div>
+
+      <!-- TOTAL -->
+
+      <div class="total-grades">
+        <span class="total-grades-label"> Total Grades </span>
+
+        <strong>
+          {{ filteredGrades.length }}
+        </strong>
+      </div>
+    </div>
+
+    <!-- =======================================================
+         LOADING
+    ======================================================== -->
+
+    @if (loading()) {
+      <div class="loading-state">
+        <span class="loading-spinner"></span>
+
+        <div class="loading-content">
+          <strong> Loading grades... </strong>
+
+          <span> Please wait while we fetch the grade data. </span>
+        </div>
+      </div>
+    }
+
+    <!-- =======================================================
+         TABLE
+    ======================================================== -->
+
+    @if (!loading() && filteredGrades.length > 0) {
+      <div class="grades-table-wrapper">
+        <table class="grades-table">
+          <!-- =================================================
+               TABLE HEADER
+          ================================================== -->
+
+          <thead>
+            <tr>
+              <!-- NAME -->
+
+              <th>
+                <button type="button" class="sort-btn" (click)="sortBy('name')">
+                  <span> Name </span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('name') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ACTION -->
+
+              <th class="action-column">Actions</th>
+            </tr>
+          </thead>
+
+          <!-- =================================================
+               TABLE BODY
+          ================================================== -->
+
+          <tbody>
+            @for (grade of filteredGrades; track grade.id) {
+              <tr>
+                <!-- NAME -->
+
+                <td class="name-cell">
+                  <strong>
+                    {{ grade.name || '—' }}
+                  </strong>
+                </td>
+
+                <!-- ACTIONS -->
+
+                <td class="action-column">
+                  <div class="action-buttons">
+                    <!-- EDIT -->
+
+                    <button
+                      type="button"
+                      class="edit-btn"
+                      title="Edit Grade"
+                      aria-label="Edit Grade"
+                      (click)="editGrade(grade)"
+                    >
+                      <span class="material-icons"> edit </span>
+                    </button>
+
+                    <!-- DELETE -->
+
+                    <button
+                      type="button"
+                      class="delete-btn"
+                      title="Delete Grade"
+                      aria-label="Delete Grade"
+                      (click)="deleteGrade(grade)"
+                    >
+                      <span class="material-icons"> delete_outline </span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+
+    <!-- =======================================================
+         EMPTY STATE
+    ======================================================== -->
+
+    @if (!loading() && filteredGrades.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">
+          <span class="material-icons"> school </span>
+        </div>
+
+        <h3>No grades found</h3>
+
+        @if (searchText) {
+          <p>No grades match your current search.</p>
+        } @else {
+          <p>No grades have been added yet.</p>
+
+          <button type="button" class="empty-add-btn" routerLink="/admin/grade/add-grade">
+            <span class="material-icons"> add </span>
+
+            Add Grade
+          </button>
+        }
+      </div>
+    }
+  </section>
+</section>

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,16 +36,20 @@ export class Header implements OnInit {
 
   isLoggedIn = this.authService.isLoggedIn;
   userName = this.authService.userName;
-  isShowAdmin: boolean = false;
-  isShowScoring: boolean = false;
-  isHighSchooolVolunteer: boolean = false;
+  isShowAdmin = signal(false);
+  isShowScoring = signal(false);
+  isHighSchooolVolunteer = signal(false);
+  menuOpen = false;
 
   ngOnInit(): void {
     this.getUserInfo();
   }
 
   getUserInfo(): void {
-    if (!this.authService.getToken()) {
+    const token = this.authService.getToken();
+
+    if (!token) {
+      this.clearRoles();
       return;
     }
 
@@ -56,22 +60,30 @@ export class Header implements OnInit {
         next: (response) => {
           const authorities = response?.authorities ?? [];
 
-          this.isShowAdmin =
-            authorities.includes('ROLE_ADMIN') || authorities.includes('ROLE_LOCATION_ADMIN');
+          this.isShowAdmin.set(authorities.includes('ROLE_ADMIN') || authorities.includes('ROLE_LOCATION_ADMIN'));
 
-          this.isShowScoring = authorities.includes('ROLE_JUDGE');
+          this.isShowScoring.set(authorities.includes('ROLE_JUDGE'));
 
-          this.isHighSchooolVolunteer = authorities.includes('ROLE_HIGH_SCHOOL_VOlUNTEER');
+          this.isHighSchooolVolunteer.set(authorities.includes('ROLE_HIGH_SCHOOL_VOlUNTEER'));
         },
-        error: (err) => {
+        error: () => {
           this.authService.logout();
           this.router.navigate(['/login']);
         },
       });
   }
 
-  // Mobile menu state
-  menuOpen = false;
+  // =========================================================
+  // CLEAR ROLES
+  // =========================================================
+
+  private clearRoles(): void {
+    this.isShowAdmin.set(false);
+
+    this.isShowScoring.set(false);
+
+    this.isHighSchooolVolunteer.set(false);
+  }
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;

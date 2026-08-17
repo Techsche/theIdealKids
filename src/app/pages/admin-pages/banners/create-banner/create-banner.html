@@ -247,7 +247,7 @@
     <div class="form-actions">
       <!-- CANCEL -->
 
-      <button type="button" class="cancel-btn" [disabled]="loading" (click)="cancel()">
+      <button type="button" class="cancel-btn" [disabled]="loading()" (click)="cancel()">
         <span class="material-icons"> close </span>
 
         Cancel
@@ -255,7 +255,7 @@
 
       <!-- RESET -->
 
-      <button type="button" class="reset-btn" [disabled]="loading" (click)="resetForm()">
+      <button type="button" class="reset-btn" [disabled]="loading()" (click)="resetForm()">
         <span class="material-icons"> refresh </span>
 
         Reset
@@ -263,8 +263,8 @@
 
       <!-- CREATE -->
 
-      <button type="submit" class="create-btn" [disabled]="loading">
-        @if (loading) {
+      <button type="submit" class="create-btn" [disabled]="loading()">
+        @if (loading()) {
           <span class="button-spinner"></span>
 
           <span> Creating... </span>

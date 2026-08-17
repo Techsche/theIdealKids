@@ -52,32 +52,32 @@
             <h4>{{ userName() }}</h4>
           </div>
         </div>
-        @if (isShowAdmin) {
+        @if (isShowAdmin()) {
           <button mat-button routerLink="/admin" (click)="closeMenu()">
             <mat-icon>admin_panel_settings</mat-icon>
             Admin
           </button>
         }
-        @if (isShowScoring) {
+        @if (isShowScoring()) {
           <button mat-button routerLink="/scoring" (click)="closeMenu()">
             <mat-icon>admin_panel_settings</mat-icon>
             Scoring
           </button>
         }
-        @if (!isHighSchooolVolunteer) {
+        @if (!isHighSchooolVolunteer()) {
           <button mat-button routerLink="/profile" (click)="closeMenu()">
             <mat-icon>person</mat-icon>
             My Profile
           </button>
         }
-        @if (isHighSchooolVolunteer) {
+        @if (isHighSchooolVolunteer()) {
           <button mat-button routerLink="/high-school-volunteer-profile" (click)="closeMenu()">
             <mat-icon>person</mat-icon>
             My Profile
           </button>
         }
 
-        @if (!isHighSchooolVolunteer) {
+        @if (!isHighSchooolVolunteer()) {
           <button mat-button routerLink="/my-events" (click)="closeMenu()">
             <mat-icon>event</mat-icon>
             My Events
@@ -89,7 +89,7 @@
           Current Event Info
         </button>
 
-        @if (!isHighSchooolVolunteer) {
+        @if (!isHighSchooolVolunteer()) {
           <button mat-button routerLink="/children" (click)="closeMenu()">
             <mat-icon>groups</mat-icon>
             Add / Edit Child
@@ -134,31 +134,31 @@
       </button>
 
       <mat-menu #profileMenu="matMenu">
-        @if (isShowAdmin) {
+        @if (isShowAdmin()) {
           <button mat-menu-item routerLink="/admin">
             <mat-icon>admin_panel_settings</mat-icon>
             <span>Admin</span>
           </button>
         }
-        @if (isShowScoring) {
+        @if (isShowScoring()) {
           <button mat-menu-item routerLink="/admin">
             <mat-icon>admin_panel_settings</mat-icon>
             <span>Scoring</span>
           </button>
         }
-        @if (!isHighSchooolVolunteer) {
+        @if (!isHighSchooolVolunteer()) {
           <button mat-menu-item routerLink="/profile">
             <mat-icon>person</mat-icon>
             <span>My Profile</span>
           </button>
         }
-        @if (isHighSchooolVolunteer) {
+        @if (isHighSchooolVolunteer()) {
           <button mat-menu-item routerLink="/high-school-volunteer-profile">
             <mat-icon>person</mat-icon>
             <span>My Profile</span>
           </button>
         }
-        @if (!isHighSchooolVolunteer) {
+        @if (!isHighSchooolVolunteer()) {
           <button mat-menu-item routerLink="/my-events">
             <mat-icon>event</mat-icon>
             <span>My Events</span>
@@ -170,7 +170,7 @@
           <span>Current Event Info</span>
         </button>
 
-        @if (!isHighSchooolVolunteer) {
+        @if (!isHighSchooolVolunteer()) {
           <button mat-menu-item routerLink="/children">
             <mat-icon>groups</mat-icon>
             <span>Add / Edit Child</span>

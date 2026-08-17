@@ -26,10 +26,22 @@ import { CompetitionComponent } from './pages/user-pages/accounts/my-events-comp
 import { HighSchoolVolunteerProfile } from './pages/user-pages/accounts/high-school-volunteer-profile/high-school-volunteer-profile';
 import { EventRegistrationComponent } from './pages/user-pages/accounts/event-registration/event-registration.component';
 
-import { AdminLayoutComponent } from './pages/admin-pages/admin-layout/admin-layout.component';
-import { Dashboard } from './pages/admin-pages/components/dashboard/dashboard';
-import { Banners } from './pages/admin-pages/components/banners/banners';
-import { CreateBanner } from './pages/admin-pages/components/banners/create-banner/create-banner';
+import { Dashboard } from './pages/admin-pages/dashboard/dashboard';
+
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { CreateBanner } from './pages/admin-pages/banners/create-banner/create-banner';
+import { Banners } from './pages/admin-pages/banners/banners';
+import { AdminUsers } from './pages/admin-pages/user-management/admin-users/admin-users';
+import { SignedupUsers } from './pages/admin-pages/user-management/signedup-users/signedup-users';
+import { HighSchoolVolunteers } from './pages/admin-pages/volunteers/high-school-volunteers/high-school-volunteers';
+import { AddUser } from './pages/admin-pages/user-management/add-user/add-user';
+import { MergeUsers } from './pages/admin-pages/user-management/merge-users/merge-users';
+import { Locations } from './pages/admin-pages/location/locations/locations';
+import { AddLocations } from './pages/admin-pages/location/add-locations/add-locations';
+import { AddCategories } from './pages/admin-pages/volunteers/add-categories/add-categories';
+import { VolunteerCategories } from './pages/admin-pages/volunteers/volunteer-categories/volunteer-categories';
+import { AddEvent } from './pages/admin-pages/events/add-event/add-event';
+import { Grades } from './pages/admin-pages/grade/grades/grades';
 
 export const routes: Routes = [
   // =========================================================
@@ -180,7 +192,7 @@ export const routes: Routes = [
         path: '',
         component: Dashboard,
       },
-       {
+      {
         path: 'banners',
         component: Banners,
       },
@@ -189,27 +201,77 @@ export const routes: Routes = [
         component: CreateBanner,
       },
 
-      // Later you can add:
+      // Usermanagement
 
-      // {
-      //   path: 'users',
-      //   component: AdminUsersComponent,
-      // },
+      {
+        path: 'user-management/users',
+        component: AdminUsers,
+      },
 
-      // {
-      //   path: 'locations',
-      //   component: AdminLocationsComponent,
-      // },
+      {
+        path: 'user-management/add-user',
+        component: AddUser,
+      },
 
-      // {
-      //   path: 'events',
-      //   component: AdminEventsComponent,
-      // },
+      {
+        path: 'user-management/signedup-users',
+        component: SignedupUsers,
+      },
 
-      // {
-      //   path: 'grades',
-      //   component: AdminGradesComponent,
-      // },
+      {
+        path: 'user-management/merge-users',
+        component: MergeUsers,
+      },
+
+      // Locations
+
+      {
+        path: 'location/locations',
+        component: Locations,
+      },
+
+      {
+        path: 'location/add-location',
+        component: AddLocations,
+      },
+
+      // Event
+
+      {
+        path: 'event/add-event',
+        component: AddEvent,
+      },
+
+      {
+        path: 'event/events',
+        component: EventsComponent,
+      },
+
+      // Volunteers
+
+      {
+        path: 'volunteers/high-school-volunteers',
+        component: HighSchoolVolunteers,
+      },
+
+      {
+        path: 'volunteers/add-category',
+        component: AddCategories,
+      },
+
+      {
+        path: 'volunteers/categories',
+        component: VolunteerCategories,
+      },
+
+      // Grades
+
+      {
+        path: 'grade/grades',
+        component: Grades,
+      },
+
+      // Competitions
 
       // {
       //   path: 'competitions',

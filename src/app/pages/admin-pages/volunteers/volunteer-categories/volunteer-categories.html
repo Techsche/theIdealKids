@@ -1,0 +1,336 @@
+<section class="categories-page">
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow"> VOLUNTEER MANAGEMENT </span>
+
+      <h1>Volunteer Categories</h1>
+
+      <p>Manage volunteer categories and their registration limits.</p>
+    </div>
+
+    <!-- ADD CATEGORY -->
+
+    <button
+      type="button"
+      class="add-category-btn"
+      routerLink="/admin/volunteers/add-volunteer-category"
+    >
+      <span class="material-icons"> add </span>
+
+      <span> Add Volunteer Category </span>
+    </button>
+  </div>
+
+  <!-- =========================================================
+       SEARCH
+  ========================================================== -->
+
+  <div class="filter-card">
+    <div class="search-wrapper">
+      <span class="material-icons search-icon"> search </span>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search volunteer categories..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+    </div>
+  </div>
+
+  <!-- =========================================================
+       CATEGORIES CARD
+  ========================================================== -->
+
+  <section class="categories-card">
+
+    <!-- =======================================================
+         CARD HEADER
+    ======================================================== -->
+
+    <div class="categories-card-header">
+
+      <div class="categories-card-title">
+        <span class="card-eyebrow">
+          VOLUNTEER MANAGEMENT
+        </span>
+
+        <h2>Volunteer Category List</h2>
+
+        <p>
+          View and manage all volunteer categories.
+        </p>
+      </div>
+
+      <!-- TOTAL -->
+
+      <div class="total-categories">
+        <span class="total-categories-label">
+          Total Categories
+        </span>
+
+        <strong>
+          {{ totalCategories }}
+        </strong>
+      </div>
+
+    </div>
+
+    <!-- =======================================================
+         LOADING
+    ======================================================== -->
+
+    @if (loading()) {
+
+      <div class="loading-state">
+
+        <span class="loading-spinner"></span>
+
+        <div class="loading-content">
+
+          <strong>
+            Loading volunteer categories...
+          </strong>
+
+          <span>
+            Please wait while we fetch the category data.
+          </span>
+
+        </div>
+
+      </div>
+
+    }
+
+    <!-- =======================================================
+         TABLE
+    ======================================================== -->
+
+    @if (!loading() && filteredCategories.length > 0) {
+
+      <div class="categories-table-wrapper">
+
+        <table class="categories-table">
+
+          <!-- =================================================
+               TABLE HEADER
+          ================================================== -->
+
+          <thead>
+
+            <tr>
+
+              <!-- NAME -->
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('name')"
+                >
+                  <span>Name</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('name') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- TYPE -->
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('type')"
+                >
+                  <span>Type</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('type') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- MAX VOLUNTEERS -->
+
+              <th>
+                <button
+                  type="button"
+                  class="sort-btn"
+                  (click)="sortBy('maxVolunteers')"
+                >
+                  <span>Max. No. of Volunteers</span>
+
+                  <span class="material-icons">
+                    {{ getSortIcon('maxVolunteers') }}
+                  </span>
+                </button>
+              </th>
+
+              <!-- ACTION -->
+
+              <th class="action-column">
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <!-- =================================================
+               TABLE BODY
+          ================================================== -->
+
+          <tbody>
+
+            @for (category of filteredCategories; track category.id) {
+
+              <tr>
+
+                <!-- NAME -->
+
+                <td class="name-cell">
+
+                  <strong>
+                    {{ category.name || '—' }}
+                  </strong>
+
+                </td>
+
+                <!-- TYPE -->
+
+                <td>
+
+                  <span class="type-badge">
+                    {{ category.type || '—' }}
+                  </span>
+
+                </td>
+
+                <!-- MAX VOLUNTEERS -->
+
+                <td>
+
+                  <span class="max-volunteers">
+
+                    <span class="material-icons">
+                      groups
+                    </span>
+
+                    <span>
+                      {{ category.max_volunteers ?? category.maxVolunteers ?? '—' }}
+                    </span>
+
+                  </span>
+
+                </td>
+
+                <!-- ACTIONS -->
+
+                <td class="action-column">
+
+                  <div class="action-buttons">
+
+                    <!-- EDIT -->
+
+                    <button
+                      type="button"
+                      class="edit-btn"
+                      title="Edit Volunteer Category"
+                      aria-label="Edit Volunteer Category"
+                      (click)="editCategory(category)"
+                    >
+                      <span class="material-icons">
+                        edit
+                      </span>
+                    </button>
+
+                    <!-- DELETE -->
+
+                    <button
+                      type="button"
+                      class="delete-btn"
+                      title="Delete Volunteer Category"
+                      aria-label="Delete Volunteer Category"
+                      (click)="deleteCategory(category)"
+                    >
+                      <span class="material-icons">
+                        delete_outline
+                      </span>
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    }
+
+    <!-- =======================================================
+         EMPTY STATE
+    ======================================================== -->
+
+    @if (!loading() && filteredCategories.length === 0) {
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+
+          <span class="material-icons">
+            category
+          </span>
+
+        </div>
+
+        <h3>
+          No volunteer categories found
+        </h3>
+
+        @if (searchText) {
+
+          <p>
+            No volunteer categories match your search.
+          </p>
+
+        } @else {
+
+          <p>
+            No volunteer categories have been added yet.
+          </p>
+
+          <button
+            type="button"
+            class="empty-add-btn"
+            routerLink="/admin/volunteers/add-volunteer-category"
+          >
+            <span class="material-icons">
+              add
+            </span>
+
+            Add Volunteer Category
+          </button>
+
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+</section>

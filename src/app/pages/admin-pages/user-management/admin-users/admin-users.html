@@ -1,0 +1,210 @@
+<section class="admin-users-page">
+  <!-- =========================================================
+       PAGE HEADER
+  ========================================================== -->
+
+  <div class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow"> USER MANAGEMENT </span>
+
+      <h1>Admin Users</h1>
+
+      <p>Manage administrator users and their access to the admin panel.</p>
+    </div>
+
+    <button type="button" class="add-user-btn" routerLink="/admin/user-management/add-user">
+      <span class="material-icons"> add </span>
+
+      <span> Add Admin User </span>
+    </button>
+  </div>
+
+  <!-- =========================================================
+       SEARCH
+  ========================================================== -->
+
+  <div class="filter-card">
+    <div class="search-wrapper">
+      <span class="material-icons search-icon"> search </span>
+
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search admin users..."
+        [(ngModel)]="searchText"
+        (ngModelChange)="onSearch()"
+      />
+
+     
+    </div>
+  </div>
+
+  <!-- =========================================================
+       ADMIN USERS LIST
+  ========================================================== -->
+
+  <section class="users-card">
+    <!-- =======================================================
+         LOADING
+    ======================================================== -->
+
+    @if (loading()) {
+      <div class="loading-state">
+        <img src="assets/idealkids/img/loader.svg" alt="Loading" />
+
+        <span> Loading admin users... </span>
+      </div>
+    }
+
+    <!-- =======================================================
+         DESKTOP TABLE
+    ======================================================== -->
+
+    @if (!loading()) {
+      <div class="users-table-wrapper">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+
+              <th>Email</th>
+
+              <th class="action-column">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (user of filteredUsers; track user.id) {
+              <tr>
+                <!-- NAME -->
+
+                <td>
+                  <div class="user-name-wrapper">
+                    
+
+                    <span class="user-name">
+                      {{ user.name }}
+                    </span>
+                  </div>
+                </td>
+
+                <!-- EMAIL -->
+
+                <td>
+                  <span class="user-email">
+                    {{ user.email || '—' }}
+                  </span>
+                </td>
+
+                <!-- ACTION -->
+
+                <td>
+                  <div class="user-actions">
+                    <!-- EDIT -->
+
+                    <button
+                      type="button"
+                      class="edit-btn"
+                      title="Edit user"
+                      aria-label="Edit user"
+                      (click)="editUser(user)"
+                    >
+                      <span class="material-icons"> edit </span>
+                    </button>
+
+                    <!-- DELETE -->
+
+                    <button
+                      type="button"
+                      class="delete-btn"
+                      title="Delete user"
+                      aria-label="Delete user"
+                      (click)="deleteUser(user)"
+                    >
+                      <span class="material-icons"> delete_outline </span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- =====================================================
+           MOBILE LIST
+      ====================================================== -->
+
+      <div class="mobile-user-list">
+        @for (user of filteredUsers; track user.id) {
+          <article class="mobile-user-card">
+            <!-- USER -->
+
+            <div class="mobile-user-top">
+              <div class="mobile-user-content">
+                <h3>
+                  {{ user.name }}
+                </h3>
+
+                <span>
+                  {{ user.email || '—' }}
+                </span>
+              </div>
+            </div>
+
+            <!-- ACTION -->
+
+            <div class="mobile-user-footer">
+              <button type="button" class="edit-btn" title="Edit user" (click)="editUser(user)">
+                <span class="material-icons"> edit </span>
+
+                <span> Edit </span>
+              </button>
+
+              <button
+                type="button"
+                class="delete-btn"
+                title="Delete user"
+                (click)="deleteUser(user)"
+              >
+                <span class="material-icons"> delete_outline </span>
+
+                <span> Delete </span>
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+
+      <!-- =====================================================
+           EMPTY STATE
+      ====================================================== -->
+
+      @if (filteredUsers.length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">
+            <span class="material-icons"> person_off </span>
+          </div>
+
+          <h3>No admin users found</h3>
+
+          @if (searchText) {
+            <p>No admin users match your search.</p>
+          } @else {
+            <p>No admin users have been added yet.</p>
+
+            <button
+              type="button"
+              class="empty-add-btn"
+              routerLink="/admin/user-management/add-user"
+            >
+              <span class="material-icons"> add </span>
+
+              Add Admin User
+            </button>
+          }
+        </div>
+      }
+    }
+  </section>
+</section>

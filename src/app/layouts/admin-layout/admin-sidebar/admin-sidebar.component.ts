@@ -46,6 +46,49 @@ export class AdminSidebarComponent {
     },
 
     {
+      label: 'User Management',
+      icon: 'how_to_reg',
+      children: [
+        {
+          label: 'Admin Users',
+          icon: 'list_alt',
+          route: '/admin/user-management/users',
+        },
+        {
+          label: 'Create Admin User',
+          icon: 'list_alt',
+          route: '',
+        },
+        {
+          label: 'Signed Up Users',
+          icon: 'pending_actions',
+          route: '/admin/user-management/signedup-users',
+        },
+        {
+          label: 'Merge Users',
+          icon: 'pending_actions',
+          route: '',
+        },
+      ],
+    },
+    {
+      label: 'Location',
+      icon: 'event',
+      children: [
+        {
+          label: 'Locations',
+          icon: 'event',
+          route: '/admin/location/locations',
+        },
+        {
+          label: 'Add Location',
+          icon: 'add_circle',
+          route: '',
+        },
+      ],
+    },
+
+    {
       label: 'Events',
       icon: 'event',
       children: [
@@ -59,54 +102,54 @@ export class AdminSidebarComponent {
           icon: 'add_circle',
           route: '/admin/events/add',
         },
-        {
-          label: 'Upcoming Events',
-          icon: 'event_available',
-          route: '/admin/events/upcoming',
-        },
-        {
-          label: 'Past Events',
-          icon: 'history',
-          route: '/admin/events/past',
-        },
+        // {
+        //   label: 'Upcoming Events',
+        //   icon: 'event_available',
+        //   route: '/admin/events/upcoming',
+        // },
+        // {
+        //   label: 'Past Events',
+        //   icon: 'history',
+        //   route: '/admin/events/past',
+        // },
       ],
     },
 
     {
-      label: 'Registrations',
-      icon: 'how_to_reg',
+      label: 'Volunteers',
+      icon: 'volunteer_activism',
       children: [
         {
-          label: 'All Registrations',
-          icon: 'list_alt',
-          route: '/admin/registrations',
-        },
-        {
-          label: 'Pending Registrations',
-          icon: 'pending_actions',
-          route: '/admin/registrations/pending',
-        },
-        {
-          label: 'Completed Registrations',
-          icon: 'task_alt',
-          route: '/admin/registrations/completed',
-        },
-      ],
-    },
-
-    {
-      label: 'Children',
-      icon: 'child_care',
-      children: [
-        {
-          label: 'All Children',
+          label: 'High School Volunteers',
           icon: 'groups',
-          route: '/admin/children',
+          route: '/admin/volunteers/high-school-volunteers',
         },
         {
-          label: 'Add Child',
-          icon: 'person_add',
-          route: '/admin/children/add',
+          label: 'Volunteer Categories',
+          icon: 'category',
+          route: '/admin/volunteers/categories',
+        },
+        {
+          label: 'Add Volunteer Categories',
+          icon: 'category',
+          route: '/admin/volunteers/add-category',
+        },
+      ],
+    },
+
+    {
+      label: 'Grades',
+      icon: 'assessment',
+      children: [
+        {
+          label: 'Add Grade',
+          icon: 'description',
+          route: '/admin/grade/add-grade',
+        },
+        {
+          label: 'Grades',
+          icon: 'fact_check',
+          route: '/admin/grade/grades',
         },
       ],
     },
@@ -116,48 +159,31 @@ export class AdminSidebarComponent {
       icon: 'emoji_events',
       children: [
         {
-          label: 'All Competitions',
-          icon: 'emoji_events',
-          route: '/admin/competitions',
-        },
-        {
           label: 'Add Competition',
           icon: 'add_circle',
           route: '/admin/competitions/add',
         },
+        {
+          label: 'Competitions',
+          icon: 'emoji_events',
+          route: '/admin/competitions',
+        },
       ],
     },
 
     {
-      label: 'Volunteers',
-      icon: 'volunteer_activism',
+      label: 'Coachings',
+      icon: 'child_care',
       children: [
         {
-          label: 'All Volunteers',
+          label: 'Add Coaching',
+          icon: 'person_add',
+          route: '/admin/children/add',
+        },
+        {
+          label: 'Coachings',
           icon: 'groups',
-          route: '/admin/volunteers',
-        },
-        {
-          label: 'Volunteer Categories',
-          icon: 'category',
-          route: '/admin/volunteers/categories',
-        },
-      ],
-    },
-
-    {
-      label: 'Reports',
-      icon: 'assessment',
-      children: [
-        {
-          label: 'Registration Report',
-          icon: 'description',
-          route: '/admin/reports/registrations',
-        },
-        {
-          label: 'Attendance Report',
-          icon: 'fact_check',
-          route: '/admin/reports/attendance',
+          route: '/admin/children',
         },
       ],
     },
@@ -173,6 +199,26 @@ export class AdminSidebarComponent {
         },
         {
           label: 'Change Password',
+          icon: 'lock',
+          route: '/admin/settings/change-password',
+        },
+        {
+          label: 'Email',
+          icon: 'lock',
+          route: '/admin/settings/change-password',
+        },
+        {
+          label: 'Static Pages',
+          icon: 'lock',
+          route: '/admin/settings/change-password',
+        },
+        {
+          label: 'Certificate',
+          icon: 'lock',
+          route: '/admin/settings/change-password',
+        },
+        {
+          label: 'Logo',
           icon: 'lock',
           route: '/admin/settings/change-password',
         },
